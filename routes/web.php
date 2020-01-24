@@ -10,7 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/pdf', 'PdfController@getIndex');
+Route::get('/newpdf', function () {
+    $datetime = date("Y-m-d");
+    return view('newpdf', ['datetime' => $datetime]);
+});
+
+Route::post('/newpdf', 'PdfController@savePdf');
+
+Route::get('/pdf', 'PdfController@createPdf');
 
 Route::get('/', function () {
     return view('welcome');
