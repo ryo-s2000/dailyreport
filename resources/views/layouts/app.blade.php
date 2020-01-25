@@ -19,6 +19,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/newpdf.css') }}" rel="stylesheet">
+
+    <!-- Loading Bootstrap -->
+    <link href="../../dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="../../dist/css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="../../dist/favicon.ico">
 
 </head>
 <body>
@@ -32,6 +41,25 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+        <!-- Bootstrap 4 requires Popper.js -->
+        <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+
+        <script src="../../dist/scripts/flat-ui.js"></script>
+
+        <script src="../assets/js/application.js"></script>
+
+        <script>
+            $(document).ready(function(){
+            $('select[name="inverse-dropdown"], select[name="inverse-dropdown-optgroup"], select[name="inverse-dropdown-disabled"]').select2({dropdownCssClass: 'select-inverse-dropdown'});
+
+            $('select[name="searchfield"]').select2({dropdownCssClass: 'show-select-search'});
+            $('select[name="inverse-dropdown-searchfield"]').select2({dropdownCssClass: 'select-inverse-dropdown show-select-search'});
+            });
+        </script>
     </div>
 </body>
 </html>

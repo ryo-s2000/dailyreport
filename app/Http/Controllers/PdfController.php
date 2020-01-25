@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use FPDI;
 use Session;
+use App\Construction;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
@@ -31,7 +32,6 @@ class PdfController extends Controller
         $pdf->SetFont('kozminproregular', '', 15);
 
         // 書き込むデータを格納
-        // TODO: 工事名と工事ナンバーの場所をデータベース化
         $items = array();
         // 日付
         $weeknames = ['日','月','火','水','木','金','土'];
@@ -75,8 +75,19 @@ class PdfController extends Controller
         // 工事番号
         $items[] = array("x" => 30.0,  "y" => 24.0, "content" => $inputData['constructionNumber']);
         // 工事名
-        $items[] = array("x" => 75.0,  "y" => 21.5, "content" => "美味しいマッシュルーム(株)");
-        $items[] = array("x" => 75.0,  "y" => 26.0, "content" => "P1プラント改修工事(外構分)");
+        $construction = Construction::where('number', $inputData['constructionNumber'])->get();
+        if(count($construction) != 0){
+            // 行数によって処理を切り替える
+            $constructionName = explode("\n", $construction[0]->name);
+            if(count($constructionName) == 1){
+                $items[] = array("x" => 75.0,  "y" => 24.0, "content" => $constructionName[0]);
+            } else if (count($constructionName) == 2){
+                $items[] = array("x" => 75.0,  "y" => 21.5, "content" => $constructionName[0]);
+                $items[] = array("x" => 75.0,  "y" => 26.0, "content" => $constructionName[1]);
+            }else{
+                // 何も表示しない
+            }
+        }
         // 労務A
         $items[] = array("x" => 15.0,  "y" => 38.0, "content" => $inputData['traderName1']);
         $items[] = array("x" => 61.0,  "y" => 38.0, "content" => $inputData['peopleNumber1']);
@@ -132,6 +143,8 @@ class PdfController extends Controller
         $items[] = array("x" => 76.0,  "y" => 166.0, "content" => $inputData['shapeDimensions5']);
         $items[] = array("x" => 107.0,  "y" => 166.0, "content" => $inputData['quantity5']);
         $items[] = array("x" => 121.0,  "y" => 166.0, "content" => $inputData['unit5']);
+        // 視察
+        $items[] = array("x" => 80.5,  "y" => 231.5, "content" => "◯");
 
         // データを書き込み
         foreach ($items as $item){

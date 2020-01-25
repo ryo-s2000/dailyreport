@@ -1,220 +1,101 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+
+    <h1>日報作成ツールPreβ</h1>
+
+    <div class="container newpdf-container">
         <form method="post" action="/newpdf" enctype="multipart/form-data" target="_blank">
             @csrf
 
-            <div>
-                年　月　日
-                <input type="date" name="date" value="{{$datetime}}">
-            </div>
-            <div>
-                AM天気
-                <input type="radio" name="amweather" value="sunny" checked="checked"><i class="fas fa-sun"></i>
-                <input type="radio" name="amweather" value="sunnyandcloudy"><i class="fas fa-cloud-sun"></i>
-                <input type="radio" name="amweather" value="cloudy"><i class="fas fa-cloud"></i>
-                <input type="radio" name="amweather" value="rain"><i class="fas fa-umbrella"></i>
-                <input type="radio" name="amweather" value="snow"><i class="far fa-snowflake"></i>
-            </div>
-            <div>
-                PM天気
-                <input type="radio" name="pmweather" value="sunny" checked="checked"><i class="fas fa-sun"></i>
-                <input type="radio" name="pmweather" value="sunnyandcloudy"><i class="fas fa-cloud-sun"></i>
-                <input type="radio" name="pmweather" value="cloudy"><i class="fas fa-cloud"></i>
-                <input type="radio" name="pmweather" value="rain"><i class="fas fa-umbrella"></i>
-                <input type="radio" name="pmweather" value="snow"><i class="far fa-snowflake"></i>
-            </div>
-            <div>
-                工事番号
-                <select name="constructionNumber">
-                    <option value="">工事番号を選択</option>
-                    <option value="MC-111">MC-111</option>
-                    <option value="MC-222">MC-222</option>
-                    <option value="MC-333">MC-333</option>
-                    <option value="MC-444">MC-444</option>
-                    <option value="MC-555">MC-555</option>
-                </select>
-            </div>
-            {{-- <div>
-                工事名
-                <textarea cols="12" rows="2" wrap="hard" name="constructionName">いらんのでは？</textarea>
-            </div> --}}
-            労務
-            <div>
-                業者名<input name="traderName1">
-                人数
-                <select name="peopleNumber1">
-                    <option value="">人数を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                時間
-                <select name="workingTime1">
-                    <option value="">時間を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                作業及び出来高等<input name="work1">
-            </div>
-            <div>
-                業者名<input name="traderName2">
-                人数
-                <select name="peopleNumber2">
-                    <option value="">人数を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                時間
-                <select name="workingTime2">
-                    <option value="">時間を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                作業及び出来高等<input name="work2">
-            </div>
-            <div>
-                業者名<input name="traderName3">
-                人数
-                <select name="peopleNumber3">
-                    <option value="">人数を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                時間
-                <select name="workingTime3">
-                    <option value="">時間を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                作業及び出来高等<input name="work3">
-            </div>
-            <div>
-                業者名<input name="traderName4">
-                人数
-                <select name="peopleNumber4">
-                    <option value="">人数を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                時間
-                <select name="workingTime4">
-                    <option value="">時間を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                作業及び出来高等<input name="work4">
-            </div>
-            <div>
-                業者名<input name="traderName5">
-                人数
-                <select name="peopleNumber5">
-                    <option value="">人数を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                時間
-                <select name="workingTime5">
-                    <option value="">時間を選択</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                作業及び出来高等<input name="work5">
-            </div>
-            購入資材
-            <div>
-                業者名<input name="materialTraderName1">
-                資材名<input name="materialName1">
-                形状寸法<input name="shapeDimensions1">
-                数量<input name="quantity1">
-                単位<input name="unit1">
-            </div>
-            <div>
-                業者名<input name="materialTraderName2">
-                資材名<input name="materialName2">
-                形状寸法<input name="shapeDimensions2">
-                数量<input name="quantity2">
-                単位<input name="unit2">
-            </div>
-            <div>
-                業者名<input name="materialTraderName3">
-                資材名<input name="materialName3">
-                形状寸法<input name="shapeDimensions3">
-                数量<input name="quantity3">
-                単位<input name="unit3">
-            </div>
-            <div>
-                業者名<input name="materialTraderName4">
-                資材名<input name="materialName4">
-                形状寸法<input name="shapeDimensions4">
-                数量<input name="quantity4">
-                単位<input name="unit4">
-            </div>
-            <div>
-                業者名<input name="materialTraderName5">
-                資材名<input name="materialName5">
-                形状寸法<input name="shapeDimensions5">
-                数量<input name="quantity5">
-                単位<input name="unit5">
+            <div class="item-conteiner">
+                <h5>日付</h5>
+                <div class="col-md-12">
+                    <input type="date" name="date" value="{{$datetime}}">
+                </div>
             </div>
 
-            <input type="submit" value="PDFを作成">
+            <div class="item-conteiner-top">
+                <h5>天気</h5>
+                <div class="col-md-12">
+                    <span class="am">AM</span>
+                    <input class="weather-icon" type="radio" name="amweather" value="sunny" checked="checked"><i class="fas fa-sun"></i>
+                    <input class="weather-icon" type="radio" name="amweather" value="sunnyandcloudy"><i class="fas fa-cloud-sun"></i>
+                    <input class="weather-icon" type="radio" name="amweather" value="cloudy"><i class="fas fa-cloud"></i>
+                    <input class="weather-icon" type="radio" name="amweather" value="rain"><i class="fas fa-umbrella"></i>
+                    <input class="weather-icon" type="radio" name="amweather" value="snow"><i class="far fa-snowflake"></i>
+                </div>
+                <div class="col-md-12">
+                    <span class="pm">PM</span>
+                    <input class="weather-icon" type="radio" name="pmweather" value="sunny" checked="checked"><i class="fas fa-sun"></i>
+                    <input class="weather-icon" type="radio" name="pmweather" value="sunnyandcloudy"><i class="fas fa-cloud-sun"></i>
+                    <input class="weather-icon" type="radio" name="pmweather" value="cloudy"><i class="fas fa-cloud"></i>
+                    <input class="weather-icon" type="radio" name="pmweather" value="rain"><i class="fas fa-umbrella"></i>
+                    <input class="weather-icon" type="radio" name="pmweather" value="snow"><i class="far fa-snowflake"></i>
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>工事番号</h5>
+                <div class="col-md-12">
+                    <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
+                        <option value="">工事番号を選択</option>
+                        @foreach ($constructions as $construction)
+                            <option value="{{$construction->number}}">{{$construction->number}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>労務</h5>
+                @foreach (range(1,5) as $i)
+                    <div class="col-md-12">
+                        <input name="traderName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" />
+                        <select name="peopleNumber{{$i}}" data-toggle="select" class="form-control select select-default mrs mbm">
+                            <option value="">人数を選択</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <select name="workingTime{{$i}}" data-toggle="select" class="form-control select select-default mrs mbm">
+                            <option value="">時間を選択</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                        <input name="work{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="作業及び出来高等" size="35"/>
+                    </div>
+                @endforeach
+            <div>
+
+            <div class="item-conteiner-top">
+                <h5>購入資材</h5>
+                @foreach (range(1,5) as $i)
+                    <div class="col-md-12" style="margin: 5px;">
+                        <input name="materialTraderName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" />
+                        <input name="materialName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資材名" />
+                        <input name="shapeDimensions{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="形状寸法" />
+                        <input name="quantity{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="数量" size="10" />
+                        <input name="unit{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="単位" size="10" />
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="item-conteiner-top">
+                <button type="submit" class="btn btn-primary">PDFを作成</button>
+            </div>
 
         </form>
     </div>
+
 @endsection

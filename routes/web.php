@@ -1,5 +1,7 @@
 <?php
 
+use App\Construction;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,9 +12,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/newpdf', function () {
+    $constructions = Construction::all();
     $datetime = date("Y-m-d");
-    return view('newpdf', ['datetime' => $datetime]);
+    return view('newpdf', ['datetime' => $datetime, "constructions" => $constructions]);
 });
 
 Route::post('/newpdf', 'PdfController@savePdf');
