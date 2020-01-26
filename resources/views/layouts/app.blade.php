@@ -9,17 +9,14 @@
 
     <title>日報作成ツール</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://kit.fontawesome.com/03da6a0c32.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/newpdf.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+    <meta name=”viewport” content=”width=device-width, initial-scale=1”>
 
     <!-- Loading Bootstrap -->
     <link href="../../dist/css/vendor/bootstrap.min.css" rel="stylesheet">
@@ -32,16 +29,6 @@
 </head>
 <body>
     <div id="app">
-        <div class="container">
-            {{-- <a class="navbar-brand" href="{{ url('/') }}">
-                日報作成ツール
-            </a> --}}
-        </div>
-
-        <main class="py-4">
-            @yield('content')
-        </main>
-
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
@@ -60,6 +47,15 @@
             $('select[name="inverse-dropdown-searchfield"]').select2({dropdownCssClass: 'select-inverse-dropdown show-select-search'});
             });
         </script>
+
+        <div class="col-md-12 col-xs-5">
+            <h1><a href="/">日報作成ツールPreβ</a></h1>
+        </div>
+
+        <main class="py-4">
+            @yield('content')
+        </main>
+
     </div>
 </body>
 </html>

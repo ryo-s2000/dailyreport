@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use FPDI;
 use Session;
 use App\Construction;
+use App\Dailyreport;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
-    public function createPdf()
+    public function createPdf(Request $request)
     {
         // データを取得できる
-        $inputData = Session::get('_old_input');
+        $inputData = Dailyreport::find($request->reportid);
 
         $pdf = new FPDI();
         // PDFの余白(上左右)を設定
@@ -75,19 +76,14 @@ class PdfController extends Controller
         // 工事番号
         $items[] = array("x" => 30.0,  "y" => 24.0, "content" => $inputData['constructionNumber']);
         // 工事名
-        $construction = Construction::where('number', $inputData['constructionNumber'])->get();
-        if(count($construction) != 0){
-            // 行数によって処理を切り替える
-            $constructionName = explode("\n", $construction[0]->name);
-            if(count($constructionName) == 1){
-                $items[] = array("x" => 75.0,  "y" => 24.0, "content" => $constructionName[0]);
-            } else if (count($constructionName) == 2){
-                $items[] = array("x" => 75.0,  "y" => 21.5, "content" => $constructionName[0]);
-                $items[] = array("x" => 75.0,  "y" => 26.0, "content" => $constructionName[1]);
-            }else{
-                // 何も表示しない
-            }
+        $construction = explode("\n", $inputData['constructionName']);
+        if(count($construction) == 1){
+            $items[] = array("x" => 75.0,  "y" => 24.0, "content" => $construction[0]);
+        } else if (count($construction) == 2){
+            $items[] = array("x" => 75.0,  "y" => 21.5, "content" => $construction[0]);
+            $items[] = array("x" => 75.0,  "y" => 26.0, "content" => $construction[1]);
         }
+        // }
         // 労務A
         $items[] = array("x" => 15.0,  "y" => 38.0, "content" => $inputData['traderName1']);
         $items[] = array("x" => 61.0,  "y" => 38.0, "content" => $inputData['peopleNumber1']);
@@ -156,8 +152,4 @@ class PdfController extends Controller
         $pdf->Output(date('Ymd', strtotime($inputData['date'])) . '-dailyreport.pdf', 'I');
     }
 
-    public function savePdf(Request $request){
-        return redirect('/pdf')->withInput();
-
-    }
 }

@@ -1,0 +1,48 @@
+.dailyreport {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-new-pdf-conteiner {
+    text-align: center;
+}
+
+.btn-new-pdf {
+    padding: 15px 50px;
+    font-size: 30px;
+}
+
+.dailyreport {
+    margin: 10px;
+    font-size: 20px;
+}
+
+.btn-create-pdf {
+    background-color: #CCC;
+}
+
+
+
+/* table css */
+table {
+    border-collapse: collapse;
+    border: solid 2px orange;/*表全体を線で囲う*/
+    text-align: center;
+  }
+table th, table td {
+    border: dashed 1px orange;/**/
+    /*破線 1px オレンジ*/
+}
+table th {/*table内のthに対して*/
+    padding: 10px;/*上下左右10pxずつ*/
+}
+
+table td {/*table内のtdに対して*/
+    padding: 3px 10px;/*上下3pxで左右10px*/
+}
+
+th {
+    color: #FF9800;/*文字色*/
+    background: #fff5e5;/*背景色*/
+}
+/* table css */

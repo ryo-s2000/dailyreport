@@ -1,6 +1,7 @@
 <?php
 
 use App\Construction;
+use App\Dailyreport;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,16 +14,10 @@ use App\Construction;
 |
 */
 
-Route::get('/newpdf', function () {
-    $constructions = Construction::all();
-    $datetime = date("Y-m-d");
-    return view('newpdf', ['datetime' => $datetime, "constructions" => $constructions]);
-});
+Route::get('/', 'ReportController@index');
 
-Route::post('/newpdf', 'PdfController@savePdf');
+Route::get('/newreport', 'ReportController@newReport');
 
-Route::get('/pdf', 'PdfController@createPdf');
+Route::post('/newreport', 'ReportController@saveReport');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/pdf/{reportid}', 'PdfController@createPdf');

@@ -1,0 +1,39 @@
+.item-conteiner-top{
+    margin-top: 30px;
+}
+
+.am, .pm {
+    margin-right: 13px;
+}
+
+.weather-icon {
+    margin-left: 5px;
+}
+
+@media screen and (min-width: 767px) {
+    .constructionName {
+        width: 400px!important;
+    }
+    .workvolume {
+        width: 360px;
+    }
+    .cells-containre {
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .constructionName {
+        width: 300px!important;
+    }
+    .workvolume {
+        width: 300px;
+    }
+    .inputform {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .cells-containre {
+        margin-bottom: 50px;
+    }
+}

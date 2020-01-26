@@ -1,0 +1,9 @@
+h1{
+    text-align: center;
+}
+
+.main-container{
+    padding: 1.5em;
+    box-shadow: 0 0 12px #bbb;
+    border-radius: 16px;
+}

@@ -2,13 +2,21 @@
 
 @section('content')
 
-    <h1>日報作成ツールPreβ</h1>
+    <!-- Styles -->
+    <link href="{{ asset('css/newreport.css') }}" rel="stylesheet">
 
-    <div class="container newpdf-container">
-        <form method="post" action="/newpdf" enctype="multipart/form-data" target="_blank">
+    <div class="container main-container">
+        <form method="post" action="/newreport" enctype="multipart/form-data">
             @csrf
 
             <div class="item-conteiner">
+                <h5>お名前</h5>
+                <div class="col-md-12">
+                    <input name="username" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" required />
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
                 <h5>日付</h5>
                 <div class="col-md-12">
                     <input type="date" name="date" value="{{$datetime}}">
@@ -36,12 +44,18 @@
             </div>
 
             <div class="item-conteiner-top">
-                <h5>工事番号</h5>
+                <h5>工事番号 工事名</h5>
                 <div class="col-md-12">
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="">工事番号を選択</option>
                         @foreach ($constructions as $construction)
                             <option value="{{$construction->number}}">{{$construction->number}}</option>
+                        @endforeach
+                    </select>
+                    <select name="constructionName" data-toggle="select" class="constructionName form-control select select-default mrs mbm">
+                        <option value="">工事名を選択</option>
+                        @foreach ($constructions as $construction)
+                            <option value="{{$construction->name}}">{{$construction->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -50,8 +64,10 @@
             <div class="item-conteiner-top">
                 <h5>労務</h5>
                 @foreach (range(1,5) as $i)
-                    <div class="col-md-12">
-                        <input name="traderName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" />
+                    <div class="col-md-12 col-xs-10 cells-containre">
+                        <span class="inputform">
+                            <input name="traderName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" />
+                        </span>
                         <select name="peopleNumber{{$i}}" data-toggle="select" class="form-control select select-default mrs mbm">
                             <option value="">人数を選択</option>
                             <option value="1">1</option>
@@ -73,7 +89,9 @@
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
-                        <input name="work{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="作業及び出来高等" size="35"/>
+                        <span class="inputform">
+                            <input name="work{{$i}}" class="workvolume tagsinput tagsinput-typeahead input-lg" placeholder="作業及び出来高等"/>
+                        </span>
                     </div>
                 @endforeach
             <div>
@@ -81,21 +99,48 @@
             <div class="item-conteiner-top">
                 <h5>購入資材</h5>
                 @foreach (range(1,5) as $i)
-                    <div class="col-md-12" style="margin: 5px;">
-                        <input name="materialTraderName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" />
-                        <input name="materialName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資材名" />
-                        <input name="shapeDimensions{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="形状寸法" />
-                        <input name="quantity{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="数量" size="10" />
-                        <input name="unit{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="単位" size="10" />
+                    <div class="col-md-12 cells-containre">
+                        <span class="inputform">
+                            <input name="materialTraderName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" />
+                        </span>
+                        <span class="inputform">
+                            <input name="materialName{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資材名" />
+                        </span>
+                        <span class="inputform">
+                            <input name="shapeDimensions{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="形状寸法" />
+                        </span>
+                        <span class="inputform">
+                            <input name="quantity{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="数量" size="10" />
+                        </span>
+                        <span class="inputform">
+                            <input name="unit{{$i}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="単位" size="10" />
+                        </span>
                     </div>
                 @endforeach
             </div>
 
             <div class="item-conteiner-top">
-                <button type="submit" class="btn btn-primary">PDFを作成</button>
+                <button type="button" class="btn btn-primary" onclick="submit();">日報を保存する</button>
             </div>
 
         </form>
     </div>
+
+    <script>
+        $(function() {
+            $('select[name="constructionNumber"]').change(function(e, data) {
+                if(data !="exit"){
+                    $('select[name="constructionName"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                }
+            });
+
+            $('select[name="constructionName"]').change(function(e, data) {
+                if(data !="exit"){
+                    $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                }
+            });
+        });
+
+    </script>
 
 @endsection
