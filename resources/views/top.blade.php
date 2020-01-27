@@ -14,11 +14,12 @@
         <div class="dailyreport-conteiner">
             <div class="dailyreport">
                 <table border="1">
-                    <tr><th>日報作者名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>PDF</th></tr>
+                    <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>PDF</th></tr>
 
                     @foreach ($dailyreports as $dailyreport)
                         <tr>
-                            <td>{{$dailyreport->username}}</td>
+                            <td>{{$dailyreport->userName}}</td>
+                            <td>{{$dailyreport->department}}</td>
                             <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
                             <td>{{$dailyreport->constructionNumber}}</td>
                             <td>{{$dailyreport->constructionName}}</td>

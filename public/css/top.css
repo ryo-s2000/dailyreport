@@ -28,11 +28,14 @@ table {
     border-collapse: collapse;
     border: solid 2px orange;/*表全体を線で囲う*/
     text-align: center;
-  }
-table th, table td {
-    border: dashed 1px orange;/**/
-    /*破線 1px オレンジ*/
+
+    /* スマホスクロール対応 */
+    display: block;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
+
 table th {/*table内のthに対して*/
     padding: 10px;/*上下左右10pxずつ*/
 }

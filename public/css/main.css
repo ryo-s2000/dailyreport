@@ -3,7 +3,8 @@ h1{
 }
 
 .main-container{
-    padding: 1.5em;
+    padding: 30px;
+    /* 上下しか,かからない */
     box-shadow: 0 0 12px #bbb;
     border-radius: 16px;
 }

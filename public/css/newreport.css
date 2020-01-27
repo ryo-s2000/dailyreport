@@ -2,7 +2,7 @@
     margin-top: 30px;
 }
 
-.am, .pm {
+.am, .pm, .result {
     margin-right: 13px;
 }
 
@@ -11,22 +11,22 @@
 }
 
 @media screen and (min-width: 767px) {
-    .constructionName {
+    .construction-name {
         width: 400px!important;
     }
-    .workvolume {
+    .work-volume {
         width: 360px;
     }
     .cells-containre {
-        margin-bottom: 5px;
+        margin-bottom: 15px;
     }
 }
 
 @media screen and (max-width: 479px) {
-    .constructionName {
+    .construction-name {
         width: 300px!important;
     }
-    .workvolume {
+    .work-volume {
         width: 300px;
     }
     .inputform {
