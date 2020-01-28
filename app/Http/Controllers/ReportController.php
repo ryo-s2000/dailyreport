@@ -18,12 +18,18 @@ class ReportController extends Controller
 
     public function editReport(Request $request){
         $dailyreport = Dailyreport::find($request->reportid);
+        if($dailyreport == null){
+            return redirect('/');
+        }
         $constructions = Construction::all();
         return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
     }
 
     public function saveEditReport(DailyreportRequest $request, $reportid){
         $dailyreport = Dailyreport::find($reportid);
+        if($dailyreport == null){
+            return redirect('/');
+        }
 
         $form = $request->dailyreportAttributes();
         unset($form['_token']);

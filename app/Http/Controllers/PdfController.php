@@ -14,6 +14,9 @@ class PdfController extends Controller
     {
         // データを取得できる
         $inputData = Dailyreport::find($request->reportid);
+        if($inputData == null){
+            return redirect('/');
+        }
 
         $pdf = new FPDI();
         // PDFの余白(上左右)を設定
