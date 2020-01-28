@@ -23,7 +23,6 @@
 
     <!-- Loading Flat UI -->
     <link href="../../dist/css/flat-ui.css" rel="stylesheet">
-
     <link rel="shortcut icon" href="../../dist/favicon.ico">
 
 </head>
@@ -35,8 +34,8 @@
         <!-- Bootstrap 4 requires Popper.js -->
         <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 
+        <!-- Loading Flat UI -->
         <script src="../../dist/scripts/flat-ui.js"></script>
-
         <script src="../assets/js/application.js"></script>
 
         <script>

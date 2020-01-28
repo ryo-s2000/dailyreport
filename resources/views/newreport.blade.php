@@ -13,21 +13,37 @@
                 $action = "/newreport";
             }
         ?>
+
+        @if (count($errors) > 0)
+        <!-- Form Error List -->
+            <div class="alert alert-danger">
+                <strong>エラーが発生しています！</strong>
+
+                <br><br>
+
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="post" action="{{$action}}" enctype="multipart/form-data">
             @csrf
 
             <div class="item-conteiner">
-                <h5>お名前</h5>
+                <h5>お名前  <span class="required">[必須]</span></h5>
                 <div class="col-md-12">
                     <input name="userName" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" value="{{$dailyreport->userName}}" required />
                 </div>
             </div>
 
-            <div class="item-conteiner-top">
-                <h5>所属部署</h5>
+            <div class="item-conteiner-top select-checker-container">
+                <h5>所属部署  <span class="required">[必須]</h5>
                 <div class="col-md-12">
-                    <select name="department" data-toggle="select" class="form-control select select-default mrs mbm">
-                        <option value="">部署を選択</option>
+                    <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                        <option value="" label="default">部署を選択</option>
 
                         @foreach(array("建築部", "土木部", "特殊建築部", "農業施設部") as $value)
                             @if($value == $dailyreport->department)
@@ -38,10 +54,66 @@
                         @endforeach
                     </select>
                 </div>
+
+                <select class="select-checker" name="departmentChecker" required>
+                    <option label="default" selected><option>
+
+                    @if($dailyreport->department != "")
+                        <option value="true" selected>true</option>
+                    @else
+                        <option value="true">true</option>
+                    @endif
+                </select>
             </div>
 
+            <div class="item-conteiner-top select-checker-container">
+                <h5>工事番号・工事名  <span class="required">[必須]</h5>
+                <div class="col-md-12">
+                    <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
+                        <option value="" label="default">工事番号を選択</option>
+                        @foreach ($constructions as $construction)
+                            @if($construction->number == $dailyreport->constructionNumber)
+                                <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
+                            @else
+                                <option value="{{$construction->number}}">{{$construction->number}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
+                        <option value="" label="default">工事名を選択</option>
+                        @foreach ($constructions as $construction)
+                            @if(str_replace("\n", "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
+                                <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
+                            @else
+                                <option value="{{$construction->name}}">{{$construction->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                </div>
+
+                <select class="select-checker" name="constructionNumberChecker" required>
+                    <option label="default" selected><option>
+
+                    @if($dailyreport->constructionNumber != "")
+                        <option value="true" selected>true</option>
+                    @else
+                        <option value="true">true</option>
+                    @endif
+                </select>
+                <select class="select-checker" name="constructionNameChecker" required>
+                    <option label="default" selected><option>
+
+                    @if($dailyreport->constructionName != "")
+                        <option value="true" selected>true</option>
+                    @else
+                        <option value="true">true</option>
+                    @endif
+                </select>
+            </div>
+
+
             <div class="item-conteiner-top">
-                <h5>日付</h5>
+                <h5>日付  <span class="required">[必須]</h5>
                 <div class="col-md-12">
                     <input type="date" name="date" value="{{date('Y-m-d', strtotime( $dailyreport->date ))}}" />
                 </div>
@@ -52,7 +124,9 @@
                 <div class="col-md-12">
                     <span class="am">AM</span>
                     @foreach(array("sun", "cloud-sun", "cloud", "umbrella", "snowflake") as $value)
-                        @if($value == $dailyreport->amWeather)
+                        @if($dailyreport->amWeather == "" and $value == "sun")
+                            <input class="weather-icon" type="radio" name="amWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
+                        @elseif($value == $dailyreport->amWeather)
                             <input class="weather-icon" type="radio" name="amWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
                         @else
                             <input class="weather-icon" type="radio" name="amWeather" value="{{$value}}" /><i class="fas fa-{{$value}}"></i>
@@ -62,38 +136,14 @@
                 <div class="col-md-12">
                     <span class="pm">PM</span>
                     @foreach(array("sun", "cloud-sun", "cloud", "umbrella", "snowflake") as $value)
-                        @if($value == $dailyreport->pmWeather)
+                        @if($dailyreport->pmWeather == "" and $value == "sun")
+                            <input class="weather-icon" type="radio" name="pmWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
+                        @elseif($value == $dailyreport->pmWeather)
                             <input class="weather-icon" type="radio" name="pmWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
                         @else
                             <input class="weather-icon" type="radio" name="pmWeather" value="{{$value}}" /><i class="fas fa-{{$value}}"></i>
                         @endif
                     @endforeach
-                </div>
-            </div>
-
-            <div class="item-conteiner-top">
-                <h5>工事番号・工事名</h5>
-                <div class="col-md-12">
-                    <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
-                        <option value="">工事番号を選択</option>
-                        @foreach ($constructions as $construction)
-                            @if($construction->number == $dailyreport->constructionNumber)
-                                <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
-                            @else
-                                <option value="{{$construction->number}}">{{$construction->number}}</option>
-                            @endif
-                        @endforeach
-                    </select>
-                    <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
-                        <option value="">工事名を選択</option>
-                        @foreach ($constructions as $construction)
-                            @if(str_replace("\n", "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
-                                <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
-                            @else
-                                <option value="{{$construction->name}}">{{$construction->name}}</option>
-                            @endif
-                        @endforeach
-                    </select>
                 </div>
             </div>
 
@@ -344,13 +394,13 @@
                         @endforeach
                     </div>
                     <div class="col-md-12">
-                        <textarea name="patrolFindings" class="form-control" rows="5">{{$dailyreport->patrolFindings}}</textarea>
+                        <textarea class="patrol-textarea" name="patrolFindings" rows="4" cols="66" wrap="hard" placeholder="130文字、4行以内">{{$dailyreport->patrolFindings}}</textarea>
                     </div>
                 </div>
             </div>
 
             <div class="item-conteiner-top">
-                <button type="button" class="btn btn-primary" onclick="submit();">日報を保存する</button>
+                <input type="submit" class="btn btn-primary" value="日報を保存する" />
             </div>
 
         </form>
@@ -358,17 +408,41 @@
 
     <script>
         $(function() {
+            // selectチェッカー
+            $('select[name="department"]').change(function(e, data) {
+                if($(this).prop("selectedIndex")){
+                    $('select[name="departmentChecker"]').val("true");
+                } else {
+                    $('select[name="departmentChecker"]').prop("selectedIndex", 0);
+                }
+            });
+            $('select[name="constructionNumber"]').change(function(e, data) {
+                if($(this).prop("selectedIndex")){
+                    $('select[name="constructionNumberChecker"]').val("true");
+                } else {
+                    $('select[name="constructionNumberChecker"]').prop("selectedIndex", 0);
+                }
+            });
+            $('select[name="constructionName"]').change(function(e, data) {
+                if($(this).prop("selectedIndex")){
+                    $('select[name="constructionNameChecker"]').val("true");
+                } else {
+                    $('select[name="constructionNameChecker"]').prop("selectedIndex", 0);
+                }
+            });
+
+            // 工事番号、工事名同期処理
             $('select[name="constructionNumber"]').change(function(e, data) {
                 if(data !="exit"){
                     $('select[name="constructionName"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
-
             $('select[name="constructionName"]').change(function(e, data) {
                 if(data !="exit"){
                     $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
+
         });
 
     </script>

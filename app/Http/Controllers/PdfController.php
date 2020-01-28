@@ -332,10 +332,15 @@ class PdfController extends Controller
                 $items[] = array("x" => 80.5, "y" => 231.5, "content" => "◯");
             break;
         }
+
         $patrolFindingsText = explode("\n", $inputData['patrolFindings']);
         foreach (range(1,count($patrolFindingsText)) as $i) {
             $y = 231.5 + 7.5 * $i;
             $items[] = array("x" => 15.0, "y" => $y, "content" => $patrolFindingsText[$i-1]);
+
+            if ($i == 4) {
+                break;
+            }
         }
 
         // データを書き込み
