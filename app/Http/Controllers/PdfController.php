@@ -42,36 +42,36 @@ class PdfController extends Controller
 
         // 天気
         switch ($inputData['amWeather']){
-            case "sunny":
+            case "sun":
                 $items[] = array("x" => 101.5, "y" => 13.0, "content" => "◯");
             break;
-            case "sunnyandcloudy":
+            case "cloud-sun":
                 $items[] = array("x" => 110.5, "y" => 13.0, "content" => "◯");
             break;
-            case "cloudy":
+            case "cloud":
                 $items[] = array("x" => 119.5, "y" => 13.0, "content" => "◯");
             break;
-            case "rain":
+            case "umbrella":
                 $items[] = array("x" => 128.5, "y" => 13.0, "content" => "◯");
             break;
-            case "snow":
+            case "snowflake":
                 $items[] = array("x" => 137.5, "y" => 13.0, "content" => "◯");
             break;
         }
         switch ($inputData['pmWeather']){
-            case "sunny":
+            case "sun":
                 $items[] = array("x" => 101.5, "y" => 17.5, "content" => "◯");
             break;
-            case "sunnyandcloudy":
+            case "cloud-sun":
                 $items[] = array("x" => 110.5, "y" => 17.5, "content" => "◯");
             break;
-            case "cloudy":
+            case "cloud":
                 $items[] = array("x" => 119.5, "y" => 17.5, "content" => "◯");
             break;
-            case "rain":
+            case "umbrella":
                 $items[] = array("x" => 128.5, "y" => 17.5, "content" => "◯");
             break;
-            case "snow":
+            case "snowflake":
                 $items[] = array("x" => 137.5, "y" => 17.5, "content" => "◯");
             break;
         }

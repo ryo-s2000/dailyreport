@@ -18,6 +18,10 @@ Route::get('/', 'ReportController@index');
 
 Route::get('/newreport', 'ReportController@newReport');
 
+Route::get('/editreport/{reportid}', 'ReportController@editReport');
+
+Route::post('/editreport/{reportid}', 'ReportController@saveEditReport');
+
 Route::post('/newreport', 'ReportController@saveReport');
 
 Route::get('/pdf/{reportid}', 'PdfController@createPdf');

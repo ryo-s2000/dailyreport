@@ -9,4 +9,9 @@ class Dailyreport extends Model
     protected $dates = [
         'date'
     ];
+
+    protected $guarded = [
+        'id',
+        'created_at'
+    ];
 }

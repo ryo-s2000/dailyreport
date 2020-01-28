@@ -14,7 +14,7 @@
         <div class="dailyreport-conteiner">
             <div class="dailyreport">
                 <table border="1">
-                    <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>PDF</th></tr>
+                    <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>編集</th><th>PDF</th></tr>
 
                     @foreach ($dailyreports as $dailyreport)
                         <tr>
@@ -23,6 +23,12 @@
                             <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
                             <td>{{$dailyreport->constructionNumber}}</td>
                             <td>{{$dailyreport->constructionName}}</td>
+                            <td>
+                                <form method="get" action="/editreport/{{$dailyreport->id}}" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
+                                </form>
+                            </td>
                             <td>
                                 <form method="get" action="/pdf/{{$dailyreport->id}}" enctype="multipart/form-data" target="_blank">
                                     @csrf
