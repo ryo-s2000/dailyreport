@@ -1,0 +1,26 @@
+.construction-name {
+    width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.photo-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+
+}
+
+.photo-cell {
+    background-color: #ccc;
+    margin: 5px;
+}
+
+.photo-info {
+    padding : 5px;
+}
+
+.photo {
+    width:180px;
+}

@@ -12,8 +12,9 @@
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
-        "tecnickcom/tcpdf": "6.2.*",
-        "setasign/fpdi-tcpdf": "1.6.1"
+        "league/flysystem-aws-s3-v3": "^1.0",
+        "setasign/fpdi-tcpdf": "1.6.1",
+        "tecnickcom/tcpdf": "6.2.*"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

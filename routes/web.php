@@ -16,6 +16,8 @@ use App\Dailyreport;
 
 Route::get('/', 'ReportController@index');
 
+Route::get('/photo', 'PhotoController@index');
+
 Route::get('/newreport', 'ReportController@newReport');
 
 Route::get('/editreport/{reportid}', 'ReportController@editReport');

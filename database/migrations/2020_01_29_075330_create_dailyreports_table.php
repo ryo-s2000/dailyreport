@@ -150,6 +150,11 @@ class CreateDailyreportsTable extends Migration
             $table->text('measuringEquipmentNumber2');
             $table->text('measuringEquipmentResult2');
             $table->text('measuringEquipmentRemarks2');
+            $table->text('imagepath1');
+            $table->text('imagepath2');
+            $table->text('imagepath3');
+            $table->text('imagepath4');
+            $table->text('imagepath5');
             $table->text('patrolResult');
             $table->text('patrolFindings');
             $table->timestamps();

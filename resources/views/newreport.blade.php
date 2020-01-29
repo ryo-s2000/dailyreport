@@ -400,6 +400,19 @@
             </div>
 
             <div class="item-conteiner-top">
+                <h5>画像を選択(5枚まで選択可能)</h5>
+                @foreach (range(1,5) as $i)
+                    <?php
+                        $imagepath = "imagepath".$i;
+                    ?>
+                    <div class="col-md-12 col-xs-10 file-upload-container">
+                        <img class="photo" src="{{ $dailyreport->$imagepath }}">
+                        <input type="file" name="{{$imagepath}}">
+                    </div>
+                @endforeach
+            <div>
+
+            <div class="item-conteiner-top">
                 <input type="submit" class="btn btn-primary" value="日報を保存する" />
             </div>
 
