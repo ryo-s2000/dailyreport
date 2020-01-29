@@ -7,8 +7,9 @@
 
     <div class="container main-container">
 
-        <div class="btn-new-pdf-conteiner">
+        <div class="btn-container col-md-12">
             <button class="btn btn-primary btn-new-pdf" onclick="location.href='/newreport'">日報を作成する</button>
+            <button class="photo-btn btn btn-primary btn-new-pdf" onclick="location.href='/photo'">画像一覧</button>
         </div>
 
         <div class="dailyreport-conteiner">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use App\Dailyreport;
 use App\Construction;
 use Illuminate\Http\Request;
@@ -34,6 +35,21 @@ class ReportController extends Controller
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
 
+        // 画像保存処理
+        foreach (range(1,5) as $i){
+            $name = 'imagepath' . $i;
+            $file = $request->file($name);
+            if($file == null){
+                $dailyreport->$name = "";
+            } else {
+                $fileName = $file->getClientOriginalExtension();
+                if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
+                    $path = Storage::disk('s3')->putFile('/', $file, 'public');
+                    $dailyreport->$name = Storage::disk('s3')->url($path);
+                }
+            }
+        }
+
         // nullを空文字に変更
         foreach ($form as $key => $item){
             if($item == null){
@@ -52,6 +68,21 @@ class ReportController extends Controller
 
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
+
+        // 画像保存処理
+        foreach (range(1,5) as $i){
+            $name = 'imagepath' . $i;
+            $file = $request->file($name);
+            if($file == null){
+                $dailyreport->$name = "";
+            } else {
+                $fileName = $file->getClientOriginalExtension();
+                if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
+                    $path = Storage::disk('s3')->putFile('/', $file, 'public');
+                    $dailyreport->$name = Storage::disk('s3')->url($path);
+                }
+            }
+        }
 
         // nullを空文字に変更
         foreach ($form as $key => $item){

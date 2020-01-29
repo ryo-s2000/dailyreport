@@ -31,6 +31,14 @@
     border-radius: 10px;
 }
 
+.file-upload-container{
+    margin-top: 10px;
+}
+
+.photo {
+    width:180px;
+}
+
 @media screen and (min-width: 767px) {
     .construction-name {
         width: 400px!important;
