@@ -394,7 +394,7 @@
                         @endforeach
                     </div>
                     <div class="col-md-12">
-                        <textarea class="patrol-textarea" name="patrolFindings" rows="4" cols="66" wrap="hard" placeholder="130文字、4行以内">{{$dailyreport->patrolFindings}}</textarea>
+                        <textarea class="patrol-textarea" name="patrolFindings" rows="4" cols="66" wrap="hard" placeholder="4行以内">{{$dailyreport->patrolFindings}}</textarea>
                     </div>
                 </div>
             </div>
