@@ -24,14 +24,12 @@
                             <td>{{$dailyreport->constructionNumber}}</td>
                             <td>{{$dailyreport->constructionName}}</td>
                             <td>
-                                <form method="get" action="/editreport/{{$dailyreport->id}}" enctype="multipart/form-data">
-                                    @csrf
+                                <form method="get" action="/editreport/{{$dailyreport->id}}">
                                     <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
                                 </form>
                             </td>
                             <td>
-                                <form method="get" action="/pdf/{{$dailyreport->id}}" enctype="multipart/form-data" target="_blank">
-                                    @csrf
+                                <form method="get" action="/pdf/{{$dailyreport->id}}" target="_blank">
                                     <input type="submit" class="btn btn-primary btn-create-pdf" value="Preview" />
                                 </form>
                             </td>
