@@ -10,6 +10,7 @@
         <div class="btn-container col-md-12">
             <button class="btn btn-primary btn-new-pdf" onclick="location.href='/newreport'">日報を作成する</button>
             <button class="photo-btn btn btn-primary btn-new-pdf" onclick="location.href='/photo'">画像一覧</button>
+            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="waring()">工事番号編集</button>
         </div>
 
         <div class="dailyreport-conteiner">
@@ -42,5 +43,15 @@
         </div>
 
     </div>
+
+    <script>
+        function waring(){
+            ret = confirm("工事番号の編集ページへ遷移します。\r必ず管理者に許可を得てから編集してください。");
+            if (ret == true){
+                location.href = "/construction";
+            }
+        }
+
+    </script>
 
 @endsection

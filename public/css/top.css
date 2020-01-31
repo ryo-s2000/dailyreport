@@ -32,6 +32,10 @@ button {
     background-color: #FF9800;
 }
 
+.edit-construction-btn {
+    background-color: #FF4C4C;
+}
+
 /* table css */
 table {
     border-collapse: collapse;
@@ -58,3 +62,9 @@ th {
     background: #fff5e5;/*背景色*/
 }
 /* table css */
+
+@media screen and (max-width: 479px) {
+    .edit-construction-btn {
+        display: none;
+    }
+}
