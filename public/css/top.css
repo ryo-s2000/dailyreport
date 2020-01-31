@@ -36,6 +36,14 @@ button {
     background-color: #FF4C4C;
 }
 
+.delete-submit {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
 /* table css */
 table {
     border-collapse: collapse;

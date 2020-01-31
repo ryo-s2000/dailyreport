@@ -16,7 +16,7 @@
         <div class="dailyreport-conteiner">
             <div class="dailyreport">
                 <table border="1">
-                    <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>編集</th><th>PDF</th></tr>
+                    <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>編集</th><th>PDF</th><th>削除</th></tr>
 
                     @foreach ($dailyreports as $dailyreport)
                         <tr>
@@ -35,7 +35,16 @@
                                     <input type="submit" class="btn btn-primary btn-create-pdf" value="Preview" />
                                 </form>
                             </td>
+                            <td>
+                                <button class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$dailyreport->id}})">削除</button>
+                            </td>
                         </tr>
+
+                        <form method="POST" action="/delete/report/{{$dailyreport->id}}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$dailyreport->id}}"></button>
+                        </form>
                     @endforeach
 
                 </table>
@@ -52,6 +61,12 @@
             }
         }
 
+        function waringDelete(id){
+            ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
+            if (ret == 'delete'){
+                document.getElementById(id).click();
+            }
+        }
     </script>
 
 @endsection

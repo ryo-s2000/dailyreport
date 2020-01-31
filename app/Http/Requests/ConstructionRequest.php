@@ -26,7 +26,7 @@ class ConstructionRequest extends FormRequest
         return [
             'number' => ['required' , 'unique:constructions', 'string' , 'max:10'],
             'name' => ['required' , 'string', 'max:150'],
-            'ordered' => ['nullable' , 'string', 'max:50' ],
+            'orderer' => ['nullable' , 'string', 'max:50' ],
             'price' => ['nullable' , 'integer'],
         ];
     }
@@ -36,7 +36,7 @@ class ConstructionRequest extends FormRequest
         return $this->only([
             'number',
             'name',
-            'ordered',
+            'orderer',
             'price',
             'updated_at'
         ]);

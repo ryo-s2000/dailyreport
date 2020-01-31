@@ -28,6 +28,8 @@ Route::get('/editconstruction/{constructionid}', 'ConstructionController@editCon
 
 Route::post('/editconstruction/{constructionid}', 'ConstructionController@saveEditConstruction');
 
+Route::delete('/delete/construction/{constructionid}', 'ConstructionController@deleteConstruction');
+
 Route::get('/newreport', 'ReportController@newReport');
 
 Route::post('/newreport', 'ReportController@saveReport');
@@ -35,5 +37,7 @@ Route::post('/newreport', 'ReportController@saveReport');
 Route::get('/editreport/{reportid}', 'ReportController@editReport');
 
 Route::post('/editreport/{reportid}', 'ReportController@saveEditReport');
+
+Route::delete('/delete/report/{reportid}', 'ReportController@deleteReport');
 
 Route::get('/pdf/{reportid}', 'PdfController@createPdf');

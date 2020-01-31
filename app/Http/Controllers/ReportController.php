@@ -97,6 +97,16 @@ class ReportController extends Controller
         return redirect('/');
     }
 
+    public function deleteReport(Dailyreport $reportid){
+        if( !(Dailyreport::find($reportid)) ){
+            return redirect('/');
+        }
+
+        $reportid->delete();
+
+        return redirect('/');
+    }
+
     public function index(){
         $dailyreports = Dailyreport::all();
         return view('top', ["dailyreports" => $dailyreports]);

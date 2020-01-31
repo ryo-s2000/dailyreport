@@ -70,4 +70,14 @@ class ConstructionController extends Controller
 
         return redirect('/construction');
     }
+
+    public function deleteConstruction(Construction $constructionid){
+        if( !(Construction::find($constructionid)) ){
+            return redirect('/construction');
+        }
+
+        $constructionid->delete();
+
+        return redirect('/construction');
+    }
 }
