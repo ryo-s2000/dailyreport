@@ -34,6 +34,8 @@ Route::get('/newreport', 'ReportController@newReport');
 
 Route::post('/newreport', 'ReportController@saveReport');
 
+Route::get('/copyreport/{reportid}', 'ReportController@copyReport');
+
 Route::get('/editreport/{reportid}', 'ReportController@editReport');
 
 Route::post('/editreport/{reportid}', 'ReportController@saveEditReport');

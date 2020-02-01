@@ -7,11 +7,16 @@
 
     <div class="container main-container">
         <?php
-            if($dailyreport->userName != ""){
-                $action = "/editreport/".$dailyreport->id;
-            } else {
+            $url = url()->current();
+
+            if(strpos($url, 'newreport') !== false){
                 $action = "/newreport";
+            } else if (strpos($url, 'copyreport') !== false){
+                $action = "/newreport";
+            } else if (strpos($url, 'editreport') !== false){
+                $action = "/editreport/".$dailyreport->id;
             }
+
         ?>
 
         @if (count($errors) > 0)

@@ -124,6 +124,24 @@ class ReportController extends Controller
         return redirect('/');
     }
 
+    public function copyReport(Request $request){
+        $dailyreport = Dailyreport::find($request->reportid);
+        // $dailyreport->date = date("Y-m-d");
+        $dailyreport->date = date("Y-m-d");
+        $dailyreport->imagepath1 = '';
+        $dailyreport->imagepath2 = '';
+        $dailyreport->imagepath3 = '';
+        $dailyreport->imagepath4 = '';
+        $dailyreport->imagepath5 = '';
+        // $dailyreport->updated_at = '';
+
+        if($dailyreport == null){
+            return redirect('/');
+        }
+        $constructions = Construction::all();
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
+    }
+
     public function deleteReport(Dailyreport $reportid){
         if( !(Dailyreport::find($reportid)) ){
             return redirect('/');
