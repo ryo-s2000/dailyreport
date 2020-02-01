@@ -40,9 +40,7 @@ class ReportController extends Controller
         foreach (range(1,5) as $i){
             $name = 'imagepath' . $i;
             $file = $request->file($name);
-            if($file == null){
-                $dailyreport->$name = "";
-            } else {
+            if($file != null){
                 $fileName = $file->getClientOriginalExtension();
                 if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
                     // リサイズ処理
