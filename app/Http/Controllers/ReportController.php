@@ -126,14 +126,12 @@ class ReportController extends Controller
 
     public function copyReport(Request $request){
         $dailyreport = Dailyreport::find($request->reportid);
-        // $dailyreport->date = date("Y-m-d");
         $dailyreport->date = date("Y-m-d");
         $dailyreport->imagepath1 = '';
         $dailyreport->imagepath2 = '';
         $dailyreport->imagepath3 = '';
         $dailyreport->imagepath4 = '';
         $dailyreport->imagepath5 = '';
-        // $dailyreport->updated_at = '';
 
         if($dailyreport == null){
             return redirect('/');
@@ -154,6 +152,8 @@ class ReportController extends Controller
 
     public function index(){
         $dailyreports = Dailyreport::all();
+        $dailyreports = $dailyreports->sortByDesc('date');
+
         return view('top', ["dailyreports" => $dailyreports]);
     }
 }
