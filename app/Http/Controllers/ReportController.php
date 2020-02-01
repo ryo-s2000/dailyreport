@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use Storage;
 use App\Dailyreport;
 use App\Construction;
@@ -44,8 +45,22 @@ class ReportController extends Controller
             } else {
                 $fileName = $file->getClientOriginalExtension();
                 if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
-                    $path = Storage::disk('s3')->putFile('/', $file, 'public');
+                    // リサイズ処理
+                    $image = Image::make($file);
+                    $image->resize(180, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $imageResized = md5($image->__toString());
+                    $image->save(public_path('images/'.$imageResized));
+                    $savedImageUri = $image->dirname.'/'.$image->basename;
+
+                    // 保存処理
+                    $path = Storage::disk('s3')->putFile('/', $savedImageUri, 'public');
                     $dailyreport->$name = Storage::disk('s3')->url($path);
+
+                    // リサイズ中のごみファイル削除
+                    $image->destroy();
+                    unlink($savedImageUri);
                 }
             }
         }
@@ -78,8 +93,22 @@ class ReportController extends Controller
             } else {
                 $fileName = $file->getClientOriginalExtension();
                 if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
-                    $path = Storage::disk('s3')->putFile('/', $file, 'public');
+                    // リサイズ処理
+                    $image = Image::make($file);
+                    $image->resize(180, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });
+                    $imageResized = md5($image->__toString());
+                    $image->save(public_path('images/'.$imageResized));
+                    $savedImageUri = $image->dirname.'/'.$image->basename;
+
+                    // 保存処理
+                    $path = Storage::disk('s3')->putFile('/', $savedImageUri, 'public');
                     $dailyreport->$name = Storage::disk('s3')->url($path);
+
+                    // リサイズ中のごみファイル削除
+                    $image->destroy();
+                    unlink($savedImageUri);
                 }
             }
         }
