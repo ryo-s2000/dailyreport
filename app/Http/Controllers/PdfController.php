@@ -49,16 +49,16 @@ class PdfController extends Controller
                 $items[] = array("x" => 102.5, "y" => 14.0, "content" => "◯");
             break;
             case "cloud-sun":
-                $items[] = array("x" => 111.5, "y" => 13.0, "content" => "◯");
+                $items[] = array("x" => 111.5, "y" => 14.0, "content" => "◯");
             break;
             case "cloud":
-                $items[] = array("x" => 120.5, "y" => 13.0, "content" => "◯");
+                $items[] = array("x" => 120.5, "y" => 14.0, "content" => "◯");
             break;
             case "umbrella":
-                $items[] = array("x" => 129.5, "y" => 13.0, "content" => "◯");
+                $items[] = array("x" => 129.5, "y" => 14.0, "content" => "◯");
             break;
             case "snowflake":
-                $items[] = array("x" => 138.5, "y" => 13.0, "content" => "◯");
+                $items[] = array("x" => 138.0, "y" => 14.0, "content" => "◯");
             break;
         }
         switch ($inputData['pmWeather']){
@@ -66,16 +66,16 @@ class PdfController extends Controller
                 $items[] = array("x" => 102.5, "y" => 18.5, "content" => "◯");
             break;
             case "cloud-sun":
-                $items[] = array("x" => 110.5, "y" => 17.5, "content" => "◯");
+                $items[] = array("x" => 111.5, "y" => 18.5, "content" => "◯");
             break;
             case "cloud":
-                $items[] = array("x" => 119.5, "y" => 17.5, "content" => "◯");
+                $items[] = array("x" => 120.5, "y" => 18.5, "content" => "◯");
             break;
             case "umbrella":
-                $items[] = array("x" => 128.5, "y" => 17.5, "content" => "◯");
+                $items[] = array("x" => 129.5, "y" => 18.5, "content" => "◯");
             break;
             case "snowflake":
-                $items[] = array("x" => 137.5, "y" => 17.5, "content" => "◯");
+                $items[] = array("x" => 138.0, "y" => 18.5, "content" => "◯");
             break;
         }
 
