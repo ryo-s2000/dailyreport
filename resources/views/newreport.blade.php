@@ -171,7 +171,7 @@
                                 </span>
                                 <select name="{{$laborPeopleNumber}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">人数を選択</option>
-                                    @foreach(array("1", "2", "3", "4", "5") as $value)
+                                    @foreach(range(1,10) as $value)
                                         @if($value == $dailyreport->$laborPeopleNumber)
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @else
@@ -181,7 +181,7 @@
                                 </select>
                                 <select name="{{$laborWorkTime}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">時間を選択</option>
-                                    @foreach(array("1", "2", "3", "4", "5", "6", "7", "8", "9", "10") as $value)
+                                    @foreach(range(1,10) as $value)
                                         @if($value == $dailyreport->$laborWorkTime)
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @else
