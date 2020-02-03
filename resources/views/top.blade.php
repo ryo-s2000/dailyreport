@@ -12,6 +12,9 @@
             <button class="photo-btn btn btn-primary btn-new-pdf" onclick="location.href='/photo'">画像一覧</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="waring()">工事番号編集</button>
         </div>
+        <div class="btn-container col-md-12">
+            <button class="btn-dataexport btn btn-primary btn-new-pdf" onclick="location.href='/dataexport'">CSVを出力する</button>
+        </div>
 
         <div class="dailyreport-conteiner">
             <div class="dailyreport">

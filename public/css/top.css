@@ -36,6 +36,11 @@ button {
     background-color: #FF4C4C;
 }
 
+.btn-dataexport {
+    background-color: #217445;
+}
+
+
 .delete-submit {
     opacity: 0;
     width: 0;
@@ -73,6 +78,9 @@ th {
 
 @media screen and (max-width: 479px) {
     .edit-construction-btn {
+        display: none;
+    }
+    .btn-dataexport {
         display: none;
     }
 }
