@@ -50,7 +50,7 @@
                     <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択</option>
 
-                        @foreach(array("建築部", "土木部", "特殊建築部", "農業施設部") as $value)
+                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
                             @if($value == $dailyreport->department)
                                 <option value="{{$value}}" selected="selected">{{$value}}</option>
                             @else

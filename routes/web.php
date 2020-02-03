@@ -42,4 +42,8 @@ Route::post('/editreport/{reportid}', 'ReportController@saveEditReport');
 
 Route::delete('/delete/report/{reportid}', 'ReportController@deleteReport');
 
+Route::get('/dataexport', 'DataexportController@index');
+
+Route::post('/dataexport', 'DataexportController@newdataexport');
+
 Route::get('/pdf/{reportid}', 'PdfController@createPdf');
