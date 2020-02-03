@@ -119,7 +119,7 @@ class DataExportController extends Controller
         header('Content-Type: application/octet-stream');
         header("Content-Disposition: attachment; filename=$fileName.csv");
 
-        foreach ($csv as $line) fputcsv(fopen('php://output', 'w'), mb_convert_encoding($line, 'Shift_JIS', 'UTF-8'));
+        foreach ($csv as $line) fputcsv(fopen('php://output', 'w'), mb_convert_encoding($line, 'SJIS', 'UTF-8'));
 
     }
 }
