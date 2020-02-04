@@ -20,6 +20,8 @@ Route::get('/photo', 'PhotoController@index');
 
 Route::get('/construction', 'ConstructionController@index');
 
+Route::get('/construction/{password}', 'ConstructionController@root');
+
 Route::get('/newconstruction', 'ConstructionController@newConstruction');
 
 Route::post('/newconstruction', 'ConstructionController@saveConstruction');

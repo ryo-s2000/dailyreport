@@ -28,6 +28,12 @@ class ConstructionRequest extends FormRequest
             'name' => ['required' , 'string', 'max:150'],
             'orderer' => ['nullable' , 'string', 'max:50' ],
             'price' => ['nullable' , 'integer'],
+            'start' => ['nullable' , 'date'],
+            'end' => ['nullable' , 'date'],
+            'place' => ['nullable' , 'string'],
+            'sales' => ['nullable' , 'string'],
+            'supervisor' => ['nullable' , 'string'],
+            'remarks' => ['nullable' , 'string'],
         ];
     }
 
@@ -38,6 +44,12 @@ class ConstructionRequest extends FormRequest
             'name',
             'orderer',
             'price',
+            'start',
+            'end',
+            'place',
+            'sales',
+            'supervisor',
+            'remarks',
             'updated_at'
         ]);
     }

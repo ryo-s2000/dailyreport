@@ -19,6 +19,12 @@ class CreateConstructionsTable extends Migration
             $table->text('name');
             $table->text('orderer');
             $table->integer('price');
+            $table->text('place');
+            $table->datetime('start');
+            $table->datetime('end');
+            $table->text('sales');
+            $table->text('supervisor');
+            $table->text('remarks');
             $table->timestamps();
         });
     }

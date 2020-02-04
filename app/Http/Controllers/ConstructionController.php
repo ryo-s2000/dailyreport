@@ -15,6 +15,16 @@ class ConstructionController extends Controller
         return view('construction', ["constructions" => $constructions]);
     }
 
+    public function root(Request $request){
+        $constructions = Construction::all();
+
+        if($request->password == 'password'){
+            return view('construction', ["constructions" => $constructions, "user" => 'root']);
+        } else {
+            return view('construction', ["constructions" => $constructions]);
+        }
+    }
+
     public function newConstruction(){
         $construction = new Construction;
 
@@ -37,7 +47,8 @@ class ConstructionController extends Controller
         // データを詰め込む
         $construction->fill($form)->save();
 
-        return redirect('/construction');
+        // NOTE:パスワードを保存
+        return redirect('/construction/password');
     }
 
     public function editConstruction($constructionid){
@@ -68,7 +79,8 @@ class ConstructionController extends Controller
         // データを詰め込む
         $construction->fill($form)->save();
 
-        return redirect('/construction');
+        // NOTE:パスワードを保存
+        return redirect('/construction/password');
     }
 
     public function deleteConstruction(Construction $constructionid){
@@ -78,6 +90,7 @@ class ConstructionController extends Controller
 
         $constructionid->delete();
 
-        return redirect('/construction');
+        // NOTE:パスワードを保存
+        return redirect('/construction/password');
     }
 }

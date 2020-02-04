@@ -8,12 +8,10 @@
     <div class="container main-container">
 
         <div class="btn-container col-md-12">
-            <button class="btn btn-primary btn-new-pdf" onclick="location.href='/newreport'">日報を作成する</button>
-            <button class="photo-btn btn btn-primary btn-new-pdf" onclick="location.href='/photo'">画像一覧</button>
-            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="waring()">工事番号編集</button>
-        </div>
-        <div class="btn-container col-md-12">
-            <button class="btn-dataexport btn btn-primary btn-new-pdf" onclick="location.href='/dataexport'">CSVを出力する</button>
+            <button class="btn btn-primary btn-new-pdf" onClick="location.href='/newreport'">日報を作成する</button>
+            <button class="photo-btn btn btn-primary btn-new-pdf" onClick="location.href='/photo'">画像一覧</button>
+            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/construction'">工事番号</button>
+            <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='/dataexport'">CSVを出力する</button>
         </div>
 
         <div class="dailyreport-conteiner">
@@ -62,13 +60,6 @@
     </div>
 
     <script>
-        function waring(){
-            ret = confirm("工事番号の編集ページへ遷移します。\r必ず管理者に許可を得てから編集してください。");
-            if (ret == true){
-                location.href = "/construction";
-            }
-        }
-
         function waringDelete(id){
             ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
             if (ret == 'delete'){

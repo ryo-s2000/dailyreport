@@ -54,9 +54,59 @@
             </div>
 
             <div class="item-conteiner-top">
-                <h5>値段  </h5>
+                <h5>値段</h5>
                 <div class="col-md-12">
                     <input type="number" name="price" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->price}}" />
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>工期自</h5>
+                <div class="col-md-12">
+                    @if($construction->start)
+                        <input type="date" name="start" value="{{date('Y-m-d', strtotime( $construction->start ))}}" />
+                    @else
+                        <input type="date" name="start" />
+                    @endif
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>工期至</h5>
+                <div class="col-md-12">
+                    @if($construction->end)
+                        <input type="date" name="end" value="{{date('Y-m-d', strtotime( $construction->end ))}}" />
+                    @else
+                        <input type="date" name="end" />
+                    @endif
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>工事箇所</h5>
+                <div class="col-md-12">
+                    <input type="text" name="place" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->place}}" />
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>営業担当</h5>
+                <div class="col-md-12">
+                    <input type="text" name="sales" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->sales}}" />
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>工事担当</h5>
+                <div class="col-md-12">
+                    <input type="text" name="supervisor" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->supervisor}}" />
+                </div>
+            </div>
+
+            <div class="item-conteiner-top">
+                <h5>工事内容・備考</h5>
+                <div class="col-md-12">
+                    <input type="text" name="remarks" class="tagsinput tagsinput-typeahead input-lg" style="width: 500px;" value="{{$construction->remarks}}" />
                 </div>
             </div>
 
