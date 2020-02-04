@@ -77,9 +77,6 @@ th {
 /* table css */
 
 @media screen and (max-width: 479px) {
-    .edit-construction-btn {
-        display: none;
-    }
     .btn-dataexport {
         display: none;
     }

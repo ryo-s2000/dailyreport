@@ -14,7 +14,7 @@
             </div>
         @else
             <div class="btn-container col-md-12">
-                <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="root()">管理用アカウントに変更する</button>
+                <button class="edit-construction-btn btn btn-primary btn-new-pdf display-none display-pc" onClick="root()">管理アカウントに変更</button>
             </div>
         @endif
 
