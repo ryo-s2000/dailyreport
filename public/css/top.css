@@ -54,12 +54,7 @@ table {
     border-collapse: collapse;
     border: solid 2px orange;/*表全体を線で囲う*/
     text-align: center;
-
-    /* スマホスクロール対応 */
-    display: block;
-    overflow-x: scroll;
     white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
 }
 
 table th {/*table内のthに対して*/
@@ -81,3 +76,9 @@ th {
         display: none;
     }
 }
+
+.container-fluid {
+    width: 90%;
+    overflow-y: hidden;
+    padding-left: 0px;
+  }

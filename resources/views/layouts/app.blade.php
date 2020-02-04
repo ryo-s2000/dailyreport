@@ -34,6 +34,9 @@
         <!-- Bootstrap 4 requires Popper.js -->
         <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 
+        <!-- Loading floatThead -->
+        <script src="../../dist/scripts/jquery.floatThead.min.js"></script>
+
         <!-- Loading Flat UI -->
         <script src="../../dist/scripts/flat-ui.js"></script>
         <script src="../assets/js/application.js"></script>

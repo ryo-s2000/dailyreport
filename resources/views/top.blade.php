@@ -15,10 +15,12 @@
         </div>
 
         <div class="dailyreport-conteiner">
-            <div class="dailyreport">
-                <table border="1">
+            <div class="container-fluid">
+                <table border="1" class="table table-striped table-condensed table-bordered table-nonfluid" id="mytable">
+                    <thead class="header">
                     <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>編集</th><th>PDF</th><th>削除</th></tr>
-
+                    </thead>
+                    <tbody>
                     @foreach ($dailyreports as $dailyreport)
                         <tr>
                             <td>{{$dailyreport->userName}}</td>
@@ -42,7 +44,7 @@
                                 </form>
                             </td>
                             <td>
-                                <button class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$dailyreport->id}})">削除</button>
+                                <input type="submit" class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$dailyreport->id}})" value="削除" />
                             </td>
                         </tr>
 
@@ -52,7 +54,7 @@
                             <button type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$dailyreport->id}}"></button>
                         </form>
                     @endforeach
-
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -66,6 +68,12 @@
                 document.getElementById(id).click();
             }
         }
+
+        var $table = $('#mytable');
+        $table.floatThead({
+            position: 'fixed',
+            responsiveContainer: function() { return $(".container-fluid") }
+        });
     </script>
 
 @endsection

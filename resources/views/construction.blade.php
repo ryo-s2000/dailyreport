@@ -18,9 +18,9 @@
             </div>
         @endif
 
-        <div class="dailyreport-conteiner">
-            <div class="dailyreport">
-                <table border="1">
+        <div class="container-fluid">
+            <table border="1" class="table table-striped table-condensed table-bordered table-nonfluid" id="mytable">
+                <thead class="header">
                     <tr>
                         <th class="display-none display-pc display-sp">工事番号</th>
                         <th class="display-none display-pc display-sp">工事名</th>
@@ -37,7 +37,9 @@
                             <th class="display-none display-pc display-root">削除</th>
                         @endif
                     </tr>
+                </thead>
 
+                <tbody>
                     @foreach ($constructions as $construction)
                         <tr>
                             <td class="display-none display-pc display-sp">{{$construction->number}}</td>
@@ -54,34 +56,32 @@
                                     {{$construction->end->format('Y年m月d日')}}
                                 @endif
                             </td>
-                        <td class="display-none display-pc display-sp">{{$construction->place}}</td>
-                            <td class="display-none display-pc display-sp">{{$construction->sales}}</td>
-                            <td class="display-none display-pc display-sp">{{$construction->supervisor}}</td>
-                            <td class="display-none　display-pc display-sp">{{$construction->remarks}}</td>
-                            @if( $user ?? false == 'root')
-                                <td class="display-none display-pc display-root">
-                                    <form method="get" action="/editconstruction/{{$construction->id}}">
-                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
-                                    </form>
-                                </td>
-                                <td class="display-none display-pc display-root">
-                                    <button class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$construction->id}})">削除</button>
-                                </td>
-                            @endif
-                        </tr>
+                            <td class="display-none display-pc display-sp">{{$construction->place}}</td>
+                                <td class="display-none display-pc display-sp">{{$construction->sales}}</td>
+                                <td class="display-none display-pc display-sp">{{$construction->supervisor}}</td>
+                                <td class="display-none　display-pc display-sp">{{$construction->remarks}}</td>
+                                @if( $user ?? false == 'root')
+                                    <td class="display-none display-pc display-root">
+                                        <form method="get" action="/editconstruction/{{$construction->id}}">
+                                            <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
+                                        </form>
+                                    </td>
+                                    <td class="display-none display-pc display-root">
+                                        <input type="submit" class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$construction->id}})" value="削除">
+                                    </td>
+                                @endif
+                            </tr>
 
-                        <form method="POST" action="/delete/construction/{{$construction->id}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$construction->id}}"></button>
-                        </form>
-                    @endforeach
-
+                            <form method="POST" action="/delete/construction/{{$construction->id}}">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$construction->id}}"></button>
+                            </form>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
         </div>
-
-    </div>
 
     <script>
         function waringDelete(id){
@@ -96,6 +96,12 @@
             url = "/construction/" + ret;
             location.href=url;
         }
+
+        var $table = $('#mytable');
+        $table.floatThead({
+            position: 'fixed',
+            responsiveContainer: function() { return $(".container-fluid") }
+        });
     </script>
 
 @endsection
