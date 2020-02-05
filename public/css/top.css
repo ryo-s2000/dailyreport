@@ -1,8 +1,11 @@
-.dailyreport {
-    display: flex;
-    justify-content: center;
+.dailyreport-wrapper {
+    width: 90%;
+    height: 600px;
+    overflow: scroll;
+    margin: 10px auto;
 }
 
+/* button css */
 .btn-container {
     display: flex;
     justify-content: space-around;
@@ -40,7 +43,6 @@ button {
     background-color: #217445;
 }
 
-
 .delete-submit {
     opacity: 0;
     width: 0;
@@ -49,25 +51,44 @@ button {
     margin: 0;
 }
 
+/* button css */
+
 /* table css */
 table {
-    border-collapse: collapse;
-    border: solid 2px orange;/*表全体を線で囲う*/
+    table-layout: auto;
+    width: 100%;
     text-align: center;
+    border: solid 2px orange;
+}
+
+thead tr th {
+    width: 100px;
+    position: sticky;
+    top: -2px;
+    z-index:1;
+}
+
+    tbody tr th {
+    position: sticky;
+    left: 0;
+    }
+
+    table th {
+    padding: 10px;
+    }
+
+table td {
+    padding: 3px 10px;
+}
+
+    th, td {
+    padding: 5px 10px;
     white-space: nowrap;
-}
-
-table th {/*table内のthに対して*/
-    padding: 10px;/*上下左右10pxずつ*/
-}
-
-table td {/*table内のtdに対して*/
-    padding: 3px 10px;/*上下3pxで左右10px*/
-}
+    }
 
 th {
-    color: #FF9800;/*文字色*/
-    background: #fff5e5;/*背景色*/
+    color: #FF9800;
+    background: #fff5e5;
 }
 /* table css */
 
@@ -76,9 +97,3 @@ th {
         display: none;
     }
 }
-
-.container-fluid {
-    width: 90%;
-    overflow-y: hidden;
-    padding-left: 0px;
-  }

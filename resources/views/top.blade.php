@@ -15,48 +15,50 @@
         </div>
 
         <div class="dailyreport-conteiner">
-            <div class="container-fluid">
-                <table border="1" class="table table-striped table-condensed table-bordered table-nonfluid" id="mytable">
+
+            <main class="dailyreport-wrapper">
+                <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">
                     <thead class="header">
-                    <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>編集</th><th>PDF</th><th>削除</th></tr>
+                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>編集</th><th>PDF</th><th>削除</th></tr>
                     </thead>
                     <tbody>
-                    @foreach ($dailyreports as $dailyreport)
-                        <tr>
-                            <td>{{$dailyreport->userName}}</td>
-                            <td>{{$dailyreport->department}}</td>
-                            <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
-                            <td>{{$dailyreport->constructionNumber}}</td>
-                            <td>{{$dailyreport->constructionName}}</td>
-                            <td>
-                                <form method="get" action="/copyreport/{{$dailyreport->id}}">
-                                    <input type="submit" class="btn btn-primary btn-create-pdf" value="コピーして作成" />
-                                </form>
-                            </td>
-                            <td>
-                                <form method="get" action="/editreport/{{$dailyreport->id}}">
-                                    <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
-                                </form>
-                            </td>
-                            <td>
-                                <form method="get" action="/pdf/{{$dailyreport->id}}" target="_blank">
-                                    <input type="submit" class="btn btn-primary btn-create-pdf" value="Preview" />
-                                </form>
-                            </td>
-                            <td>
-                                <input type="submit" class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$dailyreport->id}})" value="削除" />
-                            </td>
-                        </tr>
+                        @foreach ($dailyreports as $dailyreport)
+                            <tr>
+                                <td>{{$dailyreport->userName}}</td>
+                                <td>{{$dailyreport->department}}</td>
+                                <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
+                                <td>{{$dailyreport->constructionNumber}}</td>
+                                <td>{{$dailyreport->constructionName}}</td>
+                                <td>
+                                    <form method="get" action="/copyreport/{{$dailyreport->id}}">
+                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="コピーして作成" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="get" action="/editreport/{{$dailyreport->id}}">
+                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="get" action="/pdf/{{$dailyreport->id}}" target="_blank">
+                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="Preview" />
+                                    </form>
+                                </td>
+                                <td>
+                                    <input type="submit" class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$dailyreport->id}})" value="削除" />
+                                </td>
+                            </tr>
 
-                        <form method="POST" action="/delete/report/{{$dailyreport->id}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$dailyreport->id}}"></button>
-                        </form>
-                    @endforeach
+                            <form method="POST" action="/delete/report/{{$dailyreport->id}}" style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                                <button style="display: none;" type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$dailyreport->id}}"></button>
+                            </form>
+                        @endforeach
                     </tbody>
                 </table>
-            </div>
+              </main>
+
         </div>
 
     </div>
@@ -68,12 +70,6 @@
                 document.getElementById(id).click();
             }
         }
-
-        var $table = $('#mytable');
-        $table.floatThead({
-            position: 'fixed',
-            responsiveContainer: function() { return $(".container-fluid") }
-        });
     </script>
 
 @endsection

@@ -18,8 +18,8 @@
             </div>
         @endif
 
-        <div class="container-fluid">
-            <table border="1" class="table table-striped table-condensed table-bordered table-nonfluid" id="mytable">
+        <main class="dailyreport-wrapper">
+            <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">
                 <thead class="header">
                     <tr>
                         <th class="display-none display-pc display-sp">工事番号</th>
@@ -80,7 +80,7 @@
                         @endforeach
                     </tbody>
                 </table>
-            </div>
+            </main>
         </div>
 
     <script>
@@ -96,12 +96,6 @@
             url = "/construction/" + ret;
             location.href=url;
         }
-
-        var $table = $('#mytable');
-        $table.floatThead({
-            position: 'fixed',
-            responsiveContainer: function() { return $(".container-fluid") }
-        });
     </script>
 
 @endsection
