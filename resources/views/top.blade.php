@@ -14,6 +14,68 @@
             <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='/dataexport'">CSVを出力する</button>
         </div>
 
+        <?php
+            $userNames = array();
+            foreach($allDailyreports as $dailyreport){
+                $userNames[] = $dailyreport->userName;
+            }
+        ?>
+
+        <div>
+            <div class="refine">
+                <div><span class="refine-title">絞り込み</span></div>
+                <form method="get" action="/" enctype="multipart/form-data">
+                    <select name="userName" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                        <option value="" label="default">名前を選択</option>
+
+                        @foreach(array_unique($userNames) as $value)
+                            @if($dailyreportsPalams['userName'] == $value)
+                                <option value="{{$value}}" selected>{{$value}}</option>
+                            @else
+                                <option value="{{$value}}">{{$value}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+
+                    <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                        <option value="" label="default">部署を選択</option>
+
+                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
+                            @if($dailyreportsPalams['department'] == $value)
+                                <option value="{{$value}}" selected>{{$value}}</option>
+                            @else
+                                <option value="{{$value}}">{{$value}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+
+                    <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
+                        <option value="" label="default">工事番号を選択</option>
+                        @foreach ($constructions as $construction)
+                            @if($dailyreportsPalams['constructionNumber'] == $construction->number)
+                                <option value="{{$construction->number}}" selected>{{$construction->number}}</option>
+                            @else
+                                <option value="{{$construction->number}}">{{$construction->number}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
+                        <option value="" label="default">工事名を選択</option>
+                        @foreach ($constructions as $construction)
+                            @if($dailyreportsPalams['constructionName'] == $construction->name)
+                                <option value="{{$construction->name}}" selected>{{$construction->name}}</option>
+                            @else
+                                <option value="{{$construction->name}}">{{$construction->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+
+
+                    <button class="btn btn-primary btn-refine" onClick="location.href='/construction'">決定</button>
+                </form>
+            </div>
+        </div>
+
         <div class="dailyreport-conteiner">
 
             <main class="dailyreport-wrapper">
@@ -64,6 +126,21 @@
     </div>
 
     <script>
+        $(function() {
+            // 工事番号、工事名同期処理
+            $('select[name="constructionNumber"]').change(function(e, data) {
+                if(data !="exit"){
+                    $('select[name="constructionName"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                }
+            });
+            $('select[name="constructionName"]').change(function(e, data) {
+                if(data !="exit"){
+                    $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                }
+            });
+        });
+
+        // データ削除処理
         function waringDelete(id){
             ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
             if (ret == 'delete'){

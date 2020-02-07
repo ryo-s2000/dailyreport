@@ -150,10 +150,37 @@ class ReportController extends Controller
         return redirect('/');
     }
 
-    public function index(){
-        $dailyreports = Dailyreport::all();
+    public function index(Request $request){
+        function condition($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '!=';
+            }
+        }
+
+        function value($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '';
+            }
+        }
+
+        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+            ->where('department', condition($request->department), value($request->department))
+            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
+            ->get();
+        $dailyreportsPalams = array(
+            'userName' => $request->userName,
+            'department' => $request->department,
+            'constructionNumber' => $request->constructionNumber,
+            'constructionName' => $request->constructionName,
+        );
         $dailyreports = $dailyreports->sortByDesc('date');
 
-        return view('top', ["dailyreports" => $dailyreports]);
+        $allDailyreports = Dailyreport::all();
+        $constructions = Construction::all();
+        return view('top', ["dailyreports" => $dailyreports, "dailyreportsPalams" => $dailyreportsPalams, "allDailyreports" => $allDailyreports, "constructions" => $constructions]);
     }
 }

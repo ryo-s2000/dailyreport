@@ -5,6 +5,16 @@
     margin: 10px auto;
 }
 
+.refine{
+    width: 90%;
+    margin: 10px auto;
+}
+
+.refine-title {
+    font-size: 20px;
+    font-weight: 800;
+}
+
 /* button css */
 .btn-container {
     display: flex;
@@ -41,6 +51,10 @@ button {
 
 .btn-dataexport {
     background-color: #217445;
+}
+
+.btn-refine {
+    margin: 0;
 }
 
 .delete-submit {
