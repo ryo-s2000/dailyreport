@@ -84,7 +84,7 @@
             <main class="dailyreport-wrapper">
                 <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">
                     <thead class="header">
-                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>編集</th><th>PDF</th><th>削除</th></tr>
+                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>詳細</th></tr>
                     </thead>
                     <tbody>
                         @foreach ($dailyreports as $dailyreport)
@@ -100,17 +100,9 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form method="get" action="/editreport/{{$dailyreport->id}}">
-                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
+                                    <form method="get" action="/{{$dailyreport->id}}">
+                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="詳細" />
                                     </form>
-                                </td>
-                                <td>
-                                    <form method="get" action="/pdf/{{$dailyreport->id}}" target="_blank">
-                                        <input type="submit" class="btn btn-primary btn-create-pdf" value="Preview" />
-                                    </form>
-                                </td>
-                                <td>
-                                    <input type="submit" class="btn btn-primary btn-create-pdf" onClick="waringDelete({{$dailyreport->id}})" value="削除" />
                                 </td>
                             </tr>
 
@@ -142,14 +134,6 @@
                 }
             });
         });
-
-        // データ削除処理
-        function waringDelete(id){
-            ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
-            if (ret == 'delete'){
-                document.getElementById(id).click();
-            }
-        }
     </script>
 
 @endsection

@@ -1,0 +1,25 @@
+.detail-dailyreport-wrapper {
+    width: 90%;
+    height: auto;
+    overflow: scroll;
+    margin: 10px auto;
+}
+
+.signature-wrapper {
+    width: 90%;
+    height: auto;
+    overflow: scroll;
+    margin: 10px auto;
+}
+
+.datail-table {
+    text-align: left;
+}
+
+.btn-container {
+    display: flex;
+}
+
+.btn {
+    margin: 5px 0;
+}

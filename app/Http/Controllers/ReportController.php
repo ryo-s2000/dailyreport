@@ -6,6 +6,7 @@ use Image;
 use Storage;
 use App\Dailyreport;
 use App\Construction;
+use App\Signature;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyreportRequest;
 
@@ -148,6 +149,16 @@ class ReportController extends Controller
         $reportid->delete();
 
         return redirect('/');
+    }
+
+    public function showReport(Request $request){
+        $dailyreport = Dailyreport::find($request->reportid);
+        if($dailyreport == null){
+            return redirect('/');
+        }
+
+        $signatures = Signature::where('reportid', $request->reportid)->get();
+        return view('showreport', ['dailyreport' => $dailyreport, 'signatures' => $signatures]);
     }
 
     public function index(Request $request){
