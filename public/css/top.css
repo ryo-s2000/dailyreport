@@ -106,8 +106,19 @@ th {
 }
 /* table css */
 
+
+@media screen and (min-width: 767px) {
+    .construction-name {
+        width: 400px!important;
+    }
+}
+
 @media screen and (max-width: 479px) {
     .btn-dataexport {
         display: none;
+    }
+
+    .construction-name {
+        width: 300px!important;
     }
 }
