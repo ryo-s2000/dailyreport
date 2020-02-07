@@ -216,7 +216,7 @@
                                     <input name="{{$heavyMachineryModel}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="機種" value="{{$dailyreport->$heavyMachineryModel}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$heavyMachineryTime}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="台" size="10" value="{{$dailyreport->$heavyMachineryTime}}" />
+                                    <input type="number" name="{{$heavyMachineryTime}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="台" size="10" value="{{$dailyreport->$heavyMachineryTime}}" />
                                 </span>
                                 <span class="inputform">
                                     <input name="{{$heavyMachineryRemarks}}" class="workvolume tagsinput tagsinput-typeahead input-lg" placeholder="備考" value="{{$dailyreport->$heavyMachineryRemarks}}" />
