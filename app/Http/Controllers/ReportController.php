@@ -42,7 +42,7 @@ class ReportController extends Controller
             $file = $request->file($name);
             if($file != null){
                 $fileName = $file->getClientOriginalExtension();
-                if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
+                if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png" or $fileName == "JPEG" or $fileName == "JPG" or $fileName == "PNG"){
                     // リサイズ処理
                     $image = Image::make($file);
                     $image->resize(180, null, function ($constraint) {
