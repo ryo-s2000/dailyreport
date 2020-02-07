@@ -7,6 +7,8 @@
 
     <div class="container main-container">
         <?php
+            $action = "";
+
             if($construction->name != ""){
                 $action = "/editconstruction/".$construction->id;
             } else {

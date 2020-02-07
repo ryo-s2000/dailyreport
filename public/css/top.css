@@ -82,23 +82,24 @@ thead tr th {
     z-index:1;
 }
 
-    tbody tr th {
+tbody tr th {
     position: sticky;
     left: 0;
-    }
-
-    table th {
-    padding: 10px;
-    }
-
-table td {
-    padding: 3px 10px;
 }
 
-    th, td {
+table th {
+    padding: 10px;
+}
+
+.table td {
+    padding: 5px 10px;
+    vertical-align: inherit;
+}
+
+th, td {
     padding: 5px 10px;
     white-space: nowrap;
-    }
+}
 
 th {
     color: #FF9800;

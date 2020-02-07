@@ -8,6 +8,7 @@
     <div class="container main-container">
         <?php
             $url = url()->current();
+            $action = '';
 
             if(strpos($url, 'newreport') !== false){
                 $action = "/newreport";
