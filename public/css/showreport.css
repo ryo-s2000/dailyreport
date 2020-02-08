@@ -23,3 +23,15 @@
 .btn {
     margin: 5px 0;
 }
+
+.photo-container {
+    width: 90%;
+    margin: 10px auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo-cell {
+    padding: 5px;
+    width: 170px;
+}

@@ -6,6 +6,85 @@
     <link href="{{ asset('css/photo.css') }}" rel="stylesheet">
 
     <div class="container main-container">
+        <?php
+            $userNames = array();
+            foreach($allDailyreports as $dailyreport){
+                $userNames[] = $dailyreport->userName;
+            }
+        ?>
+
+        <div>
+            <div class="refine">
+                <form method="get" action="/photo" enctype="multipart/form-data">
+                    <div><span class="refine-title">順番</span></div>
+                    <select name="sort" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                        <option value="" label="default">選択</option>
+
+                        @foreach(array("日付が早い順", "日付が遅い順") as $value)
+                            @if($dailyreportsPalams['sort'] == $value)
+                                <option value="{{$value}}" selected>{{$value}}</option>
+                            @else
+                                <option value="{{$value}}">{{$value}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+
+                    <div><span class="refine-title">絞り込み</span></div>
+                    <div>
+                        <select name="userName" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                            <option value="" label="default">名前を選択</option>
+
+                            @foreach(array_unique($userNames) as $value)
+                                @if($dailyreportsPalams['userName'] == $value)
+                                    <option value="{{$value}}" selected>{{$value}}</option>
+                                @else
+                                    <option value="{{$value}}">{{$value}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+
+                        <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                            <option value="" label="default">部署を選択</option>
+
+                            @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
+                                @if($dailyreportsPalams['department'] == $value)
+                                    <option value="{{$value}}" selected>{{$value}}</option>
+                                @else
+                                    <option value="{{$value}}">{{$value}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
+                            <option value="" label="default">工事番号を選択</option>
+                            @foreach ($constructions as $construction)
+                                @if($dailyreportsPalams['constructionNumber'] == $construction->number)
+                                    <option value="{{$construction->number}}" selected>{{$construction->number}}</option>
+                                @else
+                                    <option value="{{$construction->number}}">{{$construction->number}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        <select name="constructionName" data-toggle="select" class="construction-form-name form-control select select-default mrs mbm">
+                            <option value="" label="default">工事名を選択</option>
+                            @foreach ($constructions as $construction)
+                                @if($dailyreportsPalams['constructionName'] == $construction->name)
+                                    <option value="{{$construction->name}}" selected>{{$construction->name}}</option>
+                                @else
+                                    <option value="{{$construction->name}}">{{$construction->name}}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-reset" onClick="window.reset();">条件をリセット</button>
+                    <button class="btn btn-primary btn-refine" onClick="location.href='/construction'">決定</button>
+                </form>
+            </div>
+        </div>
+
+
         <?php $beforReportDate = "" ?>
 
         @foreach($dailyreports as $dailyreport)
@@ -58,5 +137,29 @@
                 @endif
             @endforeach
         @endforeach
+
+        <script>
+            // リセット処理
+            function reset(){
+                ['sort', 'userName', 'department', 'constructionNumber', 'constructionName'].forEach(name => {
+                    selectName = 'select[name="' + name + '"]';
+                    $(selectName).prop("selectedIndex", 0).trigger('change', ['exit']);
+                });
+            }
+
+            $(function() {
+                // 工事番号、工事名同期処理
+                $('select[name="constructionNumber"]').change(function(e, data) {
+                    if(data !="exit"){
+                        $('select[name="constructionName"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                    }
+                });
+                $('select[name="constructionName"]').change(function(e, data) {
+                    if(data !="exit"){
+                        $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                    }
+                });
+            });
+        </script>
 
 @endsection

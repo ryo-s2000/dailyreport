@@ -23,8 +23,21 @@
 
         <div>
             <div class="refine">
-                <div><span class="refine-title">絞り込み</span></div>
                 <form method="get" action="/" enctype="multipart/form-data">
+                    <div><span class="refine-title">順番</span></div>
+                    <select name="sort" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                        <option value="" label="default">選択</option>
+
+                        @foreach(array("日付が早い順", "日付が遅い順") as $value)
+                            @if($dailyreportsPalams['sort'] == $value)
+                                <option value="{{$value}}" selected>{{$value}}</option>
+                            @else
+                                <option value="{{$value}}">{{$value}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+
+                    <div><span class="refine-title">絞り込み</span></div>
                     <div>
                         <select name="userName" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                             <option value="" label="default">名前を選択</option>
@@ -73,7 +86,7 @@
                             @endforeach
                         </select>
                     </div>
-
+                    <button type="button" class="btn btn-primary btn-create-pdf" onClick="window.reset();">条件をリセット</button>
                     <button class="btn btn-primary btn-refine" onClick="location.href='/construction'">決定</button>
                 </form>
             </div>
@@ -117,10 +130,17 @@
               </main>
 
         </div>
-
     </div>
 
     <script>
+        // リセット処理
+        function reset(){
+            ['sort', 'userName', 'department', 'constructionNumber', 'constructionName'].forEach(name => {
+                selectName = 'select[name="' + name + '"]';
+                $(selectName).prop("selectedIndex", 0).trigger('change', ['exit']);
+            });
+        }
+
         $(function() {
             // 工事番号、工事名同期処理
             $('select[name="constructionNumber"]').change(function(e, data) {

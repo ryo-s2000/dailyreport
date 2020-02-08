@@ -3,14 +3,53 @@
 namespace App\Http\Controllers;
 
 use App\Dailyreport;
+use App\Construction;
 use Illuminate\Http\Request;
 
 class PhotoController extends Controller
 {
-    public function index(){
-        $dailyreports = Dailyreport::all();
-        $dailyreportsSorted = $dailyreports->sortByDesc('date');
-        // TODO もっと最適化できそう
-        return view('photo', ["dailyreports" => $dailyreportsSorted]);
+    public function index(Request $request){
+        function condition($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '!=';
+            }
+        }
+
+        function value($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '';
+            }
+        }
+
+        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+            ->where('department', condition($request->department), value($request->department))
+            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
+            ->get();
+        switch ($request->sort){
+            case '早い順':
+                $dailyreports = $dailyreports->sortByDesc('date');
+                break;
+            case '遅い順':
+                $dailyreports = $dailyreports->sortBy('date');
+                break;
+            default:
+                $dailyreports = $dailyreports->sortByDesc('date');
+        }
+
+        $dailyreportsPalams = array(
+            'userName' => $request->userName,
+            'department' => $request->department,
+            'constructionNumber' => $request->constructionNumber,
+            'constructionName' => $request->constructionName,
+            'sort' => $request->sort,
+        );
+
+        $allDailyreports = Dailyreport::all();
+        $constructions = Construction::all();
+        return view('photo', ["dailyreports" => $dailyreports, "dailyreportsPalams" => $dailyreportsPalams, "allDailyreports" => $allDailyreports, "constructions" => $constructions]);
     }
 }

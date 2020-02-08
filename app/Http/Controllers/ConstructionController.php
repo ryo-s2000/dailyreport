@@ -9,19 +9,129 @@ use App\Http\Requests\ConstructionUpdateRequest;
 
 class ConstructionController extends Controller
 {
-    public function index(){
-        $constructions = Construction::all();
+    public function index(Request $request){
+        function condition($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '!=';
+            }
+        }
 
-        return view('construction', ["constructions" => $constructions]);
+        function value($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '';
+            }
+        }
+
+        $constructions = Construction::where('number', condition($request->number), value($request->number))
+            ->where('orderer', condition($request->orderer), value($request->orderer))
+            ->where('place', condition($request->place), value($request->place))
+            ->where('sales', condition($request->sales), value($request->sales))
+            ->where('supervisor', condition($request->supervisor), value($request->supervisor))
+            ->get();
+        switch ($request->sort){
+            case '工期自早い順':
+                $constructions = $constructions->sortBy('start');
+                break;
+            case '工期自遅い順':
+                $constructions = $constructions->sortByDesc('start');
+                break;
+            case '工期至早い順':
+                $constructions = $constructions->sortBy('end');
+                break;
+            case '工期至遅い順':
+                $constructions = $constructions->sortByDesc('end');
+                break;
+            case '安い順':
+                $constructions = $constructions->sortBy('price');
+                break;
+            case '高い順':
+                $constructions = $constructions->sortByDesc('price');
+                break;
+            default:
+                $constructions = $constructions->sortByDesc('end');
+        }
+
+        $constructionsPalams = array(
+            'number' => $request->number,
+            'name' => $request->name,
+            'orderer' => $request->orderer,
+            'place' => $request->place,
+            'sales' => $request->sales,
+            'supervisor' => $request->supervisor,
+            'sort' => $request->sort,
+        );
+
+        $allConstructions = Construction::all();
+
+        return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
     }
 
     public function root(Request $request){
-        $constructions = Construction::all();
+        function condition($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '!=';
+            }
+        }
+
+        function value($value = null){
+            if($value){
+                return $value;
+            } else {
+                return '';
+            }
+        }
+
+        $constructions = Construction::where('number', condition($request->number), value($request->number))
+            ->where('orderer', condition($request->orderer), value($request->orderer))
+            ->where('place', condition($request->place), value($request->place))
+            ->where('sales', condition($request->sales), value($request->sales))
+            ->where('supervisor', condition($request->supervisor), value($request->supervisor))
+            ->get();
+        switch ($request->sort){
+            case '工期自早い順':
+                $constructions = $constructions->sortBy('start');
+                break;
+            case '工期自遅い順':
+                $constructions = $constructions->sortByDesc('start');
+                break;
+            case '工期至早い順':
+                $constructions = $constructions->sortBy('end');
+                break;
+            case '工期至遅い順':
+                $constructions = $constructions->sortByDesc('end');
+                break;
+            case '安い順':
+                $constructions = $constructions->sortBy('price');
+                break;
+            case '高い順':
+                $constructions = $constructions->sortByDesc('price');
+                break;
+            default:
+                $constructions = $constructions->sortByDesc('end');
+        }
+
+        $constructionsPalams = array(
+            'number' => $request->number,
+            'name' => $request->name,
+            'orderer' => $request->orderer,
+            'place' => $request->place,
+            'sales' => $request->sales,
+            'supervisor' => $request->supervisor,
+            'sort' => $request->sort,
+        );
+
+        $allConstructions = Construction::all();
 
         if($request->password == 'password'){
-            return view('construction', ["constructions" => $constructions, "user" => 'root']);
+            return view('construction', ['constructions' => $constructions, "user" => 'root', 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
         } else {
-            return view('construction', ["constructions" => $constructions]);
+            return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
         }
     }
 

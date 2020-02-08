@@ -41,6 +41,19 @@
             </table>
         </main>
 
+        <h5 style="margin-top: 50px;">写真</h5>
+        <div class="photo-container">
+            @foreach(array("imagepath1", "imagepath2", "imagepath3", "imagepath4", "imagepath5") as $path)
+                @if($dailyreport->$path)
+                    <div class="photo-cell">
+                        <div>
+                            <img class="photo" src={{$dailyreport->$path}}>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
+        </div>
+
         <h5 style="margin-top: 50px;">確認用署名</h5>
         <div class="btn-container">
             <form method="get" action="/newsignature/{{$dailyreport->id}}">

@@ -182,13 +182,24 @@ class ReportController extends Controller
             ->where('department', condition($request->department), value($request->department))
             ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
             ->get();
+        switch ($request->sort){
+            case '早い順':
+                $dailyreports = $dailyreports->sortByDesc('date');
+                break;
+            case '遅い順':
+                $dailyreports = $dailyreports->sortBy('date');
+                break;
+            default:
+                $dailyreports = $dailyreports->sortByDesc('date');
+        }
+
         $dailyreportsPalams = array(
             'userName' => $request->userName,
             'department' => $request->department,
             'constructionNumber' => $request->constructionNumber,
             'constructionName' => $request->constructionName,
+            'sort' => $request->sort,
         );
-        $dailyreports = $dailyreports->sortByDesc('date');
 
         $allDailyreports = Dailyreport::all();
         $constructions = Construction::all();

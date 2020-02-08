@@ -9,7 +9,6 @@
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
-
 }
 
 .photo-cell {
@@ -24,4 +23,24 @@
 .photo {
     width:180px;
     /* 画像表示サイズ変更処理 */
+}
+
+.refine {
+    width: 90%;
+    margin: 10px auto;
+}
+
+.btn-reset {
+    background-color: #CCC;
+}
+
+@media screen and (min-width: 767px) {
+    .construction-form-name {
+        width: 400px!important;
+    }
+}
+@media screen and (max-width: 479px) {
+    .construction-form-name {
+        width: 300px!important;
+    }
 }

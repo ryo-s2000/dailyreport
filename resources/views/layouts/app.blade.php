@@ -48,7 +48,7 @@
         </script>
 
         <div class="col-md-12 col-xs-5">
-            <h1><a href="/">日報作成ツールPreβ</a></h1>
+            <h1><a href="/">日報作成ツールβ</a></h1>
         </div>
 
         <main class="py-4">

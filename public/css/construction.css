@@ -2,6 +2,14 @@
     display: none;
 }
 
+td.refine-td {
+    padding: 9px 0 0 5px;
+}
+
+.reset-button {
+    background-color: red;
+}
+
 /* PC表示 */
 @media screen and (min-width: 767px) {
     .display-pc {
