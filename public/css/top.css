@@ -123,3 +123,7 @@ th {
         width: 300px!important;
     }
 }
+
+.select-choiced {
+    border: 2px solid #0066FF!important;
+}

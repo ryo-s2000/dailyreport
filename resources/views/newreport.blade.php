@@ -75,10 +75,15 @@
             <div class="item-conteiner-top select-checker-container">
                 <h5>工事番号・工事名  <span class="required">[必須]</h5>
                 <div class="col-md-12">
+                    <?php
+                        $selectedNumber = false;
+                        $selectedName = false ;
+                    ?>
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">工事番号を選択</option>
                         @foreach ($constructions as $construction)
                             @if($construction->number == $dailyreport->constructionNumber)
+                                <?php $selectedNumber = true ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @else
                                 <option value="{{$construction->number}}">{{$construction->number}}</option>
@@ -89,6 +94,7 @@
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
                             @if(str_replace("\n", "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
+                                <?php $selectedName = true ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
                                 <option value="{{$construction->name}}">{{$construction->name}}</option>
@@ -100,7 +106,7 @@
                 <select class="select-checker" name="constructionNumberChecker" required>
                     <option label="default" selected><option>
 
-                    @if($dailyreport->constructionNumber != "")
+                    @if($selectedNumber)
                         <option value="true" selected>true</option>
                     @else
                         <option value="true">true</option>
@@ -109,7 +115,7 @@
                 <select class="select-checker" name="constructionNameChecker" required>
                     <option label="default" selected><option>
 
-                    @if($dailyreport->constructionName != "")
+                    @if($selectedName)
                         <option value="true" selected>true</option>
                     @else
                         <option value="true">true</option>

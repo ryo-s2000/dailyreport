@@ -147,6 +147,25 @@
                 });
             }
 
+            // 選択時カラー機能
+            $(document).ready(function(){
+                if($('select[name="sort"]').val() != ""){
+                    $('select[name="sort"]').addClass("select-choiced");
+                }
+                if($('select[name="userName"]').val() != ""){
+                    $('select[name="userName"]').addClass("select-choiced");
+                }
+                if($('select[name="department"]').val() != ""){
+                    $('select[name="department"]').addClass("select-choiced");
+                }
+                if($('select[name="constructionNumber"]').val() != ""){
+                    $('select[name="constructionNumber"]').addClass("select-choiced");
+                }
+                if($('select[name="constructionName"]').val() != ""){
+                    $('select[name="constructionName"]').addClass("select-choiced");
+                }
+            });
+
             $(function() {
                 // 工事番号、工事名同期処理
                 $('select[name="constructionNumber"]').change(function(e, data) {
@@ -159,6 +178,44 @@
                         $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                     }
                 });
+
+                // 選択時カラー機能
+                $('select[name="sort"]').change(function(e, data) {
+                    if($(this).prop("selectedIndex") == 0){
+                        $('select[name="sort"]').removeClass("select-choiced");
+                    } else {
+                        $('select[name="sort"]').addClass("select-choiced");
+                    }
+                });
+                $('select[name="userName"]').change(function(e, data) {
+                    if($(this).prop("selectedIndex") == 0){
+                        $('select[name="userName"]').removeClass("select-choiced");
+                    } else {
+                        $('select[name="userName"]').addClass("select-choiced");
+                    }
+                });
+                $('select[name="department"]').change(function(e, data) {
+                    if($(this).prop("selectedIndex") == 0){
+                        $('select[name="department"]').removeClass("select-choiced");
+                    } else {
+                        $('select[name="department"]').addClass("select-choiced");
+                    }
+                });
+                $('select[name="constructionNumber"]').change(function(e, data) {
+                    if($(this).prop("selectedIndex") == 0){
+                        $('select[name="constructionNumber"]').removeClass("select-choiced");
+                    } else {
+                        $('select[name="constructionNumber"]').addClass("select-choiced");
+                    }
+                });
+                $('select[name="constructionName"]').change(function(e, data) {
+                    if($(this).prop("selectedIndex") == 0){
+                        $('select[name="constructionName"]').removeClass("select-choiced");
+                    } else {
+                        $('select[name="constructionName"]').addClass("select-choiced");
+                    }
+                });
+
             });
         </script>
 

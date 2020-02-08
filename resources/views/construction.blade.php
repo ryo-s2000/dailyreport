@@ -205,6 +205,7 @@
         </div>
 
     <script>
+        // 削除処理
         function waringDelete(id){
             ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
             if (ret == 'delete'){
@@ -212,11 +213,37 @@
             }
         }
 
+        /// パスワード処理
         function root(){
             ret = prompt("※パスワードを入力してください。", "");
             url = "/construction/" + ret;
             location.href=url;
         }
+
+        // 選択時カラー機能
+        $(document).ready(function(){
+            if($('select[name="sort"]').val() != ""){
+                $('select[name="sort"]').addClass("select-choiced");
+            }
+            if($('select[name="number"]').val() != ""){
+                $('select[name="number"]').addClass("select-choiced");
+            }
+            if($('select[name="name"]').val() != ""){
+                $('select[name="name"]').addClass("select-choiced");
+            }
+            if($('select[name="orderer"]').val() != ""){
+                $('select[name="orderer"]').addClass("select-choiced");
+            }
+            if($('select[name="place"]').val() != ""){
+                $('select[name="place"]').addClass("select-choiced");
+            }
+            if($('select[name="sales"]').val() != ""){
+                $('select[name="sales"]').addClass("select-choiced");
+            }
+            if($('select[name="supervisor"]').val() != ""){
+                $('select[name="supervisor"]').addClass("select-choiced");
+            }
+        });
 
         $(function() {
             // 工事番号、工事名同期処理
@@ -230,6 +257,58 @@
                     $('select[name="number"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
+
+            // 選択時カラー機能
+            $('select[name="sort"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="sort"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="sort"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="number"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="number"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="number"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="name"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="name"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="name"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="orderer"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="orderer"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="orderer"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="place"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="place"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="place"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="sales"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="sales"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="sales"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="supervisor"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="supervisor"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="supervisor"]').addClass("select-choiced");
+                }
+            });
+
         });
 
         // リセット処理
