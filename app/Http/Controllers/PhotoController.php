@@ -30,10 +30,10 @@ class PhotoController extends Controller
             ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
             ->get();
         switch ($request->sort){
-            case '早い順':
+            case '日付が早い順':
                 $dailyreports = $dailyreports->sortByDesc('date');
                 break;
-            case '遅い順':
+            case '日付が遅い順':
                 $dailyreports = $dailyreports->sortBy('date');
                 break;
             default:
