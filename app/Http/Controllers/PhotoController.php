@@ -11,9 +11,9 @@ class PhotoController extends Controller
     public function index(Request $request){
         function condition($value = null){
             if($value){
-                return $value;
+                return '=';
             } else {
-                return '!=';
+                return 'LIKE';
             }
         }
 
@@ -21,7 +21,7 @@ class PhotoController extends Controller
             if($value){
                 return $value;
             } else {
-                return '';
+                return '%';
             }
         }
 

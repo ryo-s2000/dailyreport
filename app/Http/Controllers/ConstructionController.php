@@ -12,9 +12,9 @@ class ConstructionController extends Controller
     public function index(Request $request){
         function condition($value = null){
             if($value){
-                return $value;
+                return '=';
             } else {
-                return '!=';
+                return 'LIKE';
             }
         }
 
@@ -22,7 +22,7 @@ class ConstructionController extends Controller
             if($value){
                 return $value;
             } else {
-                return '';
+                return '%';
             }
         }
 
@@ -73,9 +73,9 @@ class ConstructionController extends Controller
     public function root(Request $request){
         function condition($value = null){
             if($value){
-                return $value;
+                return '=';
             } else {
-                return '!=';
+                return 'LIKE';
             }
         }
 
@@ -83,7 +83,7 @@ class ConstructionController extends Controller
             if($value){
                 return $value;
             } else {
-                return '';
+                return '%';
             }
         }
 
