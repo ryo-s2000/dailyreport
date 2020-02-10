@@ -31,10 +31,10 @@ class PhotoController extends Controller
             ->get();
         switch ($request->sort){
             case '日付が早い順':
-                $dailyreports = $dailyreports->sortByDesc('date');
+                $dailyreports = $dailyreports->sortBy('date');
                 break;
             case '日付が遅い順':
-                $dailyreports = $dailyreports->sortBy('date');
+                $dailyreports = $dailyreports->sortByDesc('date');
                 break;
             default:
                 $dailyreports = $dailyreports->sortByDesc('date');

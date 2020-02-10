@@ -4,6 +4,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/top.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/common/pagination.css') }}" rel="stylesheet">
 
     <div class="container main-container">
 
@@ -106,7 +107,7 @@
                                 <td>{{$dailyreport->department}}</td>
                                 <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
                                 <td>{{$dailyreport->constructionNumber}}</td>
-                                <td>{{$dailyreport->constructionName}}</td>
+                                <td><div class="construction-name-form">{{$dailyreport->constructionName}}</div></td>
                                 <td>
                                     <form method="get" action="/copyreport/{{$dailyreport->id}}">
                                         <input type="submit" class="btn btn-primary btn-create-pdf" value="コピーして作成" />
@@ -128,6 +129,9 @@
                     </tbody>
                 </table>
               </main>
+              <div class="pagination-container">
+                {{ $dailyreports->links() }}
+            </div>
 
         </div>
     </div>

@@ -38,14 +38,14 @@
             <div class="item-conteiner">
                 <h5>お名前  <span class="required">[必須]</span></h5>
                 <div class="col-md-12">
-                    <input name="name" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" value="{{$signature->name}}" required />
+                    <input name="name" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" value="{{old('name') ?? $signature->name}}" required />
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>備考</h5>
                 <div class="col-md-12">
-                    <input name="remarks" class="tagsinput tagsinput-typeahead input-lg" value="{{$signature->remarks}}" style="width:80%;"/>
+                    <input name="remarks" class="tagsinput tagsinput-typeahead input-lg" value="{{old('remarks') ?? $signature->remarks}}" style="width:80%;"/>
                 </div>
             </div>
 

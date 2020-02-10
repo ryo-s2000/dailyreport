@@ -41,19 +41,21 @@
             <div class="item-conteiner">
                 <h5>お名前  <span class="required">[必須]</span></h5>
                 <div class="col-md-12">
-                    <input name="userName" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" value="{{$dailyreport->userName}}" required />
+                    <input name="userName" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" value="{{old('userName') ?? $dailyreport->userName}}" required />
                 </div>
             </div>
 
             <div class="item-conteiner-top select-checker-container">
                 <h5>所属部署  <span class="required">[必須]</h5>
                 <div class="col-md-12">
+                    <?php $selectedDepartment = false ?>
                     <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択</option>
 
                         @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
-                            @if($value == $dailyreport->department)
+                            @if($value == (old('department') ?? $dailyreport->department))
                                 <option value="{{$value}}" selected="selected">{{$value}}</option>
+                                <?php $selectedDepartment = true ?>
                             @else
                                 <option value="{{$value}}">{{$value}}</option>
                             @endif
@@ -64,7 +66,7 @@
                 <select class="select-checker" name="departmentChecker" required>
                     <option label="default" selected><option>
 
-                    @if($dailyreport->department != "")
+                    @if($selectedDepartment)
                         <option value="true" selected>true</option>
                     @else
                         <option value="true">true</option>
@@ -82,7 +84,7 @@
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">工事番号を選択</option>
                         @foreach ($constructions as $construction)
-                            @if($construction->number == $dailyreport->constructionNumber)
+                            @if($construction->number == (old('constructionNumber') ?? $dailyreport->constructionNumber))
                                 <?php $selectedNumber = true ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @else
@@ -93,7 +95,7 @@
                     <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
-                            @if(str_replace("\n", "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
+                            @if(str_replace("\n", "", $construction->name) == (str_replace("\n", "", old('constructionName')) ?? str_replace(array("\r","\n"), "", $dailyreport->constructionName)))
                                 <?php $selectedName = true ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
@@ -127,7 +129,7 @@
             <div class="item-conteiner-top">
                 <h5>日付  <span class="required">[必須]</h5>
                 <div class="col-md-12">
-                    <input type="date" name="date" value="{{date('Y-m-d', strtotime( $dailyreport->date ))}}" />
+                    <input type="date" name="date" value="{{old('date') ?? date('Y-m-d', strtotime( $dailyreport->date ))}}" />
                 </div>
             </div>
 
@@ -138,7 +140,7 @@
                     @foreach(array("sun", "cloud-sun", "cloud", "umbrella", "snowflake") as $value)
                         @if($dailyreport->amWeather == "" and $value == "sun")
                             <input class="weather-icon" type="radio" name="amWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
-                        @elseif($value == $dailyreport->amWeather)
+                        @elseif($value == (old('amWeather') ?? $dailyreport->amWeather))
                             <input class="weather-icon" type="radio" name="amWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
                         @else
                             <input class="weather-icon" type="radio" name="amWeather" value="{{$value}}" /><i class="fas fa-{{$value}}"></i>
@@ -150,7 +152,7 @@
                     @foreach(array("sun", "cloud-sun", "cloud", "umbrella", "snowflake") as $value)
                         @if($dailyreport->pmWeather == "" and $value == "sun")
                             <input class="weather-icon" type="radio" name="pmWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
-                        @elseif($value == $dailyreport->pmWeather)
+                        @elseif($value == (old('pmWeather') ?? $dailyreport->pmWeather))
                             <input class="weather-icon" type="radio" name="pmWeather" value="{{$value}}" checked="checked" /><i class="fas fa-{{$value}}"></i>
                         @else
                             <input class="weather-icon" type="radio" name="pmWeather" value="{{$value}}" /><i class="fas fa-{{$value}}"></i>
@@ -174,12 +176,12 @@
                             ?>
                             <div class="col-md-12 col-xs-10 cells-containre">
                                 <span class="inputform">
-                                    <input name="{{$laborTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{$dailyreport->$laborTraderName}}"/>
+                                    <input name="{{$laborTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{old($laborTraderName) ?? $dailyreport->$laborTraderName}}"/>
                                 </span>
                                 <select name="{{$laborPeopleNumber}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">人数を選択</option>
                                     @foreach(range(1,10) as $value)
-                                        @if($value == $dailyreport->$laborPeopleNumber)
+                                        @if($value == old($laborPeopleNumber) ?? $dailyreport->$laborPeopleNumber)
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @else
                                             <option value="{{$value}}">{{$value}}</option>
@@ -189,7 +191,7 @@
                                 <select name="{{$laborWorkTime}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">時間を選択</option>
                                     @foreach(range(1,10) as $value)
-                                        @if($value == $dailyreport->$laborWorkTime)
+                                        @if($value == old($laborWorkTime) ?? $dailyreport->$laborWorkTime)
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @else
                                             <option value="{{$value}}">{{$value}}</option>
@@ -197,7 +199,7 @@
                                     @endforeach
                                 </select>
                                 <span class="inputform">
-                                    <input name="{{$laborWorkVolume}}" class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="作業及び出来高等" value="{{$dailyreport->$laborWorkVolume}}"/>
+                                    <input name="{{$laborWorkVolume}}" class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="作業及び出来高等" value="{{old($laborWorkVolume) ?? $dailyreport->$laborWorkVolume}}"/>
                                 </span>
                             </div>
                         @endforeach
@@ -217,16 +219,16 @@
                             ?>
                             <div class="col-md-12 col-xs-10 cells-containre">
                                 <span class="inputform">
-                                    <input name="{{$heavyMachineryTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{$dailyreport->$heavyMachineryTraderName}}" />
+                                    <input name="{{$heavyMachineryTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{old($heavyMachineryTraderName) ?? $dailyreport->$heavyMachineryTraderName}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$heavyMachineryModel}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="機種" value="{{$dailyreport->$heavyMachineryModel}}" />
+                                    <input name="{{$heavyMachineryModel}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="機種" value="{{old($heavyMachineryModel) ?? $dailyreport->$heavyMachineryModel}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input type="number" name="{{$heavyMachineryTime}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="台" size="10" value="{{$dailyreport->$heavyMachineryTime}}" />
+                                    <input type="number" name="{{$heavyMachineryTime}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="台" size="10" value="{{old($heavyMachineryTime) ?? $dailyreport->$heavyMachineryTime}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$heavyMachineryRemarks}}" class="workvolume tagsinput tagsinput-typeahead input-lg" placeholder="備考" value="{{$dailyreport->$heavyMachineryRemarks}}" />
+                                    <input name="{{$heavyMachineryRemarks}}" class="workvolume tagsinput tagsinput-typeahead input-lg" placeholder="備考" value="{{old($heavyMachineryRemarks) ?? $dailyreport->$heavyMachineryRemarks}}" />
                                 </span>
                             </div>
                         @endforeach
@@ -250,25 +252,25 @@
                             ?>
                             <div class="col-md-12 cells-containre">
                                 <span class="inputform">
-                                    <input name="{{$materialTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{$dailyreport->$materialTraderName}}" />
+                                    <input name="{{$materialTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{old($materialTraderName) ?? $dailyreport->$materialTraderName}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$materialName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資材名" value="{{$dailyreport->$materialName}}" />
+                                    <input name="{{$materialName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資材名" value="{{old($materialName) ?? $dailyreport->$materialName}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$materialShapeDimensions}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="形状寸法" value="{{$dailyreport->$materialShapeDimensions}}" />
+                                    <input name="{{$materialShapeDimensions}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="形状寸法" value="{{old($materialShapeDimensions) ?? $dailyreport->$materialShapeDimensions}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$materialQuantity}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="数量" size="10" value="{{$dailyreport->$materialQuantity}}" />
+                                    <input name="{{$materialQuantity}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="数量" size="10" value="{{old($materialQuantity) ?? $dailyreport->$materialQuantity}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$materialUnit}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="単位" size="10" value="{{$dailyreport->$materialUnit}}" />
+                                    <input name="{{$materialUnit}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="単位" size="10" value="{{old($materialUnit) ?? $dailyreport->$materialUnit}}" />
                                 </span>
                                 <div>
                                     <span class="col-md-12">
                                         <span class="result">合否判定</span>
                                         @foreach(array("pass", "fail") as $value)
-                                            @if($value == $dailyreport->$materialResult)
+                                            @if($value == old($materialResult) ?? $dailyreport->$materialResult)
                                                 @if($value == "pass")
                                                     <input type="radio" name="{{$materialResult}}" value="{{$value}}" checked="checked" />合
                                                 @elseif($value == "fail")
@@ -284,10 +286,10 @@
                                         @endforeach
                                     </span>
                                     <span class="inputform">
-                                        <input name="{{$materialInspectionMethods}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査方法・資料" value="{{$dailyreport->$materialInspectionMethods}}" />
+                                        <input name="{{$materialInspectionMethods}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査方法・資料" value="{{old($materialInspectionMethods) ?? $dailyreport->$materialInspectionMethods}}" />
                                     </span>
                                     <span class="inputform">
-                                        <input name="{{$materialInspector}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査員" size="10" value="{{$dailyreport->$materialInspector}}" />
+                                        <input name="{{$materialInspector}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査員" size="10" value="{{old($materialInspector) ?? $dailyreport->$materialInspector}}" />
                                     </span>
                                 </div>
                             </div>
@@ -310,22 +312,22 @@
                             ?>
                             <div class="col-md-12 cells-containre">
                                 <span class="inputform">
-                                    <input name="{{$processName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="工程内検査名" value="{{$dailyreport->$processName}}" />
+                                    <input name="{{$processName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="工程内検査名" value="{{old($processName) ?? $dailyreport->$processName}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$processLocation}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査箇所" value="{{$dailyreport->$processLocation}}" />
+                                    <input name="{{$processLocation}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査箇所" value="{{old($processLocation) ?? $dailyreport->$processLocation}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$processMethods}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査方法" value="{{$dailyreport->$processMethods}}" />
+                                    <input name="{{$processMethods}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査方法" value="{{old($processMethods) ?? $dailyreport->$processMethods}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$processDocument}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資料等" value="{{$dailyreport->$processDocument}}" />
+                                    <input name="{{$processDocument}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="資料等" value="{{old($processDocument) ?? $dailyreport->$processDocument}}" />
                                 </span>
                                 <div>
                                     <span class="col-md-12">
                                         <span class="result">合否判定</span>
                                         @foreach(array("pass", "fail") as $value)
-                                            @if($value == $dailyreport->$processResult)
+                                            @if($value == old($processResult) ?? $dailyreport->$processResult)
                                                 @if($value == "pass")
                                                     <input type="radio" name="{{$processResult}}" value="{{$value}}" checked="checked" />合
                                                 @elseif($value == "fail")
@@ -341,7 +343,7 @@
                                         @endforeach
                                     </span>
                                     <span class="inputform">
-                                        <input name="{{$processInspector}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査員" size="10" value="{{$dailyreport->$processInspector}}" />
+                                        <input name="{{$processInspector}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="検査員" size="10" value="{{old($processInspector) ?? $dailyreport->$processInspector}}" />
                                     </span>
                                 </div>
                             </div>
@@ -362,15 +364,15 @@
                             ?>
                             <div class="col-md-12 cells-containre">
                                 <span class="inputform">
-                                    <input name="{{$measuringEquipmentName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="測定機器名" value="{{$dailyreport->$measuringEquipmentName}}" />
+                                    <input name="{{$measuringEquipmentName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="測定機器名" value="{{old($measuringEquipmentName) ?? $dailyreport->$measuringEquipmentName}}" />
                                 </span>
                                 <span class="inputform">
-                                    <input name="{{$measuringEquipmentNumber}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="管理番号" value="{{$dailyreport->$measuringEquipmentNumber}}" />
+                                    <input name="{{$measuringEquipmentNumber}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="管理番号" value="{{old($measuringEquipmentNumber) ?? $dailyreport->$measuringEquipmentNumber}}" />
                                 </span>
                                 <span class="col-md-12">
                                     <span class="result">異常</span>
                                     @foreach(array("abnormal", "noabnormal") as $value)
-                                        @if($value == $dailyreport->$measuringEquipmentResult)
+                                        @if($value == old($measuringEquipmentResult) ?? $dailyreport->$measuringEquipmentResult)
                                             @if($value == "abnormal")
                                                 <input type="radio" name="{{$measuringEquipmentResult}}" value="{{$value}}" checked="checked" />有り
                                             @elseif($value == "noabnormal")
@@ -387,7 +389,7 @@
                                 </span>
 
                                 <span class="inputform">
-                                    <input name="{{$measuringEquipmentRemarks}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="備考(使用場所等)" value="{{$dailyreport->$measuringEquipmentRemarks}}" />
+                                    <input name="{{$measuringEquipmentRemarks}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="備考(使用場所等)" value="{{old($measuringEquipmentRemarks) ?? $dailyreport->$measuringEquipmentRemarks}}" />
                                 </span>
                             </div>
                         @endforeach
@@ -403,13 +405,13 @@
                             <div class="col-md-12">
                                 <span class="result">異常</span>
                                 @foreach(array("abnormal", "noabnormal") as $value)
-                                    @if($dailyreport->patrolResult == "")
+                                    @if($dailyreport->patrolResult == "" and old('patrolResult') == "")
                                         @if($value == "abnormal")
                                             <input type="radio" name="patrolResult" value="{{$value}}" />有り
                                         @elseif($value == "noabnormal")
                                             <input type="radio" name="patrolResult" value="{{$value}}" checked="checked" />無し
                                         @endif
-                                    @elseif($value == $dailyreport->patrolResult)
+                                    @elseif($value == old('patrolResult') ?? $dailyreport->patrolResult)
                                         @if($value == "abnormal")
                                             <input type="radio" name="patrolResult" value="{{$value}}" checked="checked" />有り
                                         @elseif($value == "noabnormal")
@@ -425,7 +427,7 @@
                                 @endforeach
                             </div>
                             <div class="col-md-12">
-                                <textarea class="patrol-textarea" name="patrolFindings" rows="5" cols="98" wrap="hard" placeholder="5行以内">{{$dailyreport->patrolFindings}}</textarea>
+                                <textarea class="patrol-textarea" name="patrolFindings" rows="5" cols="98" wrap="hard" placeholder="5行以内">{{old('patrolFindings') ?? $dailyreport->patrolFindings}}</textarea>
                             </div>
                         </div>
                     </div>

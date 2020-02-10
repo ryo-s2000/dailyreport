@@ -37,28 +37,28 @@
             <div class="item-conteiner">
                 <h5>工事番号  <span class="required">[必須]</span><span class="required">[被りなし]</span></h5>
                 <div class="col-md-12">
-                    <input name="number" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->number}}" required />
+                    <input name="number" class="tagsinput tagsinput-typeahead input-lg" value="{{old('number') ?? $construction->number}}" required />
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>工事名  <span class="required">[必須]</span></h5>
                 <div class="col-md-12">
-                    <textarea class="patrol-textarea" name="name" rows="2" cols="40" wrap="hard" placeholder="2行以内" required>{{$construction->name}}</textarea>
+                    <textarea class="patrol-textarea" name="name" rows="2" cols="40" wrap="hard" placeholder="2行以内" required>{{old('name') ?? $construction->name}}</textarea>
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>発注者</h5>
                 <div class="col-md-12">
-                    <input name="orderer" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->orderer}}" />
+                    <input name="orderer" class="tagsinput tagsinput-typeahead input-lg" value="{{old('orderer') ?? $construction->orderer}}" />
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>値段</h5>
                 <div class="col-md-12">
-                    <input type="number" name="price" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->price}}" />
+                    <input type="number" name="price" class="tagsinput tagsinput-typeahead input-lg" value="{{old('price') ?? $construction->price}}" />
                 </div>
             </div>
 
@@ -66,9 +66,9 @@
                 <h5>工期自</h5>
                 <div class="col-md-12">
                     @if($construction->start)
-                        <input type="date" name="start" value="{{date('Y-m-d', strtotime( $construction->start ))}}" />
+                        <input type="date" name="start" value="{{old('start') ?? date('Y-m-d', strtotime( $construction->start ))}}" />
                     @else
-                        <input type="date" name="start" />
+                        <input type="date" name="start" value="{{old('start')}}"/>
                     @endif
                 </div>
             </div>
@@ -77,9 +77,9 @@
                 <h5>工期至</h5>
                 <div class="col-md-12">
                     @if($construction->end)
-                        <input type="date" name="end" value="{{date('Y-m-d', strtotime( $construction->end ))}}" />
+                        <input type="date" name="end" value="{{old('end') ?? date('Y-m-d', strtotime( $construction->end ))}}" />
                     @else
-                        <input type="date" name="end" />
+                        <input type="date" name="end" value="{{old('end')}}"/>
                     @endif
                 </div>
             </div>
@@ -87,28 +87,28 @@
             <div class="item-conteiner-top">
                 <h5>工事箇所</h5>
                 <div class="col-md-12">
-                    <input type="text" name="place" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->place}}" />
+                    <input type="text" name="place" class="tagsinput tagsinput-typeahead input-lg" value="{{old('place') ?? $construction->place}}" />
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>営業担当</h5>
                 <div class="col-md-12">
-                    <input type="text" name="sales" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->sales}}" />
+                    <input type="text" name="sales" class="tagsinput tagsinput-typeahead input-lg" value="{{old('sales') ?? $construction->sales}}" />
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>工事担当</h5>
                 <div class="col-md-12">
-                    <input type="text" name="supervisor" class="tagsinput tagsinput-typeahead input-lg" value="{{$construction->supervisor}}" />
+                    <input type="text" name="supervisor" class="tagsinput tagsinput-typeahead input-lg" value="{{old('supervisor') ?? $construction->supervisor}}" />
                 </div>
             </div>
 
             <div class="item-conteiner-top">
                 <h5>工事内容・備考</h5>
                 <div class="col-md-12">
-                    <input type="text" name="remarks" class="tagsinput tagsinput-typeahead input-lg" style="width: 500px;" value="{{$construction->remarks}}" />
+                    <input type="text" name="remarks" class="tagsinput tagsinput-typeahead input-lg" style="width: 500px;" value="{{old('remarks') ?? $construction->remarks}}" />
                 </div>
             </div>
 

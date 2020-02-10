@@ -180,17 +180,16 @@ class ReportController extends Controller
 
         $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
             ->where('department', condition($request->department), value($request->department))
-            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
-            ->get();
+            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber));
         switch ($request->sort){
             case '日付が早い順':
-                $dailyreports = $dailyreports->sortByDesc('date');
+                $dailyreports = $dailyreports->orderBy('date')->paginate(100);
                 break;
             case '日付が遅い順':
-                $dailyreports = $dailyreports->sortBy('date');
+                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
                 break;
             default:
-                $dailyreports = $dailyreports->sortByDesc('date');
+                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
         }
 
         $dailyreportsPalams = array(

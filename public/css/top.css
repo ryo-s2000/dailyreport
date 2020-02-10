@@ -127,3 +127,10 @@ th {
 .select-choiced {
     border: 2px solid #0066FF!important;
 }
+
+.construction-name-form {
+    width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
