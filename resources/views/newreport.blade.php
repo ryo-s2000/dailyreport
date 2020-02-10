@@ -95,7 +95,7 @@
                     <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
-                            @if(str_replace("\n", "", $construction->name) == (str_replace("\n", "", old('constructionName')) ?? str_replace(array("\r","\n"), "", $dailyreport->constructionName)))
+                            @if(str_replace(array("\r","\n"), "", $construction->name) == (old('constructionName') ?? str_replace(array("\r","\n"), "", $dailyreport->constructionName)))
                                 <?php $selectedName = true ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
