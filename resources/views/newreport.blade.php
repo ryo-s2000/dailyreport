@@ -53,7 +53,10 @@
                         <option value="" label="default">部署を選択</option>
 
                         @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
-                            @if($value == (old('department') ?? $dailyreport->department))
+                            @if($value == (old('department')))
+                                <option value="{{$value}}" selected="selected">{{$value}}</option>
+                                <?php $selectedDepartment = true ?>
+                            @elseif(old('department') == "" and $value == $dailyreport->department)
                                 <option value="{{$value}}" selected="selected">{{$value}}</option>
                                 <?php $selectedDepartment = true ?>
                             @else
@@ -84,7 +87,10 @@
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">工事番号を選択</option>
                         @foreach ($constructions as $construction)
-                            @if($construction->number == (old('constructionNumber') ?? $dailyreport->constructionNumber))
+                            @if($construction->number == old('constructionNumber'))
+                                <?php $selectedNumber = true ?>
+                                <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
+                            @elseif(old('constructionNumber') == "" and $construction->number == $dailyreport->constructionNumber)
                                 <?php $selectedNumber = true ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @else
@@ -95,7 +101,10 @@
                     <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
-                            @if(str_replace(array("\r","\n"), "", $construction->name) == (old('constructionName') ?? str_replace(array("\r","\n"), "", $dailyreport->constructionName)))
+                            @if($construction->name == old('constructionName'))
+                                <?php $selectedName = true ?>
+                                <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
+                            @elseif(old('constructionName') == "" and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
                                 <?php $selectedName = true ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
@@ -181,7 +190,9 @@
                                 <select name="{{$laborPeopleNumber}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">人数を選択</option>
                                     @foreach(range(1,10) as $value)
-                                        @if($value == old($laborPeopleNumber) ?? $dailyreport->$laborPeopleNumber)
+                                        @if($value == old($laborPeopleNumber))
+                                            <option value="{{$value}}" selected="selected">{{$value}}</option>
+                                        @elseif(old($laborPeopleNumber) == "" and $value == $dailyreport->$laborPeopleNumber)
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @else
                                             <option value="{{$value}}">{{$value}}</option>
@@ -191,7 +202,9 @@
                                 <select name="{{$laborWorkTime}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">時間を選択</option>
                                     @foreach(range(1,10) as $value)
-                                        @if($value == old($laborWorkTime) ?? $dailyreport->$laborWorkTime)
+                                        @if($value == old($laborWorkTime))
+                                            <option value="{{$value}}" selected="selected">{{$value}}</option>
+                                        @elseif(old($laborWorkTime) == "" and $value == $dailyreport->$laborWorkTime)
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @else
                                             <option value="{{$value}}">{{$value}}</option>
@@ -270,17 +283,23 @@
                                     <span class="col-md-12">
                                         <span class="result">合否判定</span>
                                         @foreach(array("pass", "fail") as $value)
-                                            @if($value == old($materialResult) ?? $dailyreport->$materialResult)
+                                            @if($value == old($materialResult))
                                                 @if($value == "pass")
                                                     <input type="radio" name="{{$materialResult}}" value="{{$value}}" checked="checked" />合
                                                 @elseif($value == "fail")
-                                                    <input type="radio" name="{{$materialResult}}" value="{{$value}}" checked="checked" />非
+                                                    <input type="radio" name="{{$materialResult}}" value="{{$value}}" checked="checked" />否
+                                                @endif
+                                            @elseif(old($materialResult) == "" and $value == $dailyreport->$materialResult)
+                                                @if($value == "pass")
+                                                    <input type="radio" name="{{$materialResult}}" value="{{$value}}" checked="checked" />合
+                                                @elseif($value == "fail")
+                                                    <input type="radio" name="{{$materialResult}}" value="{{$value}}" checked="checked" />否
                                                 @endif
                                             @else
                                                 @if($value == "pass")
                                                     <input type="radio" name="{{$materialResult}}" value="{{$value}}" />合
                                                 @elseif($value == "fail")
-                                                    <input type="radio" name="{{$materialResult}}" value="{{$value}}" />非
+                                                    <input type="radio" name="{{$materialResult}}" value="{{$value}}" />否
                                                 @endif
                                             @endif
                                         @endforeach
@@ -327,17 +346,23 @@
                                     <span class="col-md-12">
                                         <span class="result">合否判定</span>
                                         @foreach(array("pass", "fail") as $value)
-                                            @if($value == old($processResult) ?? $dailyreport->$processResult)
+                                            @if($value == old($processResult))
                                                 @if($value == "pass")
                                                     <input type="radio" name="{{$processResult}}" value="{{$value}}" checked="checked" />合
                                                 @elseif($value == "fail")
-                                                    <input type="radio" name="{{$processResult}}" value="{{$value}}" checked="checked" />非
+                                                    <input type="radio" name="{{$processResult}}" value="{{$value}}" checked="checked" />否
+                                                @endif
+                                            @elseif(old($processResult) == "" and $value == $dailyreport->$processResult)
+                                                @if($value == "pass")
+                                                    <input type="radio" name="{{$processResult}}" value="{{$value}}" checked="checked" />合
+                                                @elseif($value == "fail")
+                                                    <input type="radio" name="{{$processResult}}" value="{{$value}}" checked="checked" />否
                                                 @endif
                                             @else
                                                 @if($value == "pass")
                                                     <input type="radio" name="{{$processResult}}" value="{{$value}}" />合
                                                 @elseif($value == "fail")
-                                                    <input type="radio" name="{{$processResult}}" value="{{$value}}" />非
+                                                    <input type="radio" name="{{$processResult}}" value="{{$value}}" />否
                                                 @endif
                                             @endif
                                         @endforeach
@@ -372,7 +397,13 @@
                                 <span class="col-md-12">
                                     <span class="result">異常</span>
                                     @foreach(array("abnormal", "noabnormal") as $value)
-                                        @if($value == old($measuringEquipmentResult) ?? $dailyreport->$measuringEquipmentResult)
+                                        @if($value == old($measuringEquipmentResult))
+                                            @if($value == "abnormal")
+                                                <input type="radio" name="{{$measuringEquipmentResult}}" value="{{$value}}" checked="checked" />有り
+                                            @elseif($value == "noabnormal")
+                                                <input type="radio" name="{{$measuringEquipmentResult}}" value="{{$value}}" checked="checked" />無し
+                                            @endif
+                                        @elseif(old($measuringEquipmentResult) == "" and $value == $dailyreport->$measuringEquipmentResult)
                                             @if($value == "abnormal")
                                                 <input type="radio" name="{{$measuringEquipmentResult}}" value="{{$value}}" checked="checked" />有り
                                             @elseif($value == "noabnormal")
@@ -411,7 +442,13 @@
                                         @elseif($value == "noabnormal")
                                             <input type="radio" name="patrolResult" value="{{$value}}" checked="checked" />無し
                                         @endif
-                                    @elseif($value == old('patrolResult') ?? $dailyreport->patrolResult)
+                                    @elseif($value == old('patrolResult'))
+                                        @if($value == "abnormal")
+                                            <input type="radio" name="patrolResult" value="{{$value}}" checked="checked" />有り
+                                        @elseif($value == "noabnormal")
+                                            <input type="radio" name="patrolResult" value="{{$value}}" checked="checked" />無し
+                                        @endif
+                                    @elseif(old('patrolResult') == "" and $value == $dailyreport->patrolResult)
                                         @if($value == "abnormal")
                                             <input type="radio" name="patrolResult" value="{{$value}}" checked="checked" />有り
                                         @elseif($value == "noabnormal")
