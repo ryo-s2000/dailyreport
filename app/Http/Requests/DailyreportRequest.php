@@ -161,6 +161,7 @@ class DailyreportRequest extends FormRequest
             'measuringEquipmentRemarks2' => ['nullable' , 'string' , 'max:50'],
             'patrolResult' => ['string', 'max:10'],
             'patrolFindings' => ['nullable' , 'string', 'max:500'],
+            'transition-preview' => ['string']
         ];
     }
 
@@ -304,6 +305,7 @@ class DailyreportRequest extends FormRequest
             'measuringEquipmentRemarks2',
             'patrolResult',
             'patrolFindings',
+            'transition-preview',
             'updated_at'
         ]);
     }

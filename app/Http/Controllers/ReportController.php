@@ -71,10 +71,20 @@ class ReportController extends Controller
             }
         }
 
+        // 遷移先を変更する。
+        $transitionPreview = $form['transition-preview'];
+        unset($form['transition-preview']);
+
         // データを詰め込む
         $dailyreport->fill($form)->save();
+        $dailyreportId = $dailyreport->id;
 
-        return redirect('/');
+        $redirectPath = '/';
+        if($transitionPreview == 'true'){
+            $redirectPath = '/pdf/' . $dailyreportId;
+        }
+
+        return redirect($redirectPath);
     }
 
     public function saveReport(DailyreportRequest $request){
@@ -119,10 +129,20 @@ class ReportController extends Controller
             }
         }
 
+        // 遷移先を変更する。
+        $transitionPreview = $form['transition-preview'];
+        unset($form['transition-preview']);
+
         // データを詰め込む
         $dailyreport->fill($form)->save();
+        $dailyreportId = $dailyreport->id;
 
-        return redirect('/');
+        $redirectPath = '/';
+        if($transitionPreview == 'true'){
+            $redirectPath = '/pdf/' . $dailyreportId;
+        }
+
+        return redirect($redirectPath);
     }
 
     public function copyReport(Request $request){
