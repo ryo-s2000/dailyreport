@@ -400,10 +400,12 @@ class PdfController extends Controller
             break;
         }
 
+        // 連絡・報告事項等
         $patrolFindingsText = explode("\n", $inputData['patrolFindings']);
         foreach (range(1,count($patrolFindingsText)) as $i) {
             $y = 233.0 + 7.0 * $i;
-            $items[] = array("x" => 14.0, "y" => $y, "content" => $patrolFindingsText[$i-1]);
+            // 空白行でも表示できるように半角スペースを加算
+            $items[] = array("x" => 14.0, "y" => $y, "content" => $patrolFindingsText[$i-1].' ');
 
             if ($i == 5) {
                 break;

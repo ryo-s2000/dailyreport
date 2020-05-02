@@ -138,7 +138,12 @@ class ConstructionController extends Controller
     public function newConstruction(){
         $construction = new Construction;
 
-        return view('newconstruction', ["construction" => $construction]);
+        $constructions = Construction::all()->toArray();
+        $construction_numbers = array_map(function($element){
+            return $element['number'];
+        }, $constructions);
+
+        return view('newconstruction', ["construction" => $construction, "construction_numbers" => $construction_numbers]);
     }
 
     public function saveConstruction(ConstructionRequest $request){
@@ -167,7 +172,12 @@ class ConstructionController extends Controller
             return redirect('/construction');
         }
 
-        return view('newconstruction', ["construction" => $construction]);
+        $constructions = Construction::all()->toArray();
+        $construction_numbers = array_map(function($element){
+            return $element['number'];
+        }, $constructions);
+
+        return view('newconstruction', ["construction" => $construction, "construction_numbers" => $construction_numbers]);
     }
 
     public function saveEditConstruction(ConstructionUpdateRequest $request, $constructionid){

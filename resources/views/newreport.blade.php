@@ -191,7 +191,7 @@
                                 </span>
                                 <select id="{{$laborPeopleNumber}}" name="{{$laborPeopleNumber}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">人数を選択</option>
-                                    @foreach(range(1,20) as $value)
+                                    @foreach(range(1,100) as $value)
                                         @if($value == old($laborPeopleNumber))
                                             <option value="{{$value}}" selected="selected">{{$value}}</option>
                                         @elseif(old($laborPeopleNumber) == "" and $value == $dailyreport->$laborPeopleNumber)

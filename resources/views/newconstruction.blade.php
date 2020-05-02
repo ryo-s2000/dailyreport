@@ -34,8 +34,17 @@
         <form method="post" action="{{$action}}" enctype="multipart/form-data">
             @csrf
 
+            {{-- 登録済工事番号取得 --}}
+            <div>
+                @foreach($construction_numbers as $key => $value)
+                    <input type="hidden" name="{{'registered_number_'.$key}}" id="{{'registered_number_'.$key}}" value="{{$value}}">
+                @endforeach
+                <input type="hidden" id="edit_construction_number" value="{{$construction->number}}">
+            </div>
+
             <div class="item-conteiner">
                 <h5>工事番号  <span class="required">[必須]</span><span class="required">[被りなし]</span></h5>
+                <div id="registered_number_alert" style="color:#a94442;background-color:#f2dede;padding:10px;margin:10px;display:none;">工事番号が被っています。</div>
                 <div class="col-md-12">
                     <input name="number" class="tagsinput tagsinput-typeahead input-lg" value="{{old('number') ?? $construction->number}}" required />
                 </div>
@@ -120,12 +129,31 @@
     </div>
 
     <script>
-        // Enter無効
         $(document).ready(function () {
+            // 登録済み工事番号取得
+            let registered_numbers = []
+            let registered_number_id = 1;
+            let edit_construction_number = $("#edit_construction_number").val();
+            while($("#registered_number_"+registered_number_id).val()){
+                registered_numbers.push($("#registered_number_"+registered_number_id).val());
+                registered_number_id++;
+            }
+
+            // Enter無効
             $('input,textarea[readonly]').not($('input[type="button"],input[type="submit"]')).keypress(function (e) {
                 if (!e) var e = window.event;
                 if (e.keyCode == 13)
                     return false;
+            });
+
+            // 工事番号が被っていたらエラー
+            $("input[name='number']").keyup(function() {
+                suffered_number = registered_numbers.filter(number => number == $(this).val())
+                if( suffered_number.length != 0 && suffered_number[0] != edit_construction_number ) {
+                    $('#registered_number_alert').show();
+                } else {
+                    $('#registered_number_alert').hide();
+                }
             });
         });
     </script>
