@@ -31,8 +31,9 @@
 
     <!-- Loading Flat UI -->
     <link href="../../dist/css/flat-ui.css" rel="stylesheet">
-    <link rel="shortcut icon" href="../../dist/favicon.ico">
 
+    <!-- ファビコン -->
+    <link rel="shortcut　icon" href="../../../public/favicon.ico">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
