@@ -49,18 +49,18 @@
                 <h5>所属部署  <span class="required">[必須]</h5>
                 <div class="col-md-12">
                     <?php $selectedDepartment = false ?>
-                    <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                    <select name="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択</option>
 
                         @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
-                            @if($value == (old('department')))
-                                <option value="{{$value}}" selected="selected">{{$value}}</option>
+                            @if($loop->index+1 == (old('department_id')))
+                                <option value="{{$loop->index+1}}" selected="selected">{{$value}}</option>
                                 <?php $selectedDepartment = true ?>
-                            @elseif(old('department') == "" and $value == $dailyreport->department)
-                                <option value="{{$value}}" selected="selected">{{$value}}</option>
+                            @elseif(old('department_id') == "" and $loop->index+1 == $dailyreport->department_id)
+                                <option value="{{$loop->index+1}}" selected="selected">{{$value}}</option>
                                 <?php $selectedDepartment = true ?>
                             @else
-                                <option value="{{$value}}">{{$value}}</option>
+                                <option value="{{$loop->index+1}}">{{$value}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -494,7 +494,7 @@
     <script>
         $(function() {
             // selectチェッカー
-            $('select[name="department"]').change(function(e, data) {
+            $('select[name="department_id"]').change(function(e, data) {
                 if($(this).prop("selectedIndex")){
                     $('select[name="departmentChecker"]').val("true");
                 } else {

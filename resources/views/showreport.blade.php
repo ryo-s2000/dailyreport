@@ -34,7 +34,25 @@
         <main class="detail-dailyreport-wrapper">
             <table class="table table-striped table-condensed table-bordered table-nonfluid datail-table" border="1">
                     <tr><th>日報作者名</th><td>{{$dailyreport->userName}}</td></tr>
-                    <tr><th>部署名</th><td>{{$dailyreport->department}}</td></tr>
+                    <tr>
+                        <th>部署名</th>
+                        @switch ($dailyreport->department_id)
+                            @case(1)
+                                <td>住宅部</td>
+                                @break
+                            @case(2)
+                                <td>土木部</td>
+                                @break
+                            @case(3)
+                                <td>特殊建築部</td>
+                                @break
+                            @case(4)
+                                <td>農業施設部</td>
+                                @break
+                            @default
+                                <td></td>
+                        @endswitch
+                    </tr>
                     <tr><th>日付</th><td>{{$dailyreport->date->format('Y年m月d日')}}</td></tr>
                     <tr><th>工事番号</th><td>{{$dailyreport->constructionNumber}}</td></tr>
                     <tr><th>工事名</th><td>{{$dailyreport->constructionName}}</td></tr>

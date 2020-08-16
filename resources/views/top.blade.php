@@ -10,7 +10,6 @@
 
         <div class="btn-container col-md-12">
             <button class="btn btn-primary btn-new-pdf" onClick="location.href='/newreport'">日報を作成する</button>
-            {{-- <button class="photo-btn btn btn-primary btn-new-pdf" onClick="location.href='/photo'">画像一覧</button> --}}
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/construction'">工事番号</button>
             <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='/dataexport'">CSVを出力する</button>
         </div>
@@ -52,14 +51,14 @@
                             @endforeach
                         </select>
 
-                        <select name="department" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                        <select name="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                             <option value="" label="default">部署を選択</option>
 
                             @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
-                                @if($dailyreportsPalams['department_id'] == $value)
-                                    <option value="{{$value}}" selected>{{$value}}</option>
+                                @if($dailyreportsPalams['department_id'] == $loop->index+1)
+                                    <option value="{{$loop->index+1}}" selected>{{$value}}</option>
                                 @else
-                                    <option value="{{$value}}">{{$value}}</option>
+                                    <option value="{{$loop->index+1}}">{{$value}}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -104,7 +103,22 @@
                         @foreach ($dailyreports as $dailyreport)
                             <tr>
                                 <td>{{$dailyreport->userName}}</td>
-                                <td>{{$dailyreport->department}}</td>
+                                @switch ($dailyreport->department_id)
+                                    @case(1)
+                                        <td>住宅部</td>
+                                        @break
+                                    @case(2)
+                                        <td>土木部</td>
+                                        @break
+                                    @case(3)
+                                        <td>特殊建築部</td>
+                                        @break
+                                    @case(4)
+                                        <td>農業施設部</td>
+                                        @break
+                                    @default
+                                        <td></td>
+                                @endswitch
                                 <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
                                 <td>{{$dailyreport->constructionNumber}}</td>
                                 <td><div class="construction-name-form">{{$dailyreport->constructionName}}</div></td>
@@ -139,7 +153,7 @@
     <script>
         // リセット処理
         function reset(){
-            ['sort', 'userName', 'department', 'constructionNumber', 'constructionName'].forEach(name => {
+            ['sort', 'userName', 'department_id', 'constructionNumber', 'constructionName'].forEach(name => {
                 selectName = 'select[name="' + name + '"]';
                 $(selectName).prop("selectedIndex", 0).trigger('change', ['exit']);
             });
@@ -153,8 +167,8 @@
             if($('select[name="userName"]').val() != ""){
                 $('select[name="userName"]').addClass("select-choiced");
             }
-            if($('select[name="department"]').val() != ""){
-                $('select[name="department"]').addClass("select-choiced");
+            if($('select[name="department_id"]').val() != ""){
+                $('select[name="department_id"]').addClass("select-choiced");
             }
             if($('select[name="constructionNumber"]').val() != ""){
                 $('select[name="constructionNumber"]').addClass("select-choiced");
@@ -192,11 +206,11 @@
                     $('select[name="userName"]').addClass("select-choiced");
                 }
             });
-            $('select[name="department"]').change(function(e, data) {
+            $('select[name="department_id"]').change(function(e, data) {
                 if($(this).prop("selectedIndex") == 0){
-                    $('select[name="department"]').removeClass("select-choiced");
+                    $('select[name="department_id"]').removeClass("select-choiced");
                 } else {
-                    $('select[name="department"]').addClass("select-choiced");
+                    $('select[name="department_id"]').addClass("select-choiced");
                 }
             });
             $('select[name="constructionNumber"]').change(function(e, data) {
