@@ -56,7 +56,7 @@
                             <option value="" label="default">部署を選択</option>
 
                             @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
-                                @if($dailyreportsPalams['department'] == $value)
+                                @if($dailyreportsPalams['department_id'] == $value)
                                     <option value="{{$value}}" selected>{{$value}}</option>
                                 @else
                                     <option value="{{$value}}">{{$value}}</option>

@@ -25,7 +25,7 @@ class DailyreportRequest extends FormRequest
     {
         return [
             'userName' => ['required' , 'string' , 'max:30'],
-            'department' => ['required' , 'string', 'max:20'],
+            'department_id' => ['required' , 'integer', 'max:20'],
             'date' => ['required' , 'date'],
             'amWeather' => ['string', 'max:20'],
             'pmWeather' => ['string', 'max:20'],
@@ -169,7 +169,7 @@ class DailyreportRequest extends FormRequest
     {
         return $this->only([
             'userName',
-            'department',
+            'department_id',
             'date',
             'amWeather',
             'pmWeather',

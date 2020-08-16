@@ -143,7 +143,7 @@ return [
 
     'attributes' => [
         'userName' => '名前',
-        'department' => '部署名',
+        'department_id' => '部署名',
         'date' => '日付',
         'amWeather' => '午前中の天気',
         'pmWeather' => '午後の天気',
@@ -277,11 +277,6 @@ return [
         'measuringEquipmentNumber2' => '測定機器点検管理番号',
         'measuringEquipmentResult2' => '測定機器点検異常の有無',
         'measuringEquipmentRemarks2' => '測定機器点検備考',
-        'imagepath1' => '画像1',
-        'imagepath2' => '画像2',
-        'imagepath3' => '画像3',
-        'imagepath4' => '画像4',
-        'imagepath5' => '画像5',
         'patrolResult' => '現場代理人の巡回初見異常性の有無',
         'patrolFindings' => '連絡・報告事項等',
         'number' => '工事番号',

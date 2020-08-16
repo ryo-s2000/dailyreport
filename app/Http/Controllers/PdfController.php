@@ -13,7 +13,7 @@ class PdfController extends Controller
     public function createPdf(Request $request)
     {
         // データを取得できる
-        $inputData = Dailyreport::find($request->reportid);
+        $inputData = Dailyreport::find($request->report_id);
         if($inputData == null){
             return redirect('/');
         }

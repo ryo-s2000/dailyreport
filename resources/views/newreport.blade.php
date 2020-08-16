@@ -479,23 +479,6 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="item-conteiner-top">
-                    <input type="checkbox" id="label7" class="cssacc" />
-                    <label for="label7"><span class="label-font">画像を選択(5枚まで)</span></label>
-                    <div class="accshow">
-                        @foreach (range(1,5) as $i)
-                            <?php
-                                $imagepath = "imagepath".$i;
-                            ?>
-                            <div class="col-md-12 col-xs-10 file-upload-container">
-                                <img class="photo" src="{{ $dailyreport->$imagepath }}">
-                                <input type="file" name="{{$imagepath}}">
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-
             </div>
 
             <input id="transition-preview" name="transition-preview" value="false" style="display:none;">
