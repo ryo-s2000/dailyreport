@@ -13,7 +13,7 @@ class AssetRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class AssetRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required' , 'string' , 'max:100'],
+            'trader_id' => ['required' , 'integer'],
         ];
+    }
+
+    public function assetAttributes()
+    {
+        return $this->only([
+            'name',
+            'trader_id'
+        ]);
     }
 }

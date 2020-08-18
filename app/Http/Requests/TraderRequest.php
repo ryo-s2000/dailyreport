@@ -13,7 +13,7 @@ class TraderRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,16 @@ class TraderRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required' , 'string' , 'max:100'],
+            'department_id' => ['required' , 'integer', 'max:20'],
         ];
+    }
+
+    public function traderAttributes()
+    {
+        return $this->only([
+            'name',
+            'department_id'
+        ]);
     }
 }

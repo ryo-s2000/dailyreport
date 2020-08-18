@@ -6,6 +6,8 @@ use Image;
 use Storage;
 use App\Dailyreport;
 use App\Construction;
+use App\Trader;
+use App\Asset;
 use App\Signature;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyreportRequest;
@@ -16,7 +18,16 @@ class ReportController extends Controller
         $dailyreport = new Dailyreport;
         $dailyreport->date = date("Y-m-d");
         $constructions = Construction::all();
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
+        $traders = array(
+            array('id'=>'', 'name'=>'部署を選択してください')
+        );
+        $assets = array();
+        for ($i = 1; $i <= 6; $i++) {
+            array_push(
+                $assets, array(array('id'=>'', 'name'=>'業者名を選択してください'))
+            );
+        }
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
     }
 
     public function editReport(Request $request){
@@ -25,7 +36,38 @@ class ReportController extends Controller
             return redirect('/');
         }
         $constructions = Construction::all();
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
+
+        $return_traders = array(
+            array('id'=>'', 'name'=>'業者名を選択してください')
+        );
+        $traders = Trader::where('department_id', $dailyreport->department_id)->get();
+        foreach ($traders as $trader) {
+            array_push(
+                $return_traders, array('id'=>$trader->id, 'name'=>$trader->name)
+            );
+        }
+
+        $return_assets = array();
+        for ($i = 1; $i <= 6; $i++) {
+            $individual_assets = array(
+                array('id'=>'', 'name'=>'業者名を選択してください')
+            );
+
+            $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
+            $trader_id = $dailyreport->$heavyMachineryTraderId;
+            $assets = Asset::where('trader_id', $trader_id)->get();
+            foreach ($assets as $asset) {
+                array_push(
+                    $individual_assets, array('id'=>$asset->id, 'name'=>$asset->name)
+                );
+            }
+
+            array_push(
+                $return_assets, $individual_assets
+            );
+        }
+
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $return_traders, "assets" => $return_assets]);
     }
 
     public function saveEditReport(DailyreportRequest $request, $report_id){

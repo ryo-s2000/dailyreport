@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => ['api']], function(){
+    Route::resource('traders', 'Api\TraderController', ['only' => ['show', 'store']]);
+
+    Route::resource('assets', 'Api\AssetController', ['only' => ['show', 'store']]);
+});

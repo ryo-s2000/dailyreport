@@ -49,7 +49,7 @@
                 <h5>所属部署  <span class="required">[必須]</h5>
                 <div class="col-md-12">
                     <?php $selectedDepartment = false ?>
-                    <select name="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
+                    <select name="department_id" id="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択</option>
 
                         @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
@@ -175,11 +175,19 @@
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label1" class="cssacc" />
                     <label for="label1"><span class="label-font">労務</span><button type="button" id="laborButtonNameAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+
+                    <div>
+                        {{-- 業者を追加 --}}
+                        <div style="margin: 20px 0;">
+                            <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
+                        </div>
+                    </div>
+
                     <div class="accshow">
                         @foreach (range(1,8) as $i)
                             <?php
                                 $laborButtonName = "laborButtonName".$i;
-                                $laborTraderName = "laborTraderName".$i;
+                                $laborTraderId = "laborTraderId".$i;
                                 $laborPeopleNumber = "laborPeopleNumber".$i;
                                 $laborWorkTime = "laborWorkTime".$i;
                                 $laborWorkVolume = "laborWorkVolume".$i;
@@ -187,7 +195,17 @@
                             <div class="col-md-12 col-xs-10 cells-containre">
                                 <button type="button" id="{{$laborButtonName}}" style="border-radius:17px; height:34px; width:34px;">×</button>
                                 <span class="inputform">
-                                    <input id="{{$laborTraderName}}" name="{{$laborTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{old($laborTraderName) ?? $dailyreport->$laborTraderName}}"/>
+
+                                <select id="{{$laborTraderId}}" name="{{$laborTraderId}}" data-toggle="select" class="form-control select select-default mrs mbm">
+                                    @foreach ($traders as $trader)
+                                        @if($trader['id'] == $dailyreport->$laborTraderId)
+                                            <option value="{{$trader['id']}}" selected="selected">{{$trader['name']}}</option>
+                                        @else
+                                            <option value="{{$trader['id']}}">{{$trader['name']}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+
                                 </span>
                                 <select id="{{$laborPeopleNumber}}" name="{{$laborPeopleNumber}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                     <option value="">人数を選択</option>
@@ -224,11 +242,34 @@
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label2" class="cssacc" />
                     <label for="label2"><span class="label-font">重機車両</span><button type="button" id="heavyMachineryTraderButtonAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+
+                    <div>
+                        {{-- 業者を追加 --}}
+                        <div style="margin: 20px 0;">
+                            <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
+                        </div>
+
+                        {{-- 機種を追加 --}}
+                        <div style="margin: 20px 0;" id="addAssetForm">
+                            <button type="button" class="btn btn-info" onclick="(addAssetForm())">機種を追加</button>
+                        </div>
+                        <div style="margin: 20px 0; display: none;" id="addAsset">
+                            <select id="addAssetSelect" name="" data-toggle="select" class="form-control select select-default mrs mbm">
+                                @foreach ($traders as $trader)
+                                    <option value="{{$trader['id']}}">{{$trader['name']}}</option>
+                                @endforeach
+                            </select>
+
+                            <input id="" name="" class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="追加したい機種" />
+                            <button type="button" class="btn btn-info" onclick="(addAsset(this))">機種を追加</button>
+                        </div>
+                    </div>
+
                     <div class="accshow">
                         @foreach (range(1,6) as $i)
                             <?php
                                 $heavyMachineryTraderButton = "heavyMachineryTraderButton".$i;
-                                $heavyMachineryTraderName = "heavyMachineryTraderName".$i;
+                                $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
                                 $heavyMachineryModel = "heavyMachineryModel".$i;
                                 $heavyMachineryTime = "heavyMachineryTime".$i;
                                 $heavyMachineryRemarks = "heavyMachineryRemarks".$i;
@@ -236,10 +277,26 @@
                             <div class="col-md-12 col-xs-10 cells-containre">
                                 <button type="button" id="{{$heavyMachineryTraderButton}}" style="border-radius:17px; height:34px; width:34px;">×</button>
                                 <span class="inputform">
-                                    <input id="{{$heavyMachineryTraderName}}" name="{{$heavyMachineryTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{old($heavyMachineryTraderName) ?? $dailyreport->$heavyMachineryTraderName}}" />
+                                    <select id="{{$heavyMachineryTraderId}}" name="{{$heavyMachineryTraderId}}" data-toggle="select" class="form-control select select-default mrs mbm">
+                                        @foreach ($traders as $trader)
+                                            @if($trader['id'] == $dailyreport->$heavyMachineryTraderId)
+                                                <option value="{{$trader['id']}}" selected="selected">{{$trader['name']}}</option>
+                                            @else
+                                                <option value="{{$trader['id']}}">{{$trader['name']}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </span>
                                 <span class="inputform">
-                                    <input id="{{$heavyMachineryModel}}" name="{{$heavyMachineryModel}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="機種" value="{{old($heavyMachineryModel) ?? $dailyreport->$heavyMachineryModel}}" />
+                                    <select id="{{$heavyMachineryModel}}" name="{{$heavyMachineryModel}}" data-toggle="select" class="form-control select select-default mrs mbm">
+                                        @foreach ($assets[$i-1] as $asset)
+                                            @if($asset['id'] == $dailyreport->$heavyMachineryModel)
+                                                <option value="{{$asset['id']}}" selected="selected">{{$asset['name']}}</option>
+                                            @else
+                                                <option value="{{$asset['id']}}">{{$asset['name']}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
                                 </span>
                                 <span class="inputform">
                                     <input id="{{$heavyMachineryTime}}" name="{{$heavyMachineryTime}}" type="number" class="tagsinput tagsinput-typeahead input-lg" placeholder="台" size="10" value="{{old($heavyMachineryTime) ?? $dailyreport->$heavyMachineryTime}}" />
@@ -492,6 +549,197 @@
     </div>
 
     <script>
+        // 業者追加
+        const addTraderForm = (button_this) => {
+            $(button_this).parent().append(`<input class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="追加したい業者名" />`);
+            $(button_this).parent().append(`<button type="button" class="btn btn-info" style="margin:0 5px;" onclick="(addTrader(this))">業者を追加</button>`);
+            $(button_this).remove();
+        };
+        const removeTraderForm = (button_this) => {
+            $(button_this).parent().append(`<button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>`);
+            $(button_this).parent().children().eq(0).remove();
+            $(button_this).parent().children().eq(0).remove();
+            alert('データ更新完了');
+        };
+        const addTrader = (button_this) => {
+            const input_value = $(button_this).parent().children('input').val();
+            if(input_value == '' ) {
+                alert("業者名を入力してください。");
+                return
+            }
+            if(input_value > 100){
+                alert("業者名は100文字以内にしてください。");
+                return
+            }
+
+            const department_id = $('#department_id').val()
+            if(department_id == '' ) {
+                alert("部署を選択してください。");
+                return
+            }
+            if(isNaN(department_id)){
+                alert("部署が不適切です。");
+                return
+            }
+
+            if(confirm(`この業者名を追加しますよろしいですか？\n「${input_value}」`)) {
+                saveTrader(input_value, department_id);
+            } else {
+                alert("キャンセルしました。");
+                return;
+            }
+
+            removeTraderForm(button_this);
+        };
+        const saveTrader = (name, department_id) => {
+            $.ajax({
+                    url: '/api/traders',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        name: name,
+                        department_id: department_id,
+                    },
+                })
+            .done(function (response) {
+                traders = response;
+                traders.unshift({'id':'', 'name':'業者名を選択してください'});
+                update_trader(traders, false);
+            })
+            .fail(function () {
+                alert('業者データ保存中にエラーが発生しました、しばらくたってやり直しても治らない場合は管理者までお問い合わせください。');
+            });
+        }
+
+        // 資産追加
+        const addAssetForm = () => {
+            $('#addAssetForm').hide();
+            $('#addAsset').show();
+        };
+        const removeAssetForm = () => {
+            $('#addAsset').children('select').prop("selectedIndex", 0).trigger('change', ['exit']);
+            $('#addAsset').children('input').val('');
+
+            $('#addAsset').hide();
+            $('#addAssetForm').show();
+        };
+        const addAsset = (button_this) => {
+            const select_value = $(button_this).parent().children('select').val();
+            if(select_value == '' ) {
+                alert("業者名を選択してください。");
+                return
+            }
+            if(isNaN(select_value)){
+                alert("業者名が不適切です。");
+                return
+            }
+
+            const input_value = $(button_this).parent().children('input').val();
+            if(input_value == '' ) {
+                alert("機種名を入力してください。");
+                return
+            }
+            if(input_value.length > 100){
+                alert("機種名は100文字以内にしてください。");
+                return
+            }
+
+            if(confirm(`この機種名を追加しますよろしいですか？\n業者名「${select_value}」\n機種名「${input_value}」`)) {
+                saveAsset(input_value, select_value)
+            } else {
+                alert("キャンセルしました。");
+                return;
+            }
+
+            removeAssetForm(button_this);
+        };
+        const saveAsset = (name, trader_id) => {
+            $.ajax({
+                    url: '/api/assets',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        name: name,
+                        trader_id: trader_id,
+                    },
+                })
+            .done(function (response) {
+                assets = response;
+                assets.unshift({'id':'', 'name':'選択してください'});
+                for (let i = 1; i <= 6; i++) {
+                    let trader_select_id = '#heavyMachineryTraderId' + i;
+                    let asset_select_id = '#heavyMachineryModel' + i;
+
+                    let trader_id = $(trader_select_id + ' option:selected').val();
+                    if(!trader_id) {
+                        return
+                    }
+
+                    update_asset(assets, asset_select_id, false);
+                }
+            })
+            .fail(function () {
+                alert('機種データ保存中にエラーが発生しました、しばらくたってやり直しても治らない場合は管理者までお問い合わせください。');
+            });
+        };
+
+        // 業者データを書き換え
+        const update_trader = (traders, select_default) => {
+            // 業者データを上書き
+            const over_write = (traders, select_id, selected_value, select_default) => {
+                // 全て取り除く
+                $(select_id  + '> option').remove();
+
+                // 追加
+                traders.forEach(trader => {
+                    $(select_id).append($('<option>').html(trader['name']).val(trader['id']));
+                });
+
+                // デフォルト選択表示にする
+                if(select_default) {
+                    $(select_id).prop("selectedIndex", 0).trigger('change', ['exit']);
+                } else {
+                    // 前回選択されていた項目を選択をする
+                    let select_index = traders.map(x => x['id']).indexOf(Number(selected_value));
+                    $(select_id).prop("selectedIndex", select_index).trigger('change', ['exit']);
+                }
+            }
+
+            for (let i = 1; i <= 8; i++) {
+                let select_id = '#laborTraderId' + i;
+                let selected_value = $(`${select_id} option:selected`).val();
+                over_write(traders, select_id, selected_value, select_default);
+            }
+            for (let i = 1; i <= 6; i++) {
+                let select_id = '#heavyMachineryTraderId' + i;
+                let selected_value = $(`${select_id} option:selected`).val();
+                over_write(traders, select_id, selected_value, select_default);
+            }
+            over_write(traders, '#addAssetSelect', '', true);
+        }
+
+        // 資産データを書き換え
+        const update_asset = (assets, select_id, select_default) => {
+            let selected_value = $(`${select_id} option:selected`).val();
+
+            // 全て取り除く
+            $(select_id  + '> option').remove();
+
+            // 追加
+            assets.forEach(asset => {
+                $(select_id).append($('<option>').html(asset['name']).val(asset['id']));
+            });
+
+            // デフォルト選択表示にする
+            if(select_default) {
+                $(select_id).prop("selectedIndex", 0).trigger('change', ['exit']);
+            } else {
+                // 前回選択されていた項目を選択をする
+                let select_index = assets.map(x => x['id']).indexOf(Number(selected_value));
+                $(select_id).prop("selectedIndex", select_index).trigger('change', ['exit']);
+            }
+        }
+
         $(function() {
             // selectチェッカー
             $('select[name="department_id"]').change(function(e, data) {
@@ -528,6 +776,57 @@
                 }
             });
 
+            // 部署を選択したら、業者データを更新
+            $('#department_id').change(function() {
+                const department_id = $('#department_id option:selected').val();
+                if(!department_id) {
+                    return
+                }
+
+                // 業者データを取得
+                $.ajax({
+                    url: '/api/traders/' + department_id,
+                    type: 'get',
+                    dataType: 'json'
+                })
+                .done(function (response) {
+                    traders = response;
+                    traders.unshift({'id':'', 'name':'業者名を選択してください'});
+                    update_trader(traders, true);
+                })
+                .fail(function () {
+                    alert('業者データ取得中にエラーが発生しました、しばらくたってやり直しても治らない場合は管理者までお問い合わせください。');
+                });
+            });
+
+            // 業者を選択したら、資産データを更新
+            for (let i = 1; i <= 6; i++) {
+                let trader_select_id = '#heavyMachineryTraderId' + i;
+                let asset_select_id = '#heavyMachineryModel' + i;
+
+                $(trader_select_id).change(function() {
+                    let trader_id = $(trader_select_id + ' option:selected').val();
+                    if(!trader_id) {
+                        return
+                    }
+
+                    // 資産データを取得
+                    $.ajax({
+                        url: '/api/assets/' + trader_id,
+                        type: 'get',
+                        dataType: 'json'
+                    })
+                    .done(function (response) {
+                        assets = response;
+                        assets.unshift({'id':'', 'name':'選択してください'});
+                        update_asset(assets, asset_select_id, true);
+                    })
+                    .fail(function () {
+                        alert('資産データ取得中にエラーが発生しました、しばらくたってやり直しても治らない場合は管理者までお問い合わせください。');
+                    });
+                });
+            }
+
             // previewページに遷移
             $('#transition-preview-button').on('click', function() {
                 $('#transition-preview').val('true');
@@ -535,83 +834,83 @@
 
             //clear-button
             $('#laborButtonName1').on('click', function() {
-                $('#laborTraderName1').val('')
+                $('#laborTraderId1').val('')
                 $('#laborPeopleNumber1').val('')
                 $('#laborWorkTime1').val('')
                 $('#laborWorkVolume1').val('')
             });
             $('#laborButtonName2').on('click', function() {
-                $('#laborTraderName2').val('')
+                $('#laborTraderId2').val('')
                 $('#laborPeopleNumber2').val('')
                 $('#laborWorkTime2').val('')
                 $('#laborWorkVolume2').val('')
             });
             $('#laborButtonName3').on('click', function() {
-                $('#laborTraderName3').val('')
+                $('#laborTraderId3').val('')
                 $('#laborPeopleNumber3').val('')
                 $('#laborWorkTime3').val('')
                 $('#laborWorkVolume3').val('')
             });
             $('#laborButtonName4').on('click', function() {
-                $('#laborTraderName4').val('')
+                $('#laborTraderId4').val('')
                 $('#laborPeopleNumber4').val('')
                 $('#laborWorkTime4').val('')
                 $('#laborWorkVolume4').val('')
             });
             $('#laborButtonName5').on('click', function() {
-                $('#laborTraderName5').val('')
+                $('#laborTraderId5').val('')
                 $('#laborPeopleNumber5').val('')
                 $('#laborWorkTime5').val('')
                 $('#laborWorkVolume5').val('')
             });
             $('#laborButtonName6').on('click', function() {
-                $('#laborTraderName6').val('')
+                $('#laborTraderId6').val('')
                 $('#laborPeopleNumber6').val('')
                 $('#laborWorkTime6').val('')
                 $('#laborWorkVolume6').val('')
             });
             $('#laborButtonName7').on('click', function() {
-                $('#laborTraderName7').val('')
+                $('#laborTraderId7').val('')
                 $('#laborPeopleNumber7').val('')
                 $('#laborWorkTime7').val('')
                 $('#laborWorkVolume7').val('')
             });
             $('#laborButtonName8').on('click', function() {
-                $('#laborTraderName8').val('')
+                $('#laborTraderId8').val('')
                 $('#laborPeopleNumber8').val('')
                 $('#laborWorkTime8').val('')
                 $('#laborWorkVolume8').val('')
             });
             $('#laborButtonNameAll').on('click', function() {
-                $('#laborTraderName1').val('')
+                $('#laborTraderId1').val('')
                 $('#laborPeopleNumber1').val('')
                 $('#laborWorkTime1').val('')
                 $('#laborWorkVolume1').val('')
-                $('#laborTraderName2').val('')
+                $('#laborTraderId2').val('')
                 $('#laborPeopleNumber2').val('')
                 $('#laborWorkTime2').val('')
                 $('#laborWorkVolume2').val('')
-                $('#laborTraderName3').val('')
+                $('#laborTraderId3').val('')
                 $('#laborPeopleNumber3').val('')
                 $('#laborWorkTime3').val('')
                 $('#laborWorkVolume3').val('')
-                $('#laborTraderName4').val('')
+                $('#laborTraderId4').val('')
                 $('#laborPeopleNumber4').val('')
                 $('#laborWorkTime4').val('')
                 $('#laborWorkVolume4').val('')
-                $('#laborTraderName5').val('')
+                $('#laborTraderId5').val('')
                 $('#laborPeopleNumber5').val('')
                 $('#laborWorkTime5').val('')
                 $('#laborWorkVolume5').val('')
-                $('#laborTraderName6').val('')
+                $('#laborTraderId6').val('')
                 $('#laborPeopleNumber6').val('')
                 $('#laborWorkTime6').val('')
                 $('#laborWorkVolume6').val('')
-                $('#laborTraderName7').val('')
+                $('#laborTraderId7').val('')
                 $('#laborPeopleNumber7').val('')
                 $('#laborWorkTime7').val('')
                 $('#laborWorkVolume7').val('')
-                $('#laborTraderName8').val('')
+                $('#laborTraderId8').val('')
                 $('#laborPeopleNumber8').val('')
                 $('#laborWorkTime8').val('')
                 $('#laborWorkVolume8').val('')
