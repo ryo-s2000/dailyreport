@@ -6,6 +6,8 @@ use FPDI;
 use Session;
 use App\Construction;
 use App\Dailyreport;
+use App\Trader;
+use App\Asset;
 use Illuminate\Http\Request;
 
 class PdfController extends Controller
@@ -92,7 +94,7 @@ class PdfController extends Controller
         }
 
         // 労務1
-        $items[] = array("x" => 14.0, "y" => 39.0, "content" => $inputData['laborTraderName1']);
+        $items[] = array("x" => 14.0, "y" => 39.0, "content" => self::trader_name($inputData['laborTraderId1']));
         $items[] = array("x" => 62.0, "y" => 39.0, "content" => $inputData['laborPeopleNumber1']);
         $items[] = array("x" => 77.0, "y" => 39.0, "content" => $inputData['laborWorkTime1']);
         if(mb_strlen($inputData['laborWorkVolume1'], 'UTF-8') < 25){
@@ -105,7 +107,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 41.0, "content" => $line2);
         }
         // 労務2
-        $items[] = array("x" => 14.0, "y" => 46.5, "content" => $inputData['laborTraderName2']);
+        $items[] = array("x" => 14.0, "y" => 46.5, "content" => self::trader_name($inputData['laborTraderId2']));
         $items[] = array("x" => 62.0, "y" => 46.5, "content" => $inputData['laborPeopleNumber2']);
         $items[] = array("x" => 77.0, "y" => 46.5, "content" => $inputData['laborWorkTime2']);
         if(mb_strlen($inputData['laborWorkVolume2'], 'UTF-8') < 25){
@@ -118,7 +120,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 48.5, "content" => $line2);
         }
         // 労務3
-        $items[] = array("x" => 14.0, "y" => 54.0, "content" => $inputData['laborTraderName3']);
+        $items[] = array("x" => 14.0, "y" => 54.0, "content" => self::trader_name($inputData['laborTraderId3']));
         $items[] = array("x" => 62.0, "y" => 54.0, "content" => $inputData['laborPeopleNumber3']);
         $items[] = array("x" => 77.0, "y" => 54.0, "content" => $inputData['laborWorkTime3']);
         if(mb_strlen($inputData['laborWorkVolume3'], 'UTF-8') < 25){
@@ -131,7 +133,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 56.0, "content" => $line2);
         }
         // 労務4
-        $items[] = array("x" => 14.0, "y" => 61.5, "content" => $inputData['laborTraderName4']);
+        $items[] = array("x" => 14.0, "y" => 61.5, "content" => self::trader_name($inputData['laborTraderId4']));
         $items[] = array("x" => 62.0, "y" => 61.5, "content" => $inputData['laborPeopleNumber4']);
         $items[] = array("x" => 77.0, "y" => 61.5, "content" => $inputData['laborWorkTime4']);
         if(mb_strlen($inputData['laborWorkVolume4'], 'UTF-8') < 25){
@@ -144,7 +146,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 63.5, "content" => $line2);
         }
         // 労務5
-        $items[] = array("x" => 14.0, "y" => 69.0, "content" => $inputData['laborTraderName5']);
+        $items[] = array("x" => 14.0, "y" => 69.0, "content" => self::trader_name($inputData['laborTraderId5']));
         $items[] = array("x" => 62.0, "y" => 69.0, "content" => $inputData['laborPeopleNumber5']);
         $items[] = array("x" => 77.0, "y" => 69.0, "content" => $inputData['laborWorkTime5']);
         if(mb_strlen($inputData['laborWorkVolume5'], 'UTF-8') < 25){
@@ -157,7 +159,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 71.0, "content" => $line2);
         }
         // 労務6
-        $items[] = array("x" => 14.0, "y" => 76.5, "content" => $inputData['laborTraderName6']);
+        $items[] = array("x" => 14.0, "y" => 76.5, "content" => self::trader_name($inputData['laborTraderId6']));
         $items[] = array("x" => 62.0, "y" => 76.5, "content" => $inputData['laborPeopleNumber6']);
         $items[] = array("x" => 77.0, "y" => 76.5, "content" => $inputData['laborWorkTime6']);
         if(mb_strlen($inputData['laborWorkVolume6'], 'UTF-8') < 25){
@@ -170,7 +172,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 78.5, "content" => $line2);
         }
         // 労務7
-        $items[] = array("x" => 14.0, "y" => 84.0, "content" => $inputData['laborTraderName7']);
+        $items[] = array("x" => 14.0, "y" => 84.0, "content" => self::trader_name($inputData['laborTraderId7']));
         $items[] = array("x" => 62.0, "y" => 84.0, "content" => $inputData['laborPeopleNumber7']);
         $items[] = array("x" => 77.0, "y" => 84.0, "content" => $inputData['laborWorkTime7']);
         if(mb_strlen($inputData['laborWorkVolume7'], 'UTF-8') < 25){
@@ -183,7 +185,7 @@ class PdfController extends Controller
             $items[] = array("x" => 86.0, "y" => 86.5, "content" => $line2);
         }
         // 労務8
-        $items[] = array("x" => 14.0, "y" => 91.5, "content" => $inputData['laborTraderName8']);
+        $items[] = array("x" => 14.0, "y" => 91.5, "content" => self::trader_name($inputData['laborTraderId8']));
         $items[] = array("x" => 62.0, "y" => 91.5, "content" => $inputData['laborPeopleNumber8']);
         $items[] = array("x" => 77.0, "y" => 91.5, "content" => $inputData['laborWorkTime8']);
         if(mb_strlen($inputData['laborWorkVolume7'], 'UTF-8') < 25){
@@ -197,33 +199,33 @@ class PdfController extends Controller
         }
 
         // 重機車両1
-        $items[] = array("x" => 15.0, "y" => 105.0, "content" => $inputData['heavyMachineryTraderName1']);
-        $items[] = array("x" => 45.0, "y" => 105.0, "content" => $inputData['heavyMachineryModel1']);
+        $items[] = array("x" => 15.0, "y" => 105.0, "content" => self::trader_name($inputData['heavyMachineryTraderId1']));
+        $items[] = array("x" => 45.0, "y" => 105.0, "content" => self::asset_name($inputData['heavyMachineryModel1']));
         $items[] = array("x" => 77.0, "y" => 105.0, "content" => $inputData['heavyMachineryTime1']);
         $items[] = array("x" => 86.0, "y" => 105.0, "content" => $inputData['heavyMachineryRemarks1']);
         // 重機車両2
-        $items[] = array("x" => 15.0, "y" => 112.5, "content" => $inputData['heavyMachineryTraderName2']);
-        $items[] = array("x" => 45.0, "y" => 112.5, "content" => $inputData['heavyMachineryModel2']);
+        $items[] = array("x" => 15.0, "y" => 112.5, "content" => self::trader_name($inputData['heavyMachineryTraderId2']));
+        $items[] = array("x" => 45.0, "y" => 112.5, "content" => self::asset_name($inputData['heavyMachineryModel2']));
         $items[] = array("x" => 77.0, "y" => 112.5, "content" => $inputData['heavyMachineryTime2']);
         $items[] = array("x" => 86.0, "y" => 112.5, "content" => $inputData['heavyMachineryRemarks2']);
         // 重機車両3
-        $items[] = array("x" => 15.0, "y" => 120.0, "content" => $inputData['heavyMachineryTraderName3']);
-        $items[] = array("x" => 45.0, "y" => 120.0, "content" => $inputData['heavyMachineryModel3']);
+        $items[] = array("x" => 15.0, "y" => 120.0, "content" => self::trader_name($inputData['heavyMachineryTraderId3']));
+        $items[] = array("x" => 45.0, "y" => 120.0, "content" => self::asset_name($inputData['heavyMachineryModel3']));
         $items[] = array("x" => 77.0, "y" => 120.0, "content" => $inputData['heavyMachineryTime3']);
         $items[] = array("x" => 86.0, "y" => 120.0, "content" => $inputData['heavyMachineryRemarks3']);
         // 重機車両4
-        $items[] = array("x" => 104.0, "y" => 105.0, "content" => $inputData['heavyMachineryTraderName4']);
-        $items[] = array("x" => 134.0, "y" => 105.0, "content" => $inputData['heavyMachineryModel4']);
+        $items[] = array("x" => 104.0, "y" => 105.0, "content" => self::trader_name($inputData['heavyMachineryTraderId4']));
+        $items[] = array("x" => 134.0, "y" => 105.0, "content" => self::asset_name($inputData['heavyMachineryModel4']));
         $items[] = array("x" => 166.0, "y" => 105.0, "content" => $inputData['heavyMachineryTime4']);
         $items[] = array("x" => 175.0, "y" => 105.0, "content" => $inputData['heavyMachineryRemarks4']);
         // 重機車両5
-        $items[] = array("x" => 104.0, "y" => 112.5, "content" => $inputData['heavyMachineryTraderName5']);
-        $items[] = array("x" => 134.0, "y" => 112.5, "content" => $inputData['heavyMachineryModel5']);
+        $items[] = array("x" => 104.0, "y" => 112.5, "content" => self::trader_name($inputData['heavyMachineryTraderId5']));
+        $items[] = array("x" => 134.0, "y" => 112.5, "content" => self::asset_name($inputData['heavyMachineryModel5']));
         $items[] = array("x" => 166.0, "y" => 112.5, "content" => $inputData['heavyMachineryTime5']);
         $items[] = array("x" => 175.0, "y" => 112.5, "content" => $inputData['heavyMachineryRemarks5']);
         // 重機車両6
-        $items[] = array("x" => 104.0, "y" => 120.0, "content" => $inputData['heavyMachineryTraderName6']);
-        $items[] = array("x" => 134.0, "y" => 120.0, "content" => $inputData['heavyMachineryModel6']);
+        $items[] = array("x" => 104.0, "y" => 120.0, "content" => self::trader_name($inputData['heavyMachineryTraderId6']));
+        $items[] = array("x" => 134.0, "y" => 120.0, "content" => self::asset_name($inputData['heavyMachineryModel6']));
         $items[] = array("x" => 166.0, "y" => 120.0, "content" => $inputData['heavyMachineryTime6']);
         $items[] = array("x" => 175.0, "y" => 120.0, "content" => $inputData['heavyMachineryRemarks6']);
 
@@ -422,4 +424,23 @@ class PdfController extends Controller
         $pdf->Output(date('Ymd', strtotime($inputData['date'])) . '-dailyreport.pdf', 'I');
     }
 
+    private function trader_name($id) {
+        $trader = Trader::where('id', $id)->first();
+
+        if(is_null($trader)) {
+            return '';
+        } else {
+            return $trader->name;
+        }
+    }
+
+    private function asset_name($id) {
+        $asset = Asset::where('id', $id)->first();
+
+        if(is_null($asset)) {
+            return '';
+        } else {
+            return $asset->name;
+        }
+    }
 }

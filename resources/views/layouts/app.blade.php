@@ -33,7 +33,7 @@
     <link href="../../dist/css/flat-ui.css" rel="stylesheet">
 
     <!-- ファビコン -->
-    <link rel="shortcut　icon" href="../../../public/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
