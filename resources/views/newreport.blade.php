@@ -174,7 +174,10 @@
 
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label1" class="cssacc" />
-                    <label for="label1"><span class="label-font">労務</span><button type="button" id="laborButtonNameAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+                    <label for="label1">
+                        <span class="label-font">労務</span>
+                        <button type="button" id="laborButtonNameAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
+                    </label>
 
                     <div>
                         {{-- 業者を追加 --}}
@@ -193,7 +196,7 @@
                                 $laborWorkVolume = "laborWorkVolume".$i;
                             ?>
                             <div class="col-md-12 col-xs-10 cells-containre">
-                                <button type="button" id="{{$laborButtonName}}" style="border-radius:17px; height:34px; width:34px;">×</button>
+                                <button type="button" id="{{$laborButtonName}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
                                 <span class="inputform">
 
                                 <select id="{{$laborTraderId}}" name="{{$laborTraderId}}" data-toggle="select" class="form-control select select-default mrs mbm">
@@ -241,7 +244,10 @@
 
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label2" class="cssacc" />
-                    <label for="label2"><span class="label-font">重機車両</span><button type="button" id="heavyMachineryTraderButtonAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+                    <label for="label2">
+                        <span class="label-font">重機車両</span>
+                        <button type="button" id="heavyMachineryTraderButtonAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
+                    </label>
 
                     <div>
                         {{-- 業者を追加 --}}
@@ -275,7 +281,7 @@
                                 $heavyMachineryRemarks = "heavyMachineryRemarks".$i;
                             ?>
                             <div class="col-md-12 col-xs-10 cells-containre">
-                                <button type="button" id="{{$heavyMachineryTraderButton}}" style="border-radius:17px; height:34px; width:34px;">×</button>
+                                <button type="button" id="{{$heavyMachineryTraderButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
                                 <span class="inputform">
                                     <select id="{{$heavyMachineryTraderId}}" name="{{$heavyMachineryTraderId}}" data-toggle="select" class="form-control select select-default mrs mbm">
                                         @foreach ($traders as $trader)
@@ -311,7 +317,10 @@
 
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label3" class="cssacc" />
-                    <label for="label3"><span class="label-font">購入資材</span><button type="button" id="materialTraderButtonAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+                    <label for="label3">
+                        <span class="label-font">購入資材</span>
+                        <button type="button" id="materialTraderButtonAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
+                    </label>
                     <div class="accshow">
                         @foreach (range(1,5) as $i)
                             <?php
@@ -326,7 +335,7 @@
                                 $materialInspector = "materialInspector".$i;
                             ?>
                             <div class="col-md-12 cells-containre">
-                                <button type="button" id="{{$materialTraderButton}}" style="border-radius:17px; height:34px; width:34px;">×</button>
+                                <button type="button" id="{{$materialTraderButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
                                 <span class="inputform">
                                     <input id="{{$materialTraderName}}" name="{{$materialTraderName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="業者名" value="{{old($materialTraderName) ?? $dailyreport->$materialTraderName}}" />
                                 </span>
@@ -381,7 +390,10 @@
 
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label4" class="cssacc" />
-                    <label for="label4"><span class="label-font">工程内検査</span><button type="button" id="processButtonAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+                    <label for="label4">
+                        <span class="label-font">工程内検査</span>
+                        <button type="button" id="processButtonAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
+                    </label>
                     <div class="accshow">
                         @foreach (range(1,4) as $i)
                             <?php
@@ -394,7 +406,7 @@
                                 $processInspector = "processInspector".$i;
                             ?>
                             <div class="col-md-12 cells-containre">
-                                <button type="button" id="{{$processButton}}" style="border-radius:17px; height:34px; width:34px;">×</button>
+                                <button type="button" id="{{$processButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
                                 <span class="inputform">
                                     <input id="{{$processName}}" name="{{$processName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="工程内検査名" value="{{old($processName) ?? $dailyreport->$processName}}" />
                                 </span>
@@ -443,7 +455,10 @@
 
                 <div class="item-conteiner-top">
                     <input type="checkbox" id="label5" class="cssacc" />
-                    <label for="label5"><span class="label-font">測定機器点検</span><button type="button" id="measuringEquipmentButtonAll" style="margin-left:10px;border-radius:18px; height:36px; width:36px;">×</button></label>
+                    <label for="label5">
+                        <span class="label-font">測定機器点検</span>
+                        <button type="button" id="measuringEquipmentButtonAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
+                    </label>
                     <div class="accshow">
                         @foreach (range(1,2) as $i)
                             <?php
@@ -454,7 +469,7 @@
                                 $measuringEquipmentRemarks = "measuringEquipmentRemarks".$i;
                             ?>
                             <div class="col-md-12 cells-containre">
-                                <button type="button" id="{{$measuringEquipmentButton}}" style="border-radius:17px; height:34px; width:34px;">×</button>
+                                <button type="button" id="{{$measuringEquipmentButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
                                 <span class="inputform">
                                     <input id="{{$measuringEquipmentName}}" name="{{$measuringEquipmentName}}" class="tagsinput tagsinput-typeahead input-lg" placeholder="測定機器名" value="{{old($measuringEquipmentName) ?? $dailyreport->$measuringEquipmentName}}" />
                                 </span>
