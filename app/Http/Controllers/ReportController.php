@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Image;
-use Storage;
 use App\Dailyreport;
 use App\Construction;
 use App\Trader;
 use App\Asset;
-use App\Signature;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyreportRequest;
 

@@ -21,4 +21,7 @@ Route::group(['middleware' => ['api']], function(){
     Route::resource('traders', 'Api\TraderController', ['only' => ['show', 'store']]);
 
     Route::resource('assets', 'Api\AssetController', ['only' => ['show', 'store']]);
+
+    Route::post('/data_exports/unit_price', 'Api\DataExportController@show');
+    Route::post('/data_exports', 'Api\DataExportController@export');
 });
