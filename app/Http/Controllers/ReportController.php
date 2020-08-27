@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Image;
-use Storage;
 use App\Dailyreport;
 use App\Construction;
-use App\Signature;
+use App\Trader;
+use App\Asset;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyreportRequest;
 
@@ -16,53 +15,66 @@ class ReportController extends Controller
         $dailyreport = new Dailyreport;
         $dailyreport->date = date("Y-m-d");
         $constructions = Construction::all();
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
+        $traders = array(
+            array('id'=>'', 'name'=>'部署を選択してください')
+        );
+        $assets = array();
+        for ($i = 1; $i <= 6; $i++) {
+            array_push(
+                $assets, array(array('id'=>'', 'name'=>'業者名を選択してください'))
+            );
+        }
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
     }
 
     public function editReport(Request $request){
-        $dailyreport = Dailyreport::find($request->reportid);
+        $dailyreport = Dailyreport::find($request->report_id);
         if($dailyreport == null){
             return redirect('/');
         }
         $constructions = Construction::all();
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
+
+        $return_traders = array(
+            array('id'=>'', 'name'=>'業者名を選択してください')
+        );
+        $traders = Trader::where('department_id', $dailyreport->department_id)->get();
+        foreach ($traders as $trader) {
+            array_push(
+                $return_traders, array('id'=>$trader->id, 'name'=>$trader->name)
+            );
+        }
+
+        $return_assets = array();
+        for ($i = 1; $i <= 6; $i++) {
+            $individual_assets = array(
+                array('id'=>'', 'name'=>'業者名を選択してください')
+            );
+
+            $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
+            $trader_id = $dailyreport->$heavyMachineryTraderId;
+            $assets = Asset::where('trader_id', $trader_id)->get();
+            foreach ($assets as $asset) {
+                array_push(
+                    $individual_assets, array('id'=>$asset->id, 'name'=>$asset->name)
+                );
+            }
+
+            array_push(
+                $return_assets, $individual_assets
+            );
+        }
+
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $return_traders, "assets" => $return_assets]);
     }
 
-    public function saveEditReport(DailyreportRequest $request, $reportid){
-        $dailyreport = Dailyreport::find($reportid);
+    public function saveEditReport(DailyreportRequest $request, $report_id){
+        $dailyreport = Dailyreport::find($report_id);
         if($dailyreport == null){
             return redirect('/');
         }
 
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
-
-        // 画像保存処理
-        foreach (range(1,5) as $i){
-            $name = 'imagepath' . $i;
-            $file = $request->file($name);
-            if($file != null){
-                $fileName = $file->getClientOriginalExtension();
-                if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png" or $fileName == "JPEG" or $fileName == "JPG" or $fileName == "PNG"){
-                    // リサイズ処理
-                    $image = Image::make($file);
-                    $image->resize(180, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $imageResized = md5($image->__toString());
-                    $image->save(public_path('images/'.$imageResized));
-                    $savedImageUri = $image->dirname.'/'.$image->basename;
-
-                    // 保存処理
-                    $path = Storage::disk('s3')->putFile('/', $savedImageUri, 'public');
-                    $dailyreport->$name = Storage::disk('s3')->url($path);
-
-                    // リサイズ中のごみファイル削除
-                    $image->destroy();
-                    unlink($savedImageUri);
-                }
-            }
-        }
 
         // nullを空文字に変更
         foreach ($form as $key => $item){
@@ -93,35 +105,6 @@ class ReportController extends Controller
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
 
-        // 画像保存処理
-        foreach (range(1,5) as $i){
-            $name = 'imagepath' . $i;
-            $file = $request->file($name);
-            if($file == null){
-                $dailyreport->$name = "";
-            } else {
-                $fileName = $file->getClientOriginalExtension();
-                if($fileName == "jpg" or $fileName == "jpeg" or $fileName == "png"){
-                    // リサイズ処理
-                    $image = Image::make($file);
-                    $image->resize(180, null, function ($constraint) {
-                        $constraint->aspectRatio();
-                    });
-                    $imageResized = md5($image->__toString());
-                    $image->save(public_path('images/'.$imageResized));
-                    $savedImageUri = $image->dirname.'/'.$image->basename;
-
-                    // 保存処理
-                    $path = Storage::disk('s3')->putFile('/', $savedImageUri, 'public');
-                    $dailyreport->$name = Storage::disk('s3')->url($path);
-
-                    // リサイズ中のごみファイル削除
-                    $image->destroy();
-                    unlink($savedImageUri);
-                }
-            }
-        }
-
         // nullを空文字に変更
         foreach ($form as $key => $item){
             if($item == null){
@@ -146,13 +129,8 @@ class ReportController extends Controller
     }
 
     public function copyReport(Request $request){
-        $dailyreport = Dailyreport::find($request->reportid);
+        $dailyreport = Dailyreport::find($request->report_id);
         $dailyreport->date = date("Y-m-d");
-        $dailyreport->imagepath1 = '';
-        $dailyreport->imagepath2 = '';
-        $dailyreport->imagepath3 = '';
-        $dailyreport->imagepath4 = '';
-        $dailyreport->imagepath5 = '';
 
         if($dailyreport == null){
             return redirect('/');
@@ -161,24 +139,22 @@ class ReportController extends Controller
         return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
     }
 
-    public function deleteReport(Dailyreport $reportid){
-        if( !(Dailyreport::find($reportid)) ){
+    public function deleteReport(Dailyreport $report_id){
+        if( !(Dailyreport::find($report_id)) ){
             return redirect('/');
         }
 
-        $reportid->delete();
+        $report_id->delete();
 
         return redirect('/');
     }
 
     public function showReport(Request $request){
-        $dailyreport = Dailyreport::find($request->reportid);
+        $dailyreport = Dailyreport::find($request->report_id);
         if($dailyreport == null){
             return redirect('/');
         }
-
-        $signatures = Signature::where('reportid', $request->reportid)->get();
-        return view('showreport', ['dailyreport' => $dailyreport, 'signatures' => $signatures]);
+        return view('showreport', ['dailyreport' => $dailyreport]);
     }
 
     public function index(Request $request){
@@ -199,7 +175,7 @@ class ReportController extends Controller
         }
 
         $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
-            ->where('department', condition($request->department), value($request->department))
+            ->where('department_id', condition($request->department_id), value($request->department_id))
             ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber));
         switch ($request->sort){
             case '日付が早い順':
@@ -214,7 +190,7 @@ class ReportController extends Controller
 
         $dailyreportsPalams = array(
             'userName' => $request->userName,
-            'department' => $request->department,
+            'department_id' => $request->department_id,
             'constructionNumber' => $request->constructionNumber,
             'constructionName' => $request->constructionName,
             'sort' => $request->sort,

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSignaturesTable extends Migration
+class ChangeDailyreportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateSignaturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('signatures', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('reportid');
-            $table->text('name');
-            $table->text('remarks');
-            $table->timestamps();
+        Schema::table('dailyreports', function (Blueprint $table) {
+            $table->integer('department_id')->change();
         });
     }
 
@@ -29,6 +25,8 @@ class CreateSignaturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('signatures');
+        Schema::table('dailyreports', function (Blueprint $table) {
+            $table->text('department_id')->change();
+        });
     }
 }

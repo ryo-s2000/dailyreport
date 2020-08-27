@@ -34,66 +34,30 @@
         <main class="detail-dailyreport-wrapper">
             <table class="table table-striped table-condensed table-bordered table-nonfluid datail-table" border="1">
                     <tr><th>日報作者名</th><td>{{$dailyreport->userName}}</td></tr>
-                    <tr><th>部署名</th><td>{{$dailyreport->department}}</td></tr>
+                    <tr>
+                        <th>部署名</th>
+                        @switch ($dailyreport->department_id)
+                            @case(1)
+                                <td>住宅部</td>
+                                @break
+                            @case(2)
+                                <td>土木部</td>
+                                @break
+                            @case(3)
+                                <td>特殊建築部</td>
+                                @break
+                            @case(4)
+                                <td>農業施設部</td>
+                                @break
+                            @default
+                                <td></td>
+                        @endswitch
+                    </tr>
                     <tr><th>日付</th><td>{{$dailyreport->date->format('Y年m月d日')}}</td></tr>
                     <tr><th>工事番号</th><td>{{$dailyreport->constructionNumber}}</td></tr>
                     <tr><th>工事名</th><td>{{$dailyreport->constructionName}}</td></tr>
             </table>
         </main>
-
-        <h5 style="margin-top: 50px;">写真</h5>
-        <div class="photo-container">
-            @foreach(array("imagepath1", "imagepath2", "imagepath3", "imagepath4", "imagepath5") as $path)
-                @if($dailyreport->$path)
-                    <div class="photo-cell">
-                        <div>
-                            <img class="photo" src={{$dailyreport->$path}}>
-                        </div>
-                    </div>
-                @endif
-            @endforeach
-        </div>
-
-        <h5 style="margin-top: 50px;">確認用署名</h5>
-        <div class="btn-container">
-            <form method="get" action="/newsignature/{{$dailyreport->id}}">
-                <input type="submit" class="btn btn-primary btn-new-pdf" value="署名を作成" />
-            </form>
-        </div>
-
-        <main class="signature-wrapper">
-            <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">
-                <thead class="header">
-                    <tr><th>名前</th><th>確認時間</th><th>備考</th><th>編集</th><th>削除</th></tr>
-                </thead>
-                <tbody>
-
-                    @foreach ($signatures as $signature)
-                        <tr>
-                            <td>{{$signature->name}}</td>
-                            <td>{{$signature->updated_at->format('Y年m月d日')}}</td>
-                            <td>{{$signature->remarks}}</td>
-                            <td>
-                                <form method="get" action="/editsignature/{{$signature->id}}">
-                                    <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
-                                </form>
-                            </td>
-                            <td>
-                                <input type="submit" class="btn btn-primary btn-create-pdf" onClick="waringSignatureDelete({{$signature->id}})" value="削除" />
-                            </td>
-                        </tr>
-
-                        <form method="POST" action="/delete/signature/{{$signature->id}}/{{$signature->reportid}}" style="display: none;">
-                            @csrf
-                            @method('DELETE')
-                            <button style="display: none;" type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="signature-{{$signature->id}}"></button>
-                        </form>
-                    @endforeach
-
-                </tbody>
-            </table>
-        </main>
-
     </div>
 
     <script>
@@ -102,14 +66,6 @@
             ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
             if (ret == 'delete'){
                 document.getElementById(id).click();
-            }
-        }
-
-        function waringSignatureDelete(id){
-            ret = prompt("※この処理を実行するとデータが削除されます。\rそれでもよろしければ入力欄にdeleteと打ち込んでボタンを押してください。", "");
-            if (ret == 'delete'){
-                elementId = 'signature-' + id
-                document.getElementById(elementId).click();
             }
         }
     </script>

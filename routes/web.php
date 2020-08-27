@@ -18,7 +18,7 @@ use App\Dailyreport;
 Route::get('/photo', 'PhotoController@index');
 
 // pdf
-Route::get('/pdf/{reportid}', 'PdfController@createPdf');
+Route::get('/pdf/{report_id}', 'PdfController@createPdf');
 
 // dataexport
 Route::get('/dataexport', 'DataExportController@index');
@@ -39,22 +39,13 @@ Route::delete('/delete/construction/{constructionid}', 'ConstructionController@d
 // report
 Route::get('/newreport', 'ReportController@newReport');
 Route::post('/newreport', 'ReportController@saveReport');
-Route::get('/copyreport/{reportid}', 'ReportController@copyReport');
+Route::get('/copyreport/{report_id}', 'ReportController@copyReport');
 
 Route::get('/', 'ReportController@index');
 
-Route::get('/editreport/{reportid}', 'ReportController@editReport');
-Route::post('/editreport/{reportid}', 'ReportController@saveEditReport');
+Route::get('/editreport/{report_id}', 'ReportController@editReport');
+Route::post('/editreport/{report_id}', 'ReportController@saveEditReport');
 
-Route::delete('/delete/report/{reportid}', 'ReportController@deleteReport');
+Route::delete('/delete/report/{report_id}', 'ReportController@deleteReport');
 
-// detail report
-Route::get('/newsignature/{reportid}', 'SignatureController@newSignature');
-Route::post('/newsignature/{reportid}', 'SignatureController@saveSignature');
-
-Route::get('/{reportid}', 'ReportController@showReport');
-
-Route::get('/editsignature/{signatureid}', 'SignatureController@editSignature');
-Route::post('/editsignature/{signatureid}', 'SignatureController@saveEditSignature');
-
-Route::delete('/delete/signature/{signatureid}/{reportid}', 'SignatureController@deleteSignature');
+Route::get('/{report_id}', 'ReportController@showReport');

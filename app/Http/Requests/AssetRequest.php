@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignatureRequest extends FormRequest
+class AssetRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,16 @@ class SignatureRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required' , 'string', 'max:20'],
-            'remarks' => ['nullable' , 'string' , 'max:500']
+            'name' => ['required' , 'string' , 'max:100'],
+            'trader_id' => ['required' , 'integer'],
         ];
     }
 
-    public function signatureAttributes()
+    public function assetAttributes()
     {
         return $this->only([
             'name',
-            'remarks',
-            'updated_at'
+            'trader_id'
         ]);
     }
 }
