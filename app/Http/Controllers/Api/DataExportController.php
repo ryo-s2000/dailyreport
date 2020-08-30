@@ -239,8 +239,13 @@ class DataExportController extends Controller
                     foreach ($uniqueLaborTraderIds as $index => $id) {
                         foreach (range(1,8) as $i) {
                             $laborTraderId = "laborTraderId".$i;
+                            $laborPeopleNumber = "laborPeopleNumber".$i;
+                            $laborWorkTime = "laborWorkTime".$i;
+
                             if($report[$laborTraderId] == $id) {
-                                $row[$index]++;
+                                // 小数点2位で切り捨て
+                                // (人数*時間)/8時間
+                                $row[$index] += round((((int)$report[$laborPeopleNumber] * (int)$report[$laborWorkTime]) / 8), 2);
                             }
                         }
                     }
@@ -248,8 +253,10 @@ class DataExportController extends Controller
                     foreach ($uniqueHeavyMachineryModels as $index => $id) {
                         foreach (range(1,6) as $i) {
                             $heavyMachineryModel = "heavyMachineryModel".$i;
+                            $heavyMachineryTime = "heavyMachineryTime".$i;
+
                             if($report[$heavyMachineryModel] == $id) {
-                                $row[$index+$laborTraderColumnCount]++;
+                                $row[$index+$laborTraderColumnCount] += (int)$report[$heavyMachineryTime];
                             }
                         }
                     }
