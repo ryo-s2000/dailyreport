@@ -179,8 +179,13 @@ class DataExportController extends Controller
             }
         }
 
+        // 重複を削除
         $uniqueLaborTraderIds = array_unique($laborTraderIds);
         $uniqueHeavyMachineryModels = array_unique($heavyMachineryModels);
+
+        //キーが飛び飛びになっているので、キーを振り直す
+        $uniqueLaborTraderIds = array_values($uniqueLaborTraderIds);
+        $uniqueHeavyMachineryModels = array_values($uniqueHeavyMachineryModels);
 
         return [$uniqueLaborTraderIds, $uniqueHeavyMachineryModels];
     }
