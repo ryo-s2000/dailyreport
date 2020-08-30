@@ -272,17 +272,21 @@ class DataExportController extends Controller
 
     private function aggregateUnitpriceRow($laborTraderUnitPrice, $uniqueLaborTraderIds, $heavyMachineUnitPrice, $uniqueHeavyMachineryModels, $laborTraderColumnCount, $lowCount) {
         $unitpriceRow = array_fill(0, $lowCount, 0);
-        foreach($laborTraderUnitPrice as $unitPrice) {
-            foreach ($uniqueLaborTraderIds as $index => $id) {
-                if($unitPrice['id'] == $id) {
-                    $unitpriceRow[$index] = (int)$unitPrice['price'];
+        if(!empty($laborTraderUnitPrice)) {
+            foreach($laborTraderUnitPrice as $unitPrice) {
+                foreach ($uniqueLaborTraderIds as $index => $id) {
+                    if($unitPrice['id'] == $id) {
+                        $unitpriceRow[$index] = (int)$unitPrice['price'];
+                    }
                 }
             }
         }
-        foreach($heavyMachineUnitPrice as $unitPrice) {
-            foreach ($uniqueHeavyMachineryModels as $index => $id) {
-                if($unitPrice['id'] == $id) {
-                    $unitpriceRow[$index+$laborTraderColumnCount] = (int)$unitPrice['price'];
+        if(!empty($heavyMachineUnitPrice)) {
+            foreach($heavyMachineUnitPrice as $unitPrice) {
+                foreach ($uniqueHeavyMachineryModels as $index => $id) {
+                    if($unitPrice['id'] == $id) {
+                        $unitpriceRow[$index+$laborTraderColumnCount] = (int)$unitPrice['price'];
+                    }
                 }
             }
         }
