@@ -179,14 +179,14 @@
                         <button type="button" id="laborButtonNameAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
                     </label>
 
-                    <div>
-                        {{-- 業者を追加 --}}
-                        <div style="margin: 20px 0;">
-                            <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
-                        </div>
-                    </div>
-
                     <div class="accshow">
+                        <div>
+                            {{-- 業者を追加 --}}
+                            <div style="margin: 20px 0;">
+                                <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
+                            </div>
+                        </div>
+
                         @foreach (range(1,8) as $i)
                             <?php
                                 $laborButtonName = "laborButtonName".$i;
@@ -249,29 +249,29 @@
                         <button type="button" id="heavyMachineryTraderButtonAll" class="btn btn--circle btn--circle--title"><i class="fas fa-times"></i></button>
                     </label>
 
-                    <div>
-                        {{-- 業者を追加 --}}
-                        <div style="margin: 20px 0;">
-                            <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
-                        </div>
-
-                        {{-- 機種を追加 --}}
-                        <div style="margin: 20px 0;" id="addAssetForm">
-                            <button type="button" class="btn btn-info" onclick="(addAssetForm())">機種を追加</button>
-                        </div>
-                        <div style="margin: 20px 0; display: none;" id="addAsset">
-                            <select id="addAssetSelect" name="" data-toggle="select" class="form-control select select-default mrs mbm">
-                                @foreach ($traders as $trader)
-                                    <option value="{{$trader['id']}}">{{$trader['name']}}</option>
-                                @endforeach
-                            </select>
-
-                            <input id="" name="" class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="追加したい機種" />
-                            <button type="button" class="btn btn-info" onclick="(addAsset(this))">機種を追加</button>
-                        </div>
-                    </div>
-
                     <div class="accshow">
+                        <div>
+                            {{-- 業者を追加 --}}
+                            <div style="margin: 20px 0;">
+                                <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
+                            </div>
+
+                            {{-- 機種を追加 --}}
+                            <div style="margin: 20px 0;" id="addAssetForm">
+                                <button type="button" class="btn btn-info" onclick="(addAssetForm())">機種を追加</button>
+                            </div>
+                            <div style="margin: 20px 0; display: none;" id="addAsset">
+                                <select id="addAssetSelect" name="" data-toggle="select" class="form-control select select-default mrs mbm">
+                                    @foreach ($traders as $trader)
+                                        <option value="{{$trader['id']}}">{{$trader['name']}}</option>
+                                    @endforeach
+                                </select>
+
+                                <input id="" name="" class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="追加したい機種" />
+                                <button type="button" class="btn btn-info" onclick="(addAsset(this))">機種を追加</button>
+                            </div>
+                        </div>
+
                         @foreach (range(1,6) as $i)
                             <?php
                                 $heavyMachineryTraderButton = "heavyMachineryTraderButton".$i;
