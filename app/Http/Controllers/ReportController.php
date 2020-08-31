@@ -29,42 +29,18 @@ class ReportController extends Controller
 
     public function editReport(Request $request){
         $dailyreport = Dailyreport::find($request->report_id);
+
         if($dailyreport == null){
             return redirect('/');
         }
+
         $constructions = Construction::all();
 
-        $return_traders = array(
-            array('id'=>'', 'name'=>'業者名を選択してください')
-        );
-        $traders = Trader::where('department_id', $dailyreport->department_id)->get();
-        foreach ($traders as $trader) {
-            array_push(
-                $return_traders, array('id'=>$trader->id, 'name'=>$trader->name)
-            );
-        }
+        $traders = self::fillTraders($dailyreport);
 
-        $return_assets = array();
-        for ($i = 1; $i <= 6; $i++) {
-            $individual_assets = array(
-                array('id'=>'', 'name'=>'業者名を選択してください')
-            );
+        $assets = self::fillAssets($dailyreport);
 
-            $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
-            $trader_id = $dailyreport->$heavyMachineryTraderId;
-            $assets = Asset::where('trader_id', $trader_id)->get();
-            foreach ($assets as $asset) {
-                array_push(
-                    $individual_assets, array('id'=>$asset->id, 'name'=>$asset->name)
-                );
-            }
-
-            array_push(
-                $return_assets, $individual_assets
-            );
-        }
-
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $return_traders, "assets" => $return_assets]);
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
     }
 
     public function saveEditReport(DailyreportRequest $request, $report_id){
@@ -135,8 +111,14 @@ class ReportController extends Controller
         if($dailyreport == null){
             return redirect('/');
         }
+
         $constructions = Construction::all();
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions]);
+
+        $traders = self::fillTraders($dailyreport);
+
+        $assets = self::fillAssets($dailyreport);
+
+        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
     }
 
     public function deleteReport(Dailyreport $report_id){
@@ -199,5 +181,43 @@ class ReportController extends Controller
         $allDailyreports = Dailyreport::all();
         $constructions = Construction::all();
         return view('top', ["dailyreports" => $dailyreports, "dailyreportsPalams" => $dailyreportsPalams, "allDailyreports" => $allDailyreports, "constructions" => $constructions]);
+    }
+
+    private function fillTraders($dailyreport) {
+        $return_traders = array(
+            array('id'=>'', 'name'=>'業者名を選択してください')
+        );
+        $traders = Trader::where('department_id', $dailyreport->department_id)->get();
+        foreach ($traders as $trader) {
+            array_push(
+                $return_traders, array('id'=>$trader->id, 'name'=>$trader->name)
+            );
+        }
+
+        return $return_traders;
+    }
+
+    private function fillAssets($dailyreport) {
+        $return_assets = array();
+        for ($i = 1; $i <= 6; $i++) {
+            $individual_assets = array(
+                array('id'=>'', 'name'=>'業者名を選択してください')
+            );
+
+            $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
+            $trader_id = $dailyreport->$heavyMachineryTraderId;
+            $assets = Asset::where('trader_id', $trader_id)->get();
+            foreach ($assets as $asset) {
+                array_push(
+                    $individual_assets, array('id'=>$asset->id, 'name'=>$asset->name)
+                );
+            }
+
+            array_push(
+                $return_assets, $individual_assets
+            );
+        }
+
+        return $return_assets;
     }
 }
