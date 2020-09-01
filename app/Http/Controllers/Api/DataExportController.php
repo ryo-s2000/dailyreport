@@ -44,7 +44,7 @@ class DataExportController extends Controller
             $data = array(
                 'heavyMachineryModel' => $id,
                 'heavyMachineName' => self::searchHeavyMachineName($id),
-                'heavyMachineTraderName' => self::searchLaborTraderName($id)
+                'heavyMachineTraderName' => self::searchHeavyMachineTraderName($id)
             );
 
             array_push(
@@ -154,6 +154,12 @@ class DataExportController extends Controller
     private function searchHeavyMachineName($id) {
         $asset = Asset::where('id', $id)->first();
         return $asset->name;
+    }
+
+    private function searchHeavyMachineTraderName($id) {
+        $asset = Asset::where('id', $id)->first();
+        $trader_name = self::searchLaborTraderName($asset->trader_id);
+        return $trader_name;
     }
 
     private function getUniqueLaborAndHeavyMachineData($reports) {
