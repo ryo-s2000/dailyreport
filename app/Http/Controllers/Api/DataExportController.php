@@ -339,7 +339,7 @@ class DataExportController extends Controller
         }
         foreach ($heavyMachineryModels as $id) {
             array_push(
-                $heavyMachineColumn, self::searchHeavyMachineName($id) . '【' . self::searchLaborTraderName($id) . '】'
+                $heavyMachineColumn, self::searchHeavyMachineName($id) . '【' . self::searchHeavyMachineTraderName($id) . '】'
             );
         }
 
