@@ -40,4 +40,16 @@ class TraderController extends Controller
         $traders = Trader::where('department_id', $request->department_id)->get();
         return response()->json($traders);
     }
+
+    public function edit($id, Request $request)
+    {
+        $trader = Trader::find($id);
+        if($trader == null){
+            return response()->json([], 500);
+        }
+        $trader->name = $request->name;
+        $trader->save();
+
+        return response()->json();
+    }
 }

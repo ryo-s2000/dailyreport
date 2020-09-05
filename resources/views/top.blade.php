@@ -9,9 +9,10 @@
     <div class="container main-container">
 
         <div class="btn-container col-md-12">
-            <button class="btn btn-primary btn-new-pdf" onClick="location.href='/newreport'">日報を作成する</button>
+            <button class="btn btn-primary btn-new-pdf" onClick="location.href='/newreport'">日報作成</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/construction'">工事番号</button>
-            <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='/dataexport'">CSVを出力する</button>
+            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/edit_trader'">業者・重機</button>
+            <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='/dataexport'">CSV出力</button>
         </div>
 
         <?php

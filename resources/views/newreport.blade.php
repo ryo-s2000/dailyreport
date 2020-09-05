@@ -183,7 +183,7 @@
                         <div>
                             {{-- 業者を追加 --}}
                             <div style="margin: 20px 0;">
-                                <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
+                                <button type="button" class="btn btn-info" onclick="(showTraderForm(this))">業者を追加</button>
                             </div>
                         </div>
 
@@ -253,7 +253,7 @@
                         <div>
                             {{-- 業者を追加 --}}
                             <div style="margin: 20px 0;">
-                                <button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>
+                                <button type="button" class="btn btn-info" onclick="(showTraderForm(this))">業者を追加</button>
                             </div>
 
                             {{-- 機種を追加 --}}
@@ -565,24 +565,24 @@
 
     <script>
         // 業者追加
-        const addTraderForm = (button_this) => {
+        const showTraderForm = (button_this) => {
             $(button_this).parent().append(`<input class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="追加したい業者名" />`);
-            $(button_this).parent().append(`<button type="button" class="btn btn-info" style="margin:0 5px;" onclick="(addTrader(this))">業者を追加</button>`);
+            $(button_this).parent().append(`<button type="button" class="btn btn-info" style="margin:0 5px;" onclick="(checkTraderForm(this))">業者を追加</button>`);
             $(button_this).remove();
         };
-        const removeTraderForm = (button_this) => {
-            $(button_this).parent().append(`<button type="button" class="btn btn-info" onclick="(addTraderForm(this))">業者を追加</button>`);
+        const hiddenTraderForm = (button_this) => {
+            $(button_this).parent().append(`<button type="button" class="btn btn-info" onclick="(showTraderForm(this))">業者を追加</button>`);
             $(button_this).parent().children().eq(0).remove();
             $(button_this).parent().children().eq(0).remove();
             alert('データ更新完了');
         };
-        const addTrader = (button_this) => {
-            const input_value = $(button_this).parent().children('input').val();
-            if(input_value == '' ) {
+        const checkTraderForm = (button_this) => {
+            const input_trader_name = $(button_this).parent().children('input').val();
+            if(input_trader_name == '' ) {
                 alert("業者名を入力してください。");
                 return
             }
-            if(input_value > 100){
+            if(input_trader_name.length > 100){
                 alert("業者名は100文字以内にしてください。");
                 return
             }
@@ -597,14 +597,14 @@
                 return
             }
 
-            if(confirm(`この業者名を追加しますよろしいですか？\n「${input_value}」`)) {
-                saveTrader(input_value, department_id);
+            if(confirm(`この業者名を追加しますよろしいですか？\n「${input_trader_name}」`)) {
+                saveTrader(input_trader_name, department_id);
             } else {
                 alert("キャンセルしました。");
                 return;
             }
 
-            removeTraderForm(button_this);
+            hiddenTraderForm(button_this);
         };
         const saveTrader = (name, department_id) => {
             $.ajax({

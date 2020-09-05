@@ -1,0 +1,42 @@
+.trader_item {
+    margin: 25px 0;
+}
+
+.assets_button {
+    margin-left: 10px;
+}
+
+.changeTraderForm {
+    cursor: pointer;
+}
+
+.changeAssetForm {
+    cursor: pointer;
+}
+
+.department {
+    margin: 0 10px;
+}
+
+/* バツボタン */
+button.btn--circle {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+}
+
+button.btn--circle i {
+    font-size: 100%;
+    line-height: 30px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    letter-spacing: 0;
+}
+
+button.btn--circle:hover {
+    color: black;
+}

@@ -15,7 +15,10 @@ use App\Dailyreport;
 */
 
 // photo
-Route::get('/photo', 'PhotoController@index');
+// Route::get('/photo', 'PhotoController@index');
+
+// trader
+Route::get('/edit_trader', 'TraderController@index');
 
 // pdf
 Route::get('/pdf/{report_id}', 'PdfController@createPdf');

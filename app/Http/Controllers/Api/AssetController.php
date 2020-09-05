@@ -40,4 +40,16 @@ class AssetController extends Controller
         $assets = Asset::where('trader_id', $request->trader_id)->get();
         return response()->json($assets);
     }
+
+    public function edit($id, Request $request)
+    {
+        $asset = Asset::find($id);
+        if($asset == null){
+            return response()->json([], 500);
+        }
+        $asset->name = $request->name;
+        $asset->save();
+
+        return response()->json();
+    }
 }
