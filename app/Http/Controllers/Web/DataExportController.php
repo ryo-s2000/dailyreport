@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Dailyreport;
 use App\Construction;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DataExportController extends Controller
 {

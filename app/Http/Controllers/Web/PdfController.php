@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use FPDI;
 use Session;
@@ -9,6 +9,7 @@ use App\Dailyreport;
 use App\Trader;
 use App\Asset;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PdfController extends Controller
 {

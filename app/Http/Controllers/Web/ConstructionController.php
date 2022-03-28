@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Construction;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConstructionRequest;
 use App\Http\Requests\ConstructionUpdateRequest;
+use App\Http\Controllers\Controller;
 
 class ConstructionController extends Controller
 {

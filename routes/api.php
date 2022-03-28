@@ -18,10 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['api']], function(){
-    Route::resource('traders', 'Api\TraderController', ['only' => ['show', 'store', 'edit']]);
+    Route::resource('traders', 'TraderController', ['only' => ['show', 'store', 'edit']]);
 
-    Route::resource('assets', 'Api\AssetController', ['only' => ['show', 'store', 'edit']]);
+    Route::resource('assets', 'AssetController', ['only' => ['show', 'store', 'edit']]);
 
-    Route::post('/data_exports/unit_price', 'Api\DataExportController@show');
-    Route::post('/data_exports', 'Api\DataExportController@export');
+    Route::post('/data_exports/unit_price', 'DataExportController@show');
+    Route::post('/data_exports', 'DataExportController@export');
 });

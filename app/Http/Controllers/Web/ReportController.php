@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Dailyreport;
 use App\Construction;
@@ -8,6 +8,7 @@ use App\Trader;
 use App\Asset;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyreportRequest;
+use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {

@@ -14,9 +14,6 @@ use App\Dailyreport;
 |
 */
 
-// photo
-// Route::get('/photo', 'PhotoController@index');
-
 // trader
 Route::get('/edit_trader', 'TraderController@index');
 

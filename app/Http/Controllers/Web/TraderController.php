@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Web;
 
 use App\Trader;
 use App\Asset;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class TraderController extends Controller
 {
