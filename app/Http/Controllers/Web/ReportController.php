@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Dailyreport;
+use App\Models\Dailyreport;
 use App\Models\Construction;
 use App\Trader;
 use App\Models\Asset;

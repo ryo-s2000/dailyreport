@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use FPDI;
 use Session;
 use App\Models\Construction;
-use App\Dailyreport;
+use App\Models\Dailyreport;
 use App\Trader;
 use App\Models\Asset;
 use Illuminate\Http\Request;
