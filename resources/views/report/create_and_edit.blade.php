@@ -10,12 +10,10 @@
             $url = url()->current();
             $action = '';
 
-            if (str_contains($url, 'create')) {
+            if (str_contains($url, 'edit')) {
+                $action = route('report.update', ['report_id' => $dailyreport->id]);
+            } else {
                 $action = route('report.store');
-            } elseif (str_contains($url, 'copyreport')) {
-                $action = '/newreport';
-            } elseif (str_contains($url, 'editreport')) {
-                $action = '/editreport/'.$dailyreport->id;
             }
 
         ?>

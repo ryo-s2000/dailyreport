@@ -142,7 +142,7 @@ class ReportController extends Controller
         return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    public function saveEditReport(DailyreportRequest $request, $report_id)
+    public function update(DailyreportRequest $request, $report_id)
     {
         $dailyreport = Dailyreport::find($report_id);
         if (null === $dailyreport) {

@@ -50,7 +50,7 @@
 
         <!-- Loading Flat UI -->
         <script src="../../dist/scripts/flat-ui.js"></script>
-        <script src="../assets/js/application.js"></script>
+        <script src="/assets/js/application.js"></script>
 
         <script>
             $(document).ready(function(){
