@@ -32,7 +32,7 @@ Route::get('/pdf/{report_id}', 'PdfController@createPdf');
 |-------------------
 */
 // Trader
-Route::get('/edit_trader', 'TraderController@index');
+Route::get('/traders/edit', 'TraderController@edit')->name('traders.edit.all');
 
 // Data Export
 Route::get('/data_export/create', 'DataExportController@create')->name('data_export.create');

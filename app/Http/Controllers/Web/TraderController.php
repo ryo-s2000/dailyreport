@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 
 class TraderController extends Controller
 {
-    public function index(Request $request)
+    public function edit(Request $request)
     {
         $traders = self::sort_traders(Trader::all());
         $assets = Asset::all();
 
-        return view('edit_trader', ['traders' => $traders, 'assets' => $assets]);
+        return view('trader.edit', ['traders' => $traders, 'assets' => $assets]);
     }
 
     private function sort_traders($trader_all)
