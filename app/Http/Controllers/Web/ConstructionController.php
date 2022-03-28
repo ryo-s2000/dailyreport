@@ -85,7 +85,19 @@ class ConstructionController extends Controller
 
         $allConstructions = Construction::all();
 
-        return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
+        return view('construction.index', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
+    }
+
+    public function create()
+    {
+        $construction = new Construction();
+
+        $constructions = Construction::all()->toArray();
+        $construction_numbers = array_map(function ($element) {
+            return $element['number'];
+        }, $constructions);
+
+        return view('construction.create', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
     public function root(Request $request)
@@ -164,22 +176,10 @@ class ConstructionController extends Controller
         $allConstructions = Construction::all();
 
         if ('password' === $request->password) {
-            return view('construction', ['constructions' => $constructions, 'user' => 'root', 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
+            return view('construction.index', ['constructions' => $constructions, 'user' => 'root', 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
         }
 
-        return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
-    }
-
-    public function newConstruction()
-    {
-        $construction = new Construction();
-
-        $constructions = Construction::all()->toArray();
-        $construction_numbers = array_map(function ($element) {
-            return $element['number'];
-        }, $constructions);
-
-        return view('newconstruction', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
+        return view('construction.index', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
     }
 
     public function saveConstruction(ConstructionRequest $request)
