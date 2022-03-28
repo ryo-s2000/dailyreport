@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AssetRequest;
+use App\Http\Requests\Asset\StoreRequest;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 
@@ -22,7 +22,7 @@ class AssetController extends Controller
         return response()->json($assets);
     }
 
-    public function store(AssetRequest $request)
+    public function store(StoreRequest $request)
     {
         $asset = new Asset();
         $form = $request->assetAttributes();
