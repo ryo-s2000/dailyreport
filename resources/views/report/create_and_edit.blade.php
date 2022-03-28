@@ -7,8 +7,8 @@
 
     <div class="container main-container">
         <?php
-            $action = '';
             $method = '';
+            $action = '';
 
             $url = url()->current();
             if (str_contains($url, 'edit')) {
@@ -35,8 +35,9 @@
             </div>
         @endif
 
-        <form method="{{$method}}" action="{{$action}}" enctype="multipart/form-data">
+        <form method="post" action="{{$action}}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="_method" value="{{$method}}">
 
             <div class="item-conteiner">
                 <h5>お名前  <span class="required">[必須]</span></h5>

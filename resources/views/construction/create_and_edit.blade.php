@@ -13,7 +13,7 @@
             $url = url()->current();
             if (str_contains($url, 'edit')) {
                 $method = 'put';
-            // $action = route('constructions.update', ['report' => $construction->id]);
+                $action = route('constructions.update', ['construction' => $construction->id]);
             } else {
                 $method = 'post';
                 $action = route('constructions.store');
@@ -35,8 +35,9 @@
             </div>
         @endif
 
-        <form method="{{$method}}" action="{{$action}}" enctype="multipart/form-data">
+        <form method="post" action="{{$action}}" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="_method" value="{{$method}}">
 
             {{-- 登録済工事番号取得 --}}
             <div>

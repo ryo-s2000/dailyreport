@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Report;
+namespace Tests\Feature\Construction;
 
 use Tests\TestCase;
 
@@ -12,7 +12,7 @@ final class UpdateMethodTest extends TestCase
 {
     public function testConnectivity()
     {
-        $response = $this->put('/reports/1/edit');
+        $response = $this->put('/constructions/1/edit');
 
         // TODO validation test
         $response->assertStatus(405);

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Construction\StoreRequest;
-use App\Http\Requests\ConstructionUpdateRequest;
+use App\Http\Requests\Construction\UpdateRequest;
 use App\Models\Construction;
 use Illuminate\Http\Request;
 
@@ -218,7 +218,7 @@ class ConstructionController extends Controller
         return view('construction.create_and_edit', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
-    public function saveEditConstruction(ConstructionUpdateRequest $request, $constructionid)
+    public function update(UpdateRequest $request, $constructionid)
     {
         $construction = Construction::find($constructionid);
         if (null === $construction) {
