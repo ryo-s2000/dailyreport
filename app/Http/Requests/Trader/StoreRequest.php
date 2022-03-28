@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Trader;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DepartmentRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class DepartmentRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,6 +24,16 @@ class DepartmentRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => ['required', 'string', 'max:100'],
+            'department_id' => ['required', 'integer', 'max:20'],
         ];
+    }
+
+    public function traderAttributes()
+    {
+        return $this->only([
+            'name',
+            'department_id',
+        ]);
     }
 }

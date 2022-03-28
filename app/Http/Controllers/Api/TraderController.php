@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TraderRequest;
+use App\Http\Requests\Trader\StoreRequest;
 use App\Models\Trader;
 use Illuminate\Http\Request;
 
@@ -22,7 +22,7 @@ class TraderController extends Controller
         return response()->json($traders);
     }
 
-    public function store(TraderRequest $request)
+    public function store(StoreRequest $request)
     {
         $trader = new Trader();
         $form = $request->traderAttributes();
