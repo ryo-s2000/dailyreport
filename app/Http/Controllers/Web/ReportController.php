@@ -22,7 +22,7 @@ class ReportController extends Controller
         ];
         $assets = [];
         for ($i = 1; $i <= 6; ++$i) {
-                $assets[] =
+            $assets[] =
                 [['id' => '', 'name' => '業者名を選択してください']]
             ;
         }
@@ -197,6 +197,7 @@ class ReportController extends Controller
             'sort' => $request->sort,
         ];
 
+        // TODO send userNames
         $allDailyreports = Dailyreport::all();
         $constructions = Construction::all();
 
@@ -237,7 +238,7 @@ class ReportController extends Controller
                 );
             }
 
-                $return_assets[] =
+            $return_assets[] =
                 $individual_assets
             ;
         }
