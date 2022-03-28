@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 
 class DataExportController extends Controller
 {
-    public function index()
+    public function create()
     {
         $constructions = Construction::all();
 
-        return view('dataexport', ['constructions' => $constructions]);
+        return view('data_export.create', ['constructions' => $constructions]);
     }
 
-    public function newdataexport(Request $request)
+    public function generate(Request $request)
     {
         $startDate = $request->startDate;
         $endDate = $request->endDate;

@@ -28,7 +28,7 @@
 
     <div class="container main-container">
 
-        <form method="post" action="/dataexport" enctype="multipart/form-data">
+        <form method="post" action="{{ route('data_export.generate') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="item-conteiner-top">

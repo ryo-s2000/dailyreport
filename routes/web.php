@@ -11,16 +11,6 @@ Route::redirect('/', '/reports');
 Route::resource('reports', 'ReportController');
 Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name('reports.create.copy');
 
-// trader
-Route::get('/edit_trader', 'TraderController@index');
-
-// pdf
-Route::get('/pdf/{report_id}', 'PdfController@createPdf');
-
-// dataexport
-Route::get('/dataexport', 'DataExportController@index');
-Route::post('/dataexport', 'DataExportController@newdataexport');
-
 // construction
 Route::get('/newconstruction', 'ConstructionController@newConstruction');
 Route::post('/newconstruction', 'ConstructionController@saveConstruction');
@@ -32,3 +22,18 @@ Route::get('/editconstruction/{constructionid}', 'ConstructionController@editCon
 Route::post('/editconstruction/{constructionid}', 'ConstructionController@saveEditConstruction');
 
 Route::delete('/delete/construction/{constructionid}', 'ConstructionController@deleteConstruction');
+
+// PDF
+Route::get('/pdf/{report_id}', 'PdfController@createPdf');
+
+/*
+|-------------------
+| With API
+|-------------------
+*/
+// Trader
+Route::get('/edit_trader', 'TraderController@index');
+
+// Data Export
+Route::get('/data_export/create', 'DataExportController@create')->name('data_export.create');
+Route::post('/data_export', 'DataExportController@generate')->name('data_export.generate');
