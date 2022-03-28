@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Trader;
+use App\Models\Trader;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TraderRequest;
 

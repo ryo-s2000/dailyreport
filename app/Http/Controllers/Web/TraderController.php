@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Trader;
+use App\Models\Trader;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

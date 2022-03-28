@@ -6,7 +6,7 @@ use FPDI;
 use Session;
 use App\Models\Construction;
 use App\Models\Dailyreport;
-use App\Trader;
+use App\Models\Trader;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
