@@ -7,14 +7,19 @@ use App\Models\Asset;
 use App\Models\Dailyreport;
 use App\Models\Trader;
 use FPDI;
-use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
-    public function createPdf(Request $request)
+    public function generate($reportId)
     {
+        /*
+         * WARNING
+         * Ignore each() function error
+         */
+        error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+
         // データを取得できる
-        $inputData = Dailyreport::find($request->report_id);
+        $inputData = Dailyreport::find($reportId);
         if (null === $inputData) {
             return redirect('/');
         }

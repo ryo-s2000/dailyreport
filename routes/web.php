@@ -24,7 +24,7 @@ Route::post('/editconstruction/{constructionid}', 'ConstructionController@saveEd
 Route::delete('/delete/construction/{constructionid}', 'ConstructionController@deleteConstruction');
 
 // PDF
-Route::get('/pdf/{report_id}', 'PdfController@createPdf');
+Route::get('/pdf/{report_id}', 'PdfController@generate');
 
 /*
 |-------------------
