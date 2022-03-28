@@ -24,8 +24,8 @@ class AssetRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required' , 'string' , 'max:100'],
-            'trader_id' => ['required' , 'integer'],
+            'name' => ['required', 'string', 'max:100'],
+            'trader_id' => ['required', 'integer'],
         ];
     }
 
@@ -33,7 +33,7 @@ class AssetRequest extends FormRequest
     {
         return $this->only([
             'name',
-            'trader_id'
+            'trader_id',
         ]);
     }
 }

@@ -24,16 +24,16 @@ class ConstructionRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' => ['required' , 'unique:constructions', 'string' , 'max:10'],
-            'name' => ['required' , 'string', 'max:150'],
-            'orderer' => ['nullable' , 'string', 'max:50' ],
-            'price' => ['nullable' , 'integer'],
-            'start' => ['nullable' , 'date'],
-            'end' => ['nullable' , 'date'],
-            'place' => ['nullable' , 'string'],
-            'sales' => ['nullable' , 'string'],
-            'supervisor' => ['nullable' , 'string'],
-            'remarks' => ['nullable' , 'string'],
+            'number' => ['required', 'unique:constructions', 'string', 'max:10'],
+            'name' => ['required', 'string', 'max:150'],
+            'orderer' => ['nullable', 'string', 'max:50'],
+            'price' => ['nullable', 'integer'],
+            'start' => ['nullable', 'date'],
+            'end' => ['nullable', 'date'],
+            'place' => ['nullable', 'string'],
+            'sales' => ['nullable', 'string'],
+            'supervisor' => ['nullable', 'string'],
+            'remarks' => ['nullable', 'string'],
         ];
     }
 
@@ -50,7 +50,7 @@ class ConstructionRequest extends FormRequest
             'sales',
             'supervisor',
             'remarks',
-            'updated_at'
+            'updated_at',
         ]);
     }
 }

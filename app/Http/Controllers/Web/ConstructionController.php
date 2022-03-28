@@ -2,29 +2,32 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Construction;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ConstructionRequest;
 use App\Http\Requests\ConstructionUpdateRequest;
-use App\Http\Controllers\Controller;
+use App\Models\Construction;
+use Illuminate\Http\Request;
 
 class ConstructionController extends Controller
 {
-    public function index(Request $request){
-        function condition($value = null){
-            if($value){
+    public function index(Request $request)
+    {
+        function condition($value = null)
+        {
+            if ($value) {
                 return '=';
-            } else {
-                return 'LIKE';
             }
+
+            return 'LIKE';
         }
 
-        function value($value = null){
-            if($value){
+        function value($value = null)
+        {
+            if ($value) {
                 return $value;
-            } else {
-                return '%';
             }
+
+            return '%';
         }
 
         $constructions = Construction::where('number', condition($request->number), value($request->number))
@@ -32,31 +35,45 @@ class ConstructionController extends Controller
             ->where('place', condition($request->place), value($request->place))
             ->where('sales', condition($request->sales), value($request->sales))
             ->where('supervisor', condition($request->supervisor), value($request->supervisor))
-            ->get();
-        switch ($request->sort){
+            ->get()
+        ;
+
+        switch ($request->sort) {
             case '工期自早い順':
                 $constructions = $constructions->sortBy('start');
+
                 break;
+
             case '工期自遅い順':
                 $constructions = $constructions->sortByDesc('start');
+
                 break;
+
             case '工期至早い順':
                 $constructions = $constructions->sortBy('end');
+
                 break;
+
             case '工期至遅い順':
                 $constructions = $constructions->sortByDesc('end');
+
                 break;
+
             case '安い順':
                 $constructions = $constructions->sortBy('price');
+
                 break;
+
             case '高い順':
                 $constructions = $constructions->sortByDesc('price');
+
                 break;
+
             default:
                 $constructions = $constructions->sortByDesc('end');
         }
 
-        $constructionsPalams = array(
+        $constructionsPalams = [
             'number' => $request->number,
             'name' => $request->name,
             'orderer' => $request->orderer,
@@ -64,28 +81,31 @@ class ConstructionController extends Controller
             'sales' => $request->sales,
             'supervisor' => $request->supervisor,
             'sort' => $request->sort,
-        );
+        ];
 
         $allConstructions = Construction::all();
 
         return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
     }
 
-    public function root(Request $request){
-        function condition($value = null){
-            if($value){
+    public function root(Request $request)
+    {
+        function condition($value = null)
+        {
+            if ($value) {
                 return '=';
-            } else {
-                return 'LIKE';
             }
+
+            return 'LIKE';
         }
 
-        function value($value = null){
-            if($value){
+        function value($value = null)
+        {
+            if ($value) {
                 return $value;
-            } else {
-                return '%';
             }
+
+            return '%';
         }
 
         $constructions = Construction::where('number', condition($request->number), value($request->number))
@@ -93,31 +113,45 @@ class ConstructionController extends Controller
             ->where('place', condition($request->place), value($request->place))
             ->where('sales', condition($request->sales), value($request->sales))
             ->where('supervisor', condition($request->supervisor), value($request->supervisor))
-            ->get();
-        switch ($request->sort){
+            ->get()
+        ;
+
+        switch ($request->sort) {
             case '工期自早い順':
                 $constructions = $constructions->sortBy('start');
+
                 break;
+
             case '工期自遅い順':
                 $constructions = $constructions->sortByDesc('start');
+
                 break;
+
             case '工期至早い順':
                 $constructions = $constructions->sortBy('end');
+
                 break;
+
             case '工期至遅い順':
                 $constructions = $constructions->sortByDesc('end');
+
                 break;
+
             case '安い順':
                 $constructions = $constructions->sortBy('price');
+
                 break;
+
             case '高い順':
                 $constructions = $constructions->sortByDesc('price');
+
                 break;
+
             default:
                 $constructions = $constructions->sortByDesc('end');
         }
 
-        $constructionsPalams = array(
+        $constructionsPalams = [
             'number' => $request->number,
             'name' => $request->name,
             'orderer' => $request->orderer,
@@ -125,38 +159,40 @@ class ConstructionController extends Controller
             'sales' => $request->sales,
             'supervisor' => $request->supervisor,
             'sort' => $request->sort,
-        );
+        ];
 
         $allConstructions = Construction::all();
 
-        if($request->password == 'password'){
-            return view('construction', ['constructions' => $constructions, "user" => 'root', 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
-        } else {
-            return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
+        if ('password' === $request->password) {
+            return view('construction', ['constructions' => $constructions, 'user' => 'root', 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
         }
+
+        return view('construction', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
     }
 
-    public function newConstruction(){
-        $construction = new Construction;
+    public function newConstruction()
+    {
+        $construction = new Construction();
 
         $constructions = Construction::all()->toArray();
-        $construction_numbers = array_map(function($element){
+        $construction_numbers = array_map(function ($element) {
             return $element['number'];
         }, $constructions);
 
-        return view('newconstruction', ["construction" => $construction, "construction_numbers" => $construction_numbers]);
+        return view('newconstruction', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
-    public function saveConstruction(ConstructionRequest $request){
-        $construction = new Construction;
+    public function saveConstruction(ConstructionRequest $request)
+    {
+        $construction = new Construction();
 
         $form = $request->constructionAttributes();
         unset($form['_token']);
 
         // nullを空文字に変更
-        foreach ($form as $key => $item){
-            if($item == null){
-                $form[$key] = "";
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
             }
         }
 
@@ -167,23 +203,25 @@ class ConstructionController extends Controller
         return redirect('/construction/password');
     }
 
-    public function editConstruction($constructionid){
+    public function editConstruction($constructionid)
+    {
         $construction = Construction::find($constructionid);
-        if($construction == null){
+        if (null === $construction) {
             return redirect('/construction');
         }
 
         $constructions = Construction::all()->toArray();
-        $construction_numbers = array_map(function($element){
+        $construction_numbers = array_map(function ($element) {
             return $element['number'];
         }, $constructions);
 
-        return view('newconstruction', ["construction" => $construction, "construction_numbers" => $construction_numbers]);
+        return view('newconstruction', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
-    public function saveEditConstruction(ConstructionUpdateRequest $request, $constructionid){
+    public function saveEditConstruction(ConstructionUpdateRequest $request, $constructionid)
+    {
         $construction = Construction::find($constructionid);
-        if($construction == null){
+        if (null === $construction) {
             return redirect('/construction');
         }
 
@@ -191,9 +229,9 @@ class ConstructionController extends Controller
         unset($form['_token']);
 
         // nullを空文字に変更
-        foreach ($form as $key => $item){
-            if($item == null){
-                $form[$key] = "";
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
             }
         }
 
@@ -204,8 +242,9 @@ class ConstructionController extends Controller
         return redirect('/construction/password');
     }
 
-    public function deleteConstruction(Construction $constructionid){
-        if( !(Construction::find($constructionid)) ){
+    public function deleteConstruction(Construction $constructionid)
+    {
+        if (!(Construction::find($constructionid))) {
             return redirect('/construction');
         }
 

@@ -7,12 +7,12 @@
 
     <div class="container main-container">
         <?php
-            $action = "";
+            $action = '';
 
-            if($construction->name != ""){
-                $action = "/editconstruction/".$construction->id;
+            if ('' !== $construction->name) {
+                $action = '/editconstruction/'.$construction->id;
             } else {
-                $action = "/newconstruction";
+                $action = '/newconstruction';
             }
         ?>
 

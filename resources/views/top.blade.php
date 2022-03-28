@@ -16,8 +16,8 @@
         </div>
 
         <?php
-            $userNames = array();
-            foreach($allDailyreports as $dailyreport){
+            $userNames = [];
+            foreach ($allDailyreports as $dailyreport) {
                 $userNames[] = $dailyreport->userName;
             }
         ?>

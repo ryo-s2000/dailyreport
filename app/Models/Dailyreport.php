@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Dailyreport extends Model
 {
     protected $dates = [
-        'date'
+        'date',
     ];
 
     protected $guarded = [
         'id',
-        'created_at'
+        'created_at',
     ];
 }

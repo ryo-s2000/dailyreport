@@ -10,12 +10,12 @@
             $url = url()->current();
             $action = '';
 
-            if(strpos($url, 'newreport') !== false){
-                $action = "/newreport";
-            } else if (strpos($url, 'copyreport') !== false){
-                $action = "/newreport";
-            } else if (strpos($url, 'editreport') !== false){
-                $action = "/editreport/".$dailyreport->id;
+            if (str_contains($url, 'newreport')) {
+                $action = '/newreport';
+            } elseif (str_contains($url, 'copyreport')) {
+                $action = '/newreport';
+            } elseif (str_contains($url, 'editreport')) {
+                $action = '/editreport/'.$dailyreport->id;
             }
 
         ?>
@@ -48,17 +48,17 @@
             <div class="item-conteiner-top select-checker-container">
                 <h5>所属部署  <span class="required">[必須]</h5>
                 <div class="col-md-12">
-                    <?php $selectedDepartment = false ?>
+                    <?php $selectedDepartment = false; ?>
                     <select name="department_id" id="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択</option>
 
                         @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
                             @if($loop->index+1 == (old('department_id')))
                                 <option value="{{$loop->index+1}}" selected="selected">{{$value}}</option>
-                                <?php $selectedDepartment = true ?>
+                                <?php $selectedDepartment = true; ?>
                             @elseif(old('department_id') == "" and $loop->index+1 == $dailyreport->department_id)
                                 <option value="{{$loop->index+1}}" selected="selected">{{$value}}</option>
-                                <?php $selectedDepartment = true ?>
+                                <?php $selectedDepartment = true; ?>
                             @else
                                 <option value="{{$loop->index+1}}">{{$value}}</option>
                             @endif
@@ -82,16 +82,16 @@
                 <div class="col-md-12">
                     <?php
                         $selectedNumber = false;
-                        $selectedName = false ;
+                        $selectedName = false;
                     ?>
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">工事番号を選択</option>
                         @foreach ($constructions as $construction)
                             @if($construction->number == old('constructionNumber'))
-                                <?php $selectedNumber = true ?>
+                                <?php $selectedNumber = true; ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @elseif(old('constructionNumber') == "" and $construction->number == $dailyreport->constructionNumber)
-                                <?php $selectedNumber = true ?>
+                                <?php $selectedNumber = true; ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @else
                                 <option value="{{$construction->number}}">{{$construction->number}}</option>
@@ -102,10 +102,10 @@
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
                             @if($construction->name == old('constructionName'))
-                                <?php $selectedName = true ?>
+                                <?php $selectedName = true; ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @elseif(old('constructionName') == "" and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
-                                <?php $selectedName = true ?>
+                                <?php $selectedName = true; ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
                                 <option value="{{$construction->name}}">{{$construction->name}}</option>
@@ -189,11 +189,11 @@
 
                         @foreach (range(1,8) as $i)
                             <?php
-                                $laborButtonName = "laborButtonName".$i;
-                                $laborTraderId = "laborTraderId".$i;
-                                $laborPeopleNumber = "laborPeopleNumber".$i;
-                                $laborWorkTime = "laborWorkTime".$i;
-                                $laborWorkVolume = "laborWorkVolume".$i;
+                                $laborButtonName = 'laborButtonName'.$i;
+                                $laborTraderId = 'laborTraderId'.$i;
+                                $laborPeopleNumber = 'laborPeopleNumber'.$i;
+                                $laborWorkTime = 'laborWorkTime'.$i;
+                                $laborWorkVolume = 'laborWorkVolume'.$i;
                             ?>
                             <div class="col-md-12 col-xs-10 cells-containre">
                                 <button type="button" id="{{$laborButtonName}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
@@ -274,11 +274,11 @@
 
                         @foreach (range(1,6) as $i)
                             <?php
-                                $heavyMachineryTraderButton = "heavyMachineryTraderButton".$i;
-                                $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
-                                $heavyMachineryModel = "heavyMachineryModel".$i;
-                                $heavyMachineryTime = "heavyMachineryTime".$i;
-                                $heavyMachineryRemarks = "heavyMachineryRemarks".$i;
+                                $heavyMachineryTraderButton = 'heavyMachineryTraderButton'.$i;
+                                $heavyMachineryTraderId = 'heavyMachineryTraderId'.$i;
+                                $heavyMachineryModel = 'heavyMachineryModel'.$i;
+                                $heavyMachineryTime = 'heavyMachineryTime'.$i;
+                                $heavyMachineryRemarks = 'heavyMachineryRemarks'.$i;
                             ?>
                             <div class="col-md-12 col-xs-10 cells-containre">
                                 <button type="button" id="{{$heavyMachineryTraderButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
@@ -324,15 +324,15 @@
                     <div class="accshow">
                         @foreach (range(1,5) as $i)
                             <?php
-                                $materialTraderButton = "materialTraderButton".$i;
-                                $materialTraderName = "materialTraderName".$i;
-                                $materialName = "materialName".$i;
-                                $materialShapeDimensions = "materialShapeDimensions".$i;
-                                $materialQuantity = "materialQuantity".$i;
-                                $materialUnit = "materialUnit".$i;
-                                $materialResult = "materialResult".$i;
-                                $materialInspectionMethods = "materialInspectionMethods".$i;
-                                $materialInspector = "materialInspector".$i;
+                                $materialTraderButton = 'materialTraderButton'.$i;
+                                $materialTraderName = 'materialTraderName'.$i;
+                                $materialName = 'materialName'.$i;
+                                $materialShapeDimensions = 'materialShapeDimensions'.$i;
+                                $materialQuantity = 'materialQuantity'.$i;
+                                $materialUnit = 'materialUnit'.$i;
+                                $materialResult = 'materialResult'.$i;
+                                $materialInspectionMethods = 'materialInspectionMethods'.$i;
+                                $materialInspector = 'materialInspector'.$i;
                             ?>
                             <div class="col-md-12 cells-containre">
                                 <button type="button" id="{{$materialTraderButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
@@ -397,13 +397,13 @@
                     <div class="accshow">
                         @foreach (range(1,4) as $i)
                             <?php
-                                $processButton = "processButton".$i;
-                                $processName = "processName".$i;
-                                $processLocation = "processLocation".$i;
-                                $processMethods = "processMethods".$i;
-                                $processDocument = "processDocument".$i;
-                                $processResult = "processResult".$i;
-                                $processInspector = "processInspector".$i;
+                                $processButton = 'processButton'.$i;
+                                $processName = 'processName'.$i;
+                                $processLocation = 'processLocation'.$i;
+                                $processMethods = 'processMethods'.$i;
+                                $processDocument = 'processDocument'.$i;
+                                $processResult = 'processResult'.$i;
+                                $processInspector = 'processInspector'.$i;
                             ?>
                             <div class="col-md-12 cells-containre">
                                 <button type="button" id="{{$processButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>
@@ -462,11 +462,11 @@
                     <div class="accshow">
                         @foreach (range(1,2) as $i)
                             <?php
-                                $measuringEquipmentButton = "measuringEquipmentButton".$i;
-                                $measuringEquipmentName = "measuringEquipmentName".$i;
-                                $measuringEquipmentNumber = "measuringEquipmentNumber".$i;
-                                $measuringEquipmentResult = "measuringEquipmentResult".$i;
-                                $measuringEquipmentRemarks = "measuringEquipmentRemarks".$i;
+                                $measuringEquipmentButton = 'measuringEquipmentButton'.$i;
+                                $measuringEquipmentName = 'measuringEquipmentName'.$i;
+                                $measuringEquipmentNumber = 'measuringEquipmentNumber'.$i;
+                                $measuringEquipmentResult = 'measuringEquipmentResult'.$i;
+                                $measuringEquipmentRemarks = 'measuringEquipmentRemarks'.$i;
                             ?>
                             <div class="col-md-12 cells-containre">
                                 <button type="button" id="{{$measuringEquipmentButton}}" class="btn btn--circle btn--circle--item"><i class="fas fa-times"></i></button>

@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => ['api']], function(){
+Route::group(['middleware' => ['api']], function () {
     Route::resource('traders', 'TraderController', ['only' => ['show', 'store', 'edit']]);
 
     Route::resource('assets', 'AssetController', ['only' => ['show', 'store', 'edit']]);

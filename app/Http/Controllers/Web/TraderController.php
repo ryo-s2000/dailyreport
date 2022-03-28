@@ -2,30 +2,32 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Trader;
-use App\Models\Asset;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Asset;
+use App\Models\Trader;
+use Illuminate\Http\Request;
 
 class TraderController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $traders = self::sort_traders(Trader::all());
         $assets = Asset::all();
 
         return view('edit_trader', ['traders' => $traders, 'assets' => $assets]);
     }
 
-    private function sort_traders($trader_all){
-        $sort = array();
-        $traders = array();
+    private function sort_traders($trader_all)
+    {
+        $sort = [];
+        $traders = [];
         foreach ($trader_all as $index => $trader) {
             $sort[$index] = $trader->department_id;
-            $traders[$index] = array(
+            $traders[$index] = [
                 'id' => $trader->id,
                 'department_id' => $trader->department_id,
-                'name' => $trader->name
-            );
+                'name' => $trader->name,
+            ];
         }
         array_multisort($sort, SORT_ASC, $traders);
 

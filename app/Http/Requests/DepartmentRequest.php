@@ -24,7 +24,6 @@ class DepartmentRequest extends FormRequest
     public function rules()
     {
         return [
-            //
         ];
     }
 }

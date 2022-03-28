@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use App\Models\Asset;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
+use App\Models\Asset;
+use Illuminate\Http\Request;
 
 class AssetController extends Controller
 {
@@ -18,19 +18,20 @@ class AssetController extends Controller
     {
         $trader_id = $request->asset;
         $assets = Asset::where('trader_id', $trader_id)->get();
+
         return response()->json($assets);
     }
 
     public function store(AssetRequest $request)
     {
-        $asset = new Asset;
+        $asset = new Asset();
         $form = $request->assetAttributes();
         unset($form['_token']);
 
         // nullを空文字に変更
-        foreach ($form as $key => $item){
-            if($item == null){
-                $form[$key] = "";
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
             }
         }
 
@@ -38,13 +39,14 @@ class AssetController extends Controller
         $asset->fill($form)->save();
 
         $assets = Asset::where('trader_id', $request->trader_id)->get();
+
         return response()->json($assets);
     }
 
     public function edit($id, Request $request)
     {
         $asset = Asset::find($id);
-        if($asset == null){
+        if (null === $asset) {
             return response()->json([], 500);
         }
         $asset->name = $request->name;

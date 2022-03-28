@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Construction extends Model{
+class Construction extends Model
+{
     protected $dates = [
         'start',
-        'end'
+        'end',
     ];
 
     protected $guarded = [
         'id',
-        'created_at'
+        'created_at',
     ];
 }

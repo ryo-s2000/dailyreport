@@ -8,6 +8,6 @@ class Trader extends Model
 {
     protected $guarded = [
         'id',
-        'created_at'
+        'created_at',
     ];
 }

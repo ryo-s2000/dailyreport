@@ -12,12 +12,12 @@
             <div class="btn-container col-md-12">
                 <button class="btn btn-primary btn-new-pdf display-none display-pc display-root" onClick="location.href='/newconstruction'">工事番号登録</button>
             </div>
-            <?php $action = "/construction/password"?>
+            <?php $action = '/construction/password'; ?>
         @else
             <div class="btn-container col-md-12">
                 <button class="edit-construction-btn btn btn-primary btn-new-pdf display-none display-pc" onClick="root()">管理アカウントに変更</button>
             </div>
-            <?php $action = "/construction"?>
+            <?php $action = '/construction'; ?>
         @endif
 
         <main class="dailyreport-wrapper">
@@ -35,11 +35,11 @@
                 </select>
 
                 <?php
-                    $orderer = array();
-                    $place = array();
-                    $sales = array();
-                    $supervisor = array();
-                    foreach($allConstructions as $construction){
+                    $orderer = [];
+                    $place = [];
+                    $sales = [];
+                    $supervisor = [];
+                    foreach ($allConstructions as $construction) {
                         $orderer[] = $construction->orderer;
                         $place[] = $construction->place;
                         $sales[] = $construction->sales;

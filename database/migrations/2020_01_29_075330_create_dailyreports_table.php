@@ -8,8 +8,6 @@ class CreateDailyreportsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up()
     {
@@ -163,8 +161,6 @@ class CreateDailyreportsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down()
     {

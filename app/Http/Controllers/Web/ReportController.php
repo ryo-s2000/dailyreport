@@ -2,36 +2,39 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Models\Dailyreport;
-use App\Models\Construction;
-use App\Models\Trader;
-use App\Models\Asset;
-use Illuminate\Http\Request;
-use App\Http\Requests\DailyreportRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DailyreportRequest;
+use App\Models\Asset;
+use App\Models\Construction;
+use App\Models\Dailyreport;
+use App\Models\Trader;
+use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function newReport(){
-        $dailyreport = new Dailyreport;
-        $dailyreport->date = date("Y-m-d");
+    public function newReport()
+    {
+        $dailyreport = new Dailyreport();
+        $dailyreport->date = date('Y-m-d');
         $constructions = Construction::all();
-        $traders = array(
-            array('id'=>'', 'name'=>'部署を選択してください')
-        );
-        $assets = array();
-        for ($i = 1; $i <= 6; $i++) {
-            array_push(
-                $assets, array(array('id'=>'', 'name'=>'業者名を選択してください'))
-            );
+        $traders = [
+            ['id' => '', 'name' => '部署を選択してください'],
+        ];
+        $assets = [];
+        for ($i = 1; $i <= 6; ++$i) {
+                $assets[] =
+                [['id' => '', 'name' => '業者名を選択してください']]
+            ;
         }
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
+
+        return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    public function editReport(Request $request){
+    public function editReport(Request $request)
+    {
         $dailyreport = Dailyreport::find($request->report_id);
 
-        if($dailyreport == null){
+        if (null === $dailyreport) {
             return redirect('/');
         }
 
@@ -41,12 +44,13 @@ class ReportController extends Controller
 
         $assets = self::fillAssets($dailyreport);
 
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
+        return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    public function saveEditReport(DailyreportRequest $request, $report_id){
+    public function saveEditReport(DailyreportRequest $request, $report_id)
+    {
         $dailyreport = Dailyreport::find($report_id);
-        if($dailyreport == null){
+        if (null === $dailyreport) {
             return redirect('/');
         }
 
@@ -54,9 +58,9 @@ class ReportController extends Controller
         unset($form['_token']);
 
         // nullを空文字に変更
-        foreach ($form as $key => $item){
-            if($item == null){
-                $form[$key] = "";
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
             }
         }
 
@@ -69,23 +73,24 @@ class ReportController extends Controller
         $dailyreportId = $dailyreport->id;
 
         $redirectPath = '/';
-        if($transitionPreview == 'true'){
-            $redirectPath = '/pdf/' . $dailyreportId;
+        if ('true' === $transitionPreview) {
+            $redirectPath = '/pdf/'.$dailyreportId;
         }
 
         return redirect($redirectPath);
     }
 
-    public function saveReport(DailyreportRequest $request){
-        $dailyreport = new Dailyreport;
+    public function saveReport(DailyreportRequest $request)
+    {
+        $dailyreport = new Dailyreport();
 
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
 
         // nullを空文字に変更
-        foreach ($form as $key => $item){
-            if($item == null){
-                $form[$key] = "";
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
             }
         }
 
@@ -98,18 +103,19 @@ class ReportController extends Controller
         $dailyreportId = $dailyreport->id;
 
         $redirectPath = '/';
-        if($transitionPreview == 'true'){
-            $redirectPath = '/pdf/' . $dailyreportId;
+        if ('true' === $transitionPreview) {
+            $redirectPath = '/pdf/'.$dailyreportId;
         }
 
         return redirect($redirectPath);
     }
 
-    public function copyReport(Request $request){
+    public function copyReport(Request $request)
+    {
         $dailyreport = Dailyreport::find($request->report_id);
-        $dailyreport->date = date("Y-m-d");
+        $dailyreport->date = date('Y-m-d');
 
-        if($dailyreport == null){
+        if (null === $dailyreport) {
             return redirect('/');
         }
 
@@ -119,11 +125,12 @@ class ReportController extends Controller
 
         $assets = self::fillAssets($dailyreport);
 
-        return view('newreport', ['dailyreport' => $dailyreport, "constructions" => $constructions, "traders" => $traders, "assets" => $assets]);
+        return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    public function deleteReport(Dailyreport $report_id){
-        if( !(Dailyreport::find($report_id)) ){
+    public function deleteReport(Dailyreport $report_id)
+    {
+        if (!(Dailyreport::find($report_id))) {
             return redirect('/');
         }
 
@@ -132,91 +139,107 @@ class ReportController extends Controller
         return redirect('/');
     }
 
-    public function showReport(Request $request){
+    public function showReport(Request $request)
+    {
         $dailyreport = Dailyreport::find($request->report_id);
-        if($dailyreport == null){
+        if (null === $dailyreport) {
             return redirect('/');
         }
+
         return view('showreport', ['dailyreport' => $dailyreport]);
     }
 
-    public function index(Request $request){
-        function condition($value = null){
-            if($value){
+    public function index(Request $request)
+    {
+        function condition($value = null)
+        {
+            if ($value) {
                 return '=';
-            } else {
-                return 'LIKE';
             }
+
+            return 'LIKE';
         }
 
-        function value($value = null){
-            if($value){
+        function value($value = null)
+        {
+            if ($value) {
                 return $value;
-            } else {
-                return '%';
             }
+
+            return '%';
         }
 
         $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
             ->where('department_id', condition($request->department_id), value($request->department_id))
-            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber));
-        switch ($request->sort){
+            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
+        ;
+
+        switch ($request->sort) {
             case '日付が早い順':
                 $dailyreports = $dailyreports->orderBy('date')->paginate(100);
+
                 break;
+
             case '日付が遅い順':
                 $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
+
                 break;
+
             default:
                 $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
         }
 
-        $dailyreportsPalams = array(
+        $dailyreportsPalams = [
             'userName' => $request->userName,
             'department_id' => $request->department_id,
             'constructionNumber' => $request->constructionNumber,
             'constructionName' => $request->constructionName,
             'sort' => $request->sort,
-        );
+        ];
 
         $allDailyreports = Dailyreport::all();
         $constructions = Construction::all();
-        return view('top', ["dailyreports" => $dailyreports, "dailyreportsPalams" => $dailyreportsPalams, "allDailyreports" => $allDailyreports, "constructions" => $constructions]);
+
+        return view('top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
     }
 
-    private function fillTraders($dailyreport) {
-        $return_traders = array(
-            array('id'=>'', 'name'=>'業者名を選択してください')
-        );
+    private function fillTraders($dailyreport)
+    {
+        $return_traders = [
+            ['id' => '', 'name' => '業者名を選択してください'],
+        ];
         $traders = Trader::where('department_id', $dailyreport->department_id)->get();
         foreach ($traders as $trader) {
             array_push(
-                $return_traders, array('id'=>$trader->id, 'name'=>$trader->name)
+                $return_traders,
+                ['id' => $trader->id, 'name' => $trader->name]
             );
         }
 
         return $return_traders;
     }
 
-    private function fillAssets($dailyreport) {
-        $return_assets = array();
-        for ($i = 1; $i <= 6; $i++) {
-            $individual_assets = array(
-                array('id'=>'', 'name'=>'業者名を選択してください')
-            );
+    private function fillAssets($dailyreport)
+    {
+        $return_assets = [];
+        for ($i = 1; $i <= 6; ++$i) {
+            $individual_assets = [
+                ['id' => '', 'name' => '業者名を選択してください'],
+            ];
 
-            $heavyMachineryTraderId = "heavyMachineryTraderId".$i;
-            $trader_id = $dailyreport->$heavyMachineryTraderId;
+            $heavyMachineryTraderId = 'heavyMachineryTraderId'.$i;
+            $trader_id = $dailyreport->{$heavyMachineryTraderId};
             $assets = Asset::where('trader_id', $trader_id)->get();
             foreach ($assets as $asset) {
                 array_push(
-                    $individual_assets, array('id'=>$asset->id, 'name'=>$asset->name)
+                    $individual_assets,
+                    ['id' => $asset->id, 'name' => $asset->name]
                 );
             }
 
-            array_push(
-                $return_assets, $individual_assets
-            );
+                $return_assets[] =
+                $individual_assets
+            ;
         }
 
         return $return_assets;
