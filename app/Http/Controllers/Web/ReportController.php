@@ -40,17 +40,17 @@ class ReportController extends Controller
 
         switch ($request->sort) {
             case '日付が早い順':
-                $dailyreports = $dailyreports->orderBy('date')->paginate(100);
+                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('created_at')->paginate(100);
 
                 break;
 
             case '日付が遅い順':
-                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('created_at')->paginate(100);
 
                 break;
 
             default:
-                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('created_at')->paginate(100);
         }
 
         $dailyreportsPalams = [
