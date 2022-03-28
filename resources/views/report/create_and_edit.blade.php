@@ -8,12 +8,15 @@
     <div class="container main-container">
         <?php
             $action = '';
+            $method = '';
 
             $url = url()->current();
             if (str_contains($url, 'edit')) {
-                $action = route('report.update', ['report_id' => $dailyreport->id]);
+                $method = 'put';
+                $action = route('reports.update', ['report' => $dailyreport->id]);
             } else {
-                $action = route('report.store');
+                $method = 'post';
+                $action = route('reports.store');
             }
         ?>
 
@@ -32,7 +35,7 @@
             </div>
         @endif
 
-        <form method="post" action="{{$action}}" enctype="multipart/form-data">
+        <form method="{{$method}}" action="{{$action}}" enctype="multipart/form-data">
             @csrf
 
             <div class="item-conteiner">

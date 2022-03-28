@@ -9,7 +9,7 @@
     <div class="container main-container">
 
         <div class="btn-container col-md-12">
-            <button class="btn btn-primary btn-new-pdf" onClick="location.href='{{ route('report.create') }}'">日報作成</button>
+            <button class="btn btn-primary btn-new-pdf" onClick="location.href='{{ route('reports.create') }}'">日報作成</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/construction'">工事番号</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/edit_trader'">業者・重機</button>
             <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='/dataexport'">CSV出力</button>
@@ -124,12 +124,12 @@
                                 <td>{{$dailyreport->constructionNumber}}</td>
                                 <td><div class="construction-name-form">{{$dailyreport->constructionName}}</div></td>
                                 <td>
-                                    <form method="get" action="{{ route('report.create.copy', ['report_id' => $dailyreport->id]) }}">
+                                    <form method="get" action="{{ route('reports.create.copy', ['report' => $dailyreport->id]) }}">
                                         <input type="submit" class="btn btn-primary btn-create-pdf" value="コピーして作成" />
                                     </form>
                                 </td>
                                 <td>
-                                    <form method="get" action="{{ route('report.show', ['report_id' => $dailyreport->id]) }}">
+                                    <form method="get" action="{{ route('reports.show', ['report' => $dailyreport->id]) }}">
                                         <input type="submit" class="btn btn-primary btn-create-pdf" value="詳細" />
                                     </form>
                                 </td>

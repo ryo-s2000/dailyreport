@@ -15,6 +15,6 @@ final class UpdateMethodTest extends TestCase
         $response = $this->post('/reports/1/edit');
 
         // TODO validation test
-        $response->assertStatus(419);
+        $response->assertStatus(405);
     }
 }

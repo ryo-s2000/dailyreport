@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DailyreportRequest;
+use App\Http\Requests\Report\StoreRequest;
+use App\Http\Requests\Report\StoreRequest as UpdateRequest;
 use App\Models\Asset;
 use App\Models\Construction;
 use App\Models\Dailyreport;
@@ -85,7 +86,7 @@ class ReportController extends Controller
         return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    public function store(DailyreportRequest $request)
+    public function store(StoreRequest $request)
     {
         $dailyreport = new Dailyreport();
 
@@ -115,9 +116,9 @@ class ReportController extends Controller
         return redirect($redirectPath);
     }
 
-    public function show(Request $request)
+    public function show($reportId)
     {
-        $dailyreport = Dailyreport::find($request->report_id);
+        $dailyreport = Dailyreport::find($reportId);
         if (null === $dailyreport) {
             return redirect('/');
         }
@@ -125,9 +126,9 @@ class ReportController extends Controller
         return view('report.show', ['dailyreport' => $dailyreport]);
     }
 
-    public function edit(Request $request)
+    public function edit($reportId)
     {
-        $dailyreport = Dailyreport::find($request->report_id);
+        $dailyreport = Dailyreport::find($reportId);
 
         if (null === $dailyreport) {
             return redirect('/');
@@ -142,9 +143,9 @@ class ReportController extends Controller
         return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    public function update(DailyreportRequest $request, $report_id)
+    public function update(UpdateRequest $request, $reportId)
     {
-        $dailyreport = Dailyreport::find($report_id);
+        $dailyreport = Dailyreport::find($reportId);
         if (null === $dailyreport) {
             return redirect('/');
         }
@@ -175,20 +176,16 @@ class ReportController extends Controller
         return redirect($redirectPath);
     }
 
-    public function destroy(Dailyreport $report_id)
+    public function destroy(Dailyreport $dailyreport)
     {
-        if (!(Dailyreport::find($report_id))) {
-            return redirect('/');
-        }
-
-        $report_id->delete();
+        $dailyreport->delete();
 
         return redirect('/');
     }
 
-    public function createCopy(Request $request)
+    public function createCopy($reportId)
     {
-        $dailyreport = Dailyreport::find($request->report_id);
+        $dailyreport = Dailyreport::find($reportId);
         $dailyreport->date = date('Y-m-d');
 
         if (null === $dailyreport) {

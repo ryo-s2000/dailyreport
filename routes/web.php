@@ -8,17 +8,8 @@
 
 // Report
 Route::redirect('/', '/reports');
-Route::prefix('reports')->group(function () {
-    Route::get('/', 'ReportController@index');
-    Route::get('/create', 'ReportController@create')->name('report.create');
-    Route::post('/', 'ReportController@store')->name('report.store');
-    Route::get('/{report_id}', 'ReportController@show')->name('report.show');
-    Route::get('/{report_id}/edit', 'ReportController@edit')->name('report.edit');
-    Route::post('/{report_id}/edit', 'ReportController@update')->name('report.update');
-    Route::delete('/{report_id}', 'ReportController@destroy')->name('report.destroy');
-
-    Route::get('/create/copy/{report_id}', 'ReportController@createCopy')->name('report.create.copy');
-});
+Route::resource('reports', 'ReportController');
+Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name('reports.create.copy');
 
 // trader
 Route::get('/edit_trader', 'TraderController@index');
