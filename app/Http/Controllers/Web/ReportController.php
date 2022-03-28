@@ -175,6 +175,17 @@ class ReportController extends Controller
         return redirect($redirectPath);
     }
 
+    public function destroy(Dailyreport $report_id)
+    {
+        if (!(Dailyreport::find($report_id))) {
+            return redirect('/');
+        }
+
+        $report_id->delete();
+
+        return redirect('/');
+    }
+
     public function copyReport(Request $request)
     {
         $dailyreport = Dailyreport::find($request->report_id);
@@ -191,17 +202,6 @@ class ReportController extends Controller
         $assets = self::fillAssets($dailyreport);
 
         return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
-    }
-
-    public function deleteReport(Dailyreport $report_id)
-    {
-        if (!(Dailyreport::find($report_id))) {
-            return redirect('/');
-        }
-
-        $report_id->delete();
-
-        return redirect('/');
     }
 
     private function fillTraders($dailyreport)

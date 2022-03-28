@@ -42,8 +42,7 @@ Route::prefix('reports')->group(function () {
     Route::get('/{report_id}', 'ReportController@show')->name('report.show');
     Route::get('/{report_id}/edit', 'ReportController@edit')->name('report.edit');
     Route::post('/{report_id}/edit', 'ReportController@update')->name('report.update');
+    Route::delete('/{report_id}', 'ReportController@destroy')->name('report.destroy');
 });
 
 Route::get('/copyreport/{report_id}', 'ReportController@copyReport');
-
-Route::delete('/delete/report/{report_id}', 'ReportController@deleteReport');

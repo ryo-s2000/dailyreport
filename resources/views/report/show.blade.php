@@ -19,7 +19,7 @@
                 <input type="submit" class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="waringDelete({{$dailyreport->id}})" value="削除" />
             </div>
 
-            <form method="POST" action="/delete/report/{{$dailyreport->id}}" style="display: none;">
+            <form method="POST" action="{{ route('report.destroy', ['report_id' => $dailyreport->id]) }}" style="display: none;">
                 @csrf
                 @method('DELETE')
                 <button style="display: none;" type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$dailyreport->id}}"></button>
