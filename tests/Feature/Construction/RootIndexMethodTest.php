@@ -8,12 +8,12 @@ use Tests\TestCase;
  * @internal
  * @coversNothing
  */
-final class DestroyMethodTest extends TestCase
+final class RootIndexMethodTest extends TestCase
 {
     public function testConnectivity()
     {
-        // TODO delete method
-        $response = $this->get('/constructions/create');
+        // TODO fix auth
+        $response = $this->get('/constructions/password');
 
         $response->assertStatus(200);
     }

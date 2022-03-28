@@ -13,7 +13,7 @@ Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name
 
 // Construction
 Route::resource('constructions', 'ConstructionController', ['except' => ['show']]);
-Route::get('/construction/{password}', 'ConstructionController@root');
+Route::get('/constructions/{password}', 'ConstructionController@rootIndex');
 
 // PDF
 Route::get('/pdf/{report_id}', 'PdfController@generate');

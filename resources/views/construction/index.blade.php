@@ -216,7 +216,7 @@
         /// パスワード処理
         function root(){
             ret = prompt("※パスワードを入力してください。", "");
-            url = "/construction/" + ret;
+            url = "/constructions/" + ret;
             location.href=url;
         }
 
