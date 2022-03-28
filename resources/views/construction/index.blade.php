@@ -180,10 +180,10 @@
                             <td class="display-none display-pc display-sp">{{$construction->place}}</td>
                                 <td class="display-none display-pc display-sp">{{$construction->sales}}</td>
                                 <td class="display-none display-pc display-sp">{{$construction->supervisor}}</td>
-                                <td class="display-none　display-pc display-sp">{{$construction->remarks}}</td>
+                                <td class="display-none display-pc display-sp">{{$construction->remarks}}</td>
                                 @if( $user ?? false == 'root')
                                     <td class="display-none display-pc display-root">
-                                        <form method="get" action="/editconstruction/{{$construction->id}}">
+                                        <form method="get" action="{{ route('constructions.edit', ['construction' => $construction->id]) }}">
                                             <input type="submit" class="btn btn-primary btn-create-pdf" value="編集" />
                                         </form>
                                     </td>

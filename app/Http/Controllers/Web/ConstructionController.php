@@ -203,7 +203,7 @@ class ConstructionController extends Controller
         return view('construction.index', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
     }
 
-    public function editConstruction($constructionid)
+    public function edit($constructionid)
     {
         $construction = Construction::find($constructionid);
         if (null === $construction) {
@@ -215,7 +215,7 @@ class ConstructionController extends Controller
             return $element['number'];
         }, $constructions);
 
-        return view('newconstruction', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
+        return view('construction.create_and_edit', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
     public function saveEditConstruction(ConstructionUpdateRequest $request, $constructionid)

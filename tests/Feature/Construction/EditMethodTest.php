@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Report;
+namespace Tests\Feature\Construction;
 
 use Tests\TestCase;
 
@@ -13,7 +13,7 @@ final class EditMethodTest extends TestCase
     public function testConnectivity()
     {
         // TODO inner DB
-        $response = $this->get('/reports/1/edit');
+        $response = $this->get('/constructions/1/edit');
 
         $response->assertStatus(200);
     }
