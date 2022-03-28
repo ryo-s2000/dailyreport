@@ -12,7 +12,7 @@ class ConstructionController extends Controller
 {
     public function index(Request $request)
     {
-        function condition($value = null)
+        function operator($value = null)
         {
             if ($value) {
                 return '=';
@@ -21,7 +21,7 @@ class ConstructionController extends Controller
             return 'LIKE';
         }
 
-        function value($value = null)
+        function word($value = null)
         {
             if ($value) {
                 return $value;
@@ -30,11 +30,11 @@ class ConstructionController extends Controller
             return '%';
         }
 
-        $constructions = Construction::where('number', condition($request->number), value($request->number))
-            ->where('orderer', condition($request->orderer), value($request->orderer))
-            ->where('place', condition($request->place), value($request->place))
-            ->where('sales', condition($request->sales), value($request->sales))
-            ->where('supervisor', condition($request->supervisor), value($request->supervisor))
+        $constructions = Construction::where('number', operator($request->number), word($request->number))
+            ->where('orderer', operator($request->orderer), word($request->orderer))
+            ->where('place', operator($request->place), word($request->place))
+            ->where('sales', operator($request->sales), word($request->sales))
+            ->where('supervisor', operator($request->supervisor), word($request->supervisor))
             ->get()
         ;
 

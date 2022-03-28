@@ -10,7 +10,7 @@
 
         <div class="btn-container col-md-12">
             <button class="btn btn-primary btn-new-pdf" onClick="location.href='{{ route('reports.create') }}'">日報作成</button>
-            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='/construction'">工事番号</button>
+            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('constructions.index') }}'">工事番号</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('traders.edit.all') }}'">業者・重機</button>
             <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.create') }}'">CSV出力</button>
         </div>
@@ -24,7 +24,7 @@
 
         <div>
             <div class="refine">
-                <form method="get" action="/" enctype="multipart/form-data">
+                <form method="get" action="{{ route('reports.index') }}" enctype="multipart/form-data">
                     <div><span class="refine-title">順番</span></div>
                     <select name="sort" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">選択</option>
@@ -88,7 +88,7 @@
                         </select>
                     </div>
                     <button type="button" class="btn btn-primary btn-create-pdf" onClick="window.reset();">条件をリセット</button>
-                    <button class="btn btn-primary btn-refine" onClick="location.href='/construction'">決定</button>
+                    <button class="btn btn-primary btn-refine">決定</button>
                 </form>
             </div>
         </div>

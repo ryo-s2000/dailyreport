@@ -137,7 +137,7 @@
                     </tr>
                 </table>
                 <button type="button" class="btn btn-primary btn-create-pdf" onClick="window.reset();">条件をリセット</button>
-                <button type="submit" class="btn btn-primary btn-refine" onClick="location.href='/construction'">決定</button>
+                <button type="submit" class="btn btn-primary btn-refine">決定</button>
             </form>
 
             <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">

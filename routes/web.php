@@ -12,10 +12,11 @@ Route::resource('reports', 'ReportController');
 Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name('reports.create.copy');
 
 // Construction
+Route::resource('constructions', 'ConstructionController', ['only' => ['index']]);
+
 Route::get('/newconstruction', 'ConstructionController@newConstruction');
 Route::post('/newconstruction', 'ConstructionController@saveConstruction');
 
-Route::get('/construction', 'ConstructionController@index');
 Route::get('/construction/{password}', 'ConstructionController@root');
 
 Route::get('/editconstruction/{constructionid}', 'ConstructionController@editConstruction');
