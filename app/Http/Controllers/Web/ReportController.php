@@ -67,17 +67,7 @@ class ReportController extends Controller
         return view('top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
     }
 
-    public function show(Request $request)
-    {
-        $dailyreport = Dailyreport::find($request->report_id);
-        if (null === $dailyreport) {
-            return redirect('/');
-        }
-
-        return view('showreport', ['dailyreport' => $dailyreport]);
-    }
-
-    public function newReport()
+    public function create()
     {
         $dailyreport = new Dailyreport();
         $dailyreport->date = date('Y-m-d');
@@ -93,6 +83,16 @@ class ReportController extends Controller
         }
 
         return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+    }
+
+    public function show(Request $request)
+    {
+        $dailyreport = Dailyreport::find($request->report_id);
+        if (null === $dailyreport) {
+            return redirect('/');
+        }
+
+        return view('showreport', ['dailyreport' => $dailyreport]);
     }
 
     public function editReport(Request $request)

@@ -10,9 +10,16 @@ use Tests\TestCase;
  */
 final class IndexMethodTest extends TestCase
 {
-    public function testConnectivity()
+    public function testRedirect()
     {
         $response = $this->get('/');
+
+        $response->assertStatus(302);
+    }
+
+    public function testConnectivity()
+    {
+        $response = $this->get('/reports');
 
         $response->assertStatus(200);
     }

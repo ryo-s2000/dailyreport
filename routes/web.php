@@ -34,10 +34,10 @@ Route::post('/editconstruction/{constructionid}', 'ConstructionController@saveEd
 Route::delete('/delete/construction/{constructionid}', 'ConstructionController@deleteConstruction');
 
 // report
-Route::get('/', 'ReportController@index');
-Route::get('/{report_id}', 'ReportController@show');
+Route::redirect('/', '/reports');
+Route::get('/reports', 'ReportController@index');
+Route::get('/reports/create', 'ReportController@create')->name('report.create');
 
-Route::get('/newreport', 'ReportController@newReport');
 Route::post('/newreport', 'ReportController@saveReport');
 Route::get('/copyreport/{report_id}', 'ReportController@copyReport');
 
@@ -45,3 +45,5 @@ Route::get('/editreport/{report_id}', 'ReportController@editReport');
 Route::post('/editreport/{report_id}', 'ReportController@saveEditReport');
 
 Route::delete('/delete/report/{report_id}', 'ReportController@deleteReport');
+
+Route::get('/{report_id}', 'ReportController@show');
