@@ -10,7 +10,7 @@
         <h5>詳細情報</h5>
         <div class="btn-container">
             <div>
-                <form method="get" action="/editreport/{{$dailyreport->id}}">
+                <form method="get" action="{{ route('report.edit', ['report_id' => $dailyreport->id]) }}">
                     <input type="submit" class="btn btn-primary btn-new-pdf" value="編集" />
                 </form>
             </div>

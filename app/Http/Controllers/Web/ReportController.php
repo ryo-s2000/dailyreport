@@ -82,7 +82,7 @@ class ReportController extends Controller
             ;
         }
 
-        return view('report.create', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
     public function store(DailyreportRequest $request)
@@ -125,7 +125,7 @@ class ReportController extends Controller
         return view('report.show', ['dailyreport' => $dailyreport]);
     }
 
-    public function editReport(Request $request)
+    public function edit(Request $request)
     {
         $dailyreport = Dailyreport::find($request->report_id);
 
@@ -139,7 +139,7 @@ class ReportController extends Controller
 
         $assets = self::fillAssets($dailyreport);
 
-        return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
     public function saveEditReport(DailyreportRequest $request, $report_id)
