@@ -27,10 +27,10 @@
     <meta name=”viewport” content=”width=device-width, initial-scale=1”>
 
     <!-- Loading Bootstrap -->
-    <link href="../../dist/css/vendor/bootstrap.min.css" rel="stylesheet">
+    <link href="/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
 
     <!-- Loading Flat UI -->
-    <link href="../../dist/css/flat-ui.css" rel="stylesheet">
+    <link href="/dist/css/flat-ui.css" rel="stylesheet">
 
     <!-- ファビコン -->
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
@@ -49,7 +49,7 @@
         <script src="https://unpkg.com/popper.js@1.14.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 
         <!-- Loading Flat UI -->
-        <script src="../../dist/scripts/flat-ui.js"></script>
+        <script src="/dist/scripts/flat-ui.js"></script>
         <script src="/assets/js/application.js"></script>
 
         <script>

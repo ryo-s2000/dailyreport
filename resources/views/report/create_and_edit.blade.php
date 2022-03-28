@@ -7,15 +7,14 @@
 
     <div class="container main-container">
         <?php
-            $url = url()->current();
             $action = '';
 
+            $url = url()->current();
             if (str_contains($url, 'edit')) {
                 $action = route('report.update', ['report_id' => $dailyreport->id]);
             } else {
                 $action = route('report.store');
             }
-
         ?>
 
         @if (count($errors) > 0)
@@ -51,10 +50,15 @@
                         <option value="" label="default">部署を選択</option>
 
                         @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
-                            @if($loop->index+1 == (old('department_id')))
-                                <option value="{{$loop->index+1}}" selected="selected">{{$value}}</option>
-                                <?php $selectedDepartment = true; ?>
-                            @elseif(old('department_id') == "" and $loop->index+1 == $dailyreport->department_id)
+                            @if(
+                                ( $loop->index+1 == old('department_id') )
+                                ||
+                                (
+                                    ( old('department_id') == '' )
+                                    &&
+                                    ( $loop->index+1 == $dailyreport->department_id )
+                                )
+                            )
                                 <option value="{{$loop->index+1}}" selected="selected">{{$value}}</option>
                                 <?php $selectedDepartment = true; ?>
                             @else
