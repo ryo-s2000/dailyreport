@@ -7,7 +7,7 @@ use Session;
 use App\Construction;
 use App\Dailyreport;
 use App\Trader;
-use App\Asset;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

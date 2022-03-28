@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Dailyreport;
 use App\Construction;
 use App\Trader;
-use App\Asset;
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use App\Http\Requests\DailyreportRequest;
 use App\Http\Controllers\Controller;

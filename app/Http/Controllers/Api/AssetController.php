@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
-use App\Asset;
+use App\Models\Asset;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetRequest;
 
