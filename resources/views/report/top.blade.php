@@ -134,12 +134,6 @@
                                     </form>
                                 </td>
                             </tr>
-
-                            <form method="POST" action="/delete/report/{{$dailyreport->id}}" style="display: none;">
-                                @csrf
-                                @method('DELETE')
-                                <button style="display: none;" type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$dailyreport->id}}"></button>
-                            </form>
                         @endforeach
                     </tbody>
                 </table>

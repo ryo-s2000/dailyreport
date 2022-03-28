@@ -242,13 +242,9 @@ class ConstructionController extends Controller
         return redirect('/construction/password');
     }
 
-    public function deleteConstruction(Construction $constructionid)
+    public function destroy(Construction $constructionId)
     {
-        if (!(Construction::find($constructionid))) {
-            return redirect('/construction');
-        }
-
-        $constructionid->delete();
+        Construction::destroy($constructionId);
 
         // NOTE:パスワードを保存
         return redirect('/construction/password');

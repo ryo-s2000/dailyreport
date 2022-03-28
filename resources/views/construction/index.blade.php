@@ -193,7 +193,7 @@
                                 @endif
                             </tr>
 
-                            <form method="POST" action="/delete/construction/{{$construction->id}}">
+                            <form method="POST" action="{{ route('constructions.destroy', ['construction' => $construction->id]) }}">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-primary btn-create-pdf delete-submit" id="{{$construction->id}}"></button>

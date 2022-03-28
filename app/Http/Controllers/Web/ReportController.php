@@ -176,9 +176,9 @@ class ReportController extends Controller
         return redirect($redirectPath);
     }
 
-    public function destroy(Dailyreport $dailyreport)
+    public function destroy($dailyreportId)
     {
-        $dailyreport->delete();
+        Dailyreport::destroy($dailyreportId);
 
         return redirect('/');
     }

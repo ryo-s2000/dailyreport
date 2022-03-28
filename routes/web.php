@@ -12,11 +12,8 @@ Route::resource('reports', 'ReportController');
 Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name('reports.create.copy');
 
 // Construction
-Route::resource('constructions', 'ConstructionController', ['only' => ['index', 'create', 'store', 'edit', 'update']]);
-
+Route::resource('constructions', 'ConstructionController', ['except' => ['show']]);
 Route::get('/construction/{password}', 'ConstructionController@root');
-
-Route::delete('/delete/construction/{constructionid}', 'ConstructionController@deleteConstruction');
 
 // PDF
 Route::get('/pdf/{report_id}', 'PdfController@generate');
