@@ -1,8 +1,5 @@
 <?php
 
-use App\Construction;
-use App\Dailyreport;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

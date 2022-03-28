@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Dailyreport;
-use App\Construction;
+use App\Models\Construction;
 use App\Trader;
 use App\Models\Asset;
 use Illuminate\Http\Request;

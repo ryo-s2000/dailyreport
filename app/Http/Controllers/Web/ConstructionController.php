@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Construction;
+use App\Models\Construction;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConstructionRequest;
 use App\Http\Requests\ConstructionUpdateRequest;

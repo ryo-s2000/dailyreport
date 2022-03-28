@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Dailyreport;
-use App\Construction;
+use App\Models\Construction;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
