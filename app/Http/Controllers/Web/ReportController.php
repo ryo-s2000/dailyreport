@@ -186,7 +186,7 @@ class ReportController extends Controller
         return redirect('/');
     }
 
-    public function copyReport(Request $request)
+    public function createCopy(Request $request)
     {
         $dailyreport = Dailyreport::find($request->report_id);
         $dailyreport->date = date('Y-m-d');
@@ -201,7 +201,7 @@ class ReportController extends Controller
 
         $assets = self::fillAssets($dailyreport);
 
-        return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
     private function fillTraders($dailyreport)

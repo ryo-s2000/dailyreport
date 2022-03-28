@@ -4,12 +4,21 @@
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
 */
+
+// Report
+Route::redirect('/', '/reports');
+Route::prefix('reports')->group(function () {
+    Route::get('/', 'ReportController@index');
+    Route::get('/create', 'ReportController@create')->name('report.create');
+    Route::post('/', 'ReportController@store')->name('report.store');
+    Route::get('/{report_id}', 'ReportController@show')->name('report.show');
+    Route::get('/{report_id}/edit', 'ReportController@edit')->name('report.edit');
+    Route::post('/{report_id}/edit', 'ReportController@update')->name('report.update');
+    Route::delete('/{report_id}', 'ReportController@destroy')->name('report.destroy');
+
+    Route::get('/create/copy/{report_id}', 'ReportController@createCopy')->name('report.create.copy');
+});
 
 // trader
 Route::get('/edit_trader', 'TraderController@index');
@@ -32,17 +41,3 @@ Route::get('/editconstruction/{constructionid}', 'ConstructionController@editCon
 Route::post('/editconstruction/{constructionid}', 'ConstructionController@saveEditConstruction');
 
 Route::delete('/delete/construction/{constructionid}', 'ConstructionController@deleteConstruction');
-
-// report
-Route::redirect('/', '/reports');
-Route::prefix('reports')->group(function () {
-    Route::get('/', 'ReportController@index');
-    Route::get('/create', 'ReportController@create')->name('report.create');
-    Route::post('/', 'ReportController@store')->name('report.store');
-    Route::get('/{report_id}', 'ReportController@show')->name('report.show');
-    Route::get('/{report_id}/edit', 'ReportController@edit')->name('report.edit');
-    Route::post('/{report_id}/edit', 'ReportController@update')->name('report.update');
-    Route::delete('/{report_id}', 'ReportController@destroy')->name('report.destroy');
-});
-
-Route::get('/copyreport/{report_id}', 'ReportController@copyReport');

@@ -124,7 +124,7 @@
                                 <td>{{$dailyreport->constructionNumber}}</td>
                                 <td><div class="construction-name-form">{{$dailyreport->constructionName}}</div></td>
                                 <td>
-                                    <form method="get" action="/copyreport/{{$dailyreport->id}}">
+                                    <form method="get" action="{{ route('report.create.copy', ['report_id' => $dailyreport->id]) }}">
                                         <input type="submit" class="btn btn-primary btn-create-pdf" value="コピーして作成" />
                                     </form>
                                 </td>
