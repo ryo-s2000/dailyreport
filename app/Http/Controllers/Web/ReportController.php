@@ -122,7 +122,7 @@ class ReportController extends Controller
             return redirect('/');
         }
 
-        return view('showreport', ['dailyreport' => $dailyreport]);
+        return view('report.show', ['dailyreport' => $dailyreport]);
     }
 
     public function editReport(Request $request)

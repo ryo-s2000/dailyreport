@@ -129,7 +129,7 @@
                                     </form>
                                 </td>
                                 <td>
-                                    <form method="get" action="/{{$dailyreport->id}}">
+                                    <form method="get" action="{{ route('report.show', ['report_id' => $dailyreport->id]) }}">
                                         <input type="submit" class="btn btn-primary btn-create-pdf" value="詳細" />
                                     </form>
                                 </td>

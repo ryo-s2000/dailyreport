@@ -13,7 +13,7 @@ final class ShowMethodTest extends TestCase
     public function testConnectivity()
     {
         // TODO inner DB
-        $response = $this->get('/1');
+        $response = $this->get('/reports/1');
 
         $response->assertStatus(200);
     }

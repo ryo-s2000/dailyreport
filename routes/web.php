@@ -39,6 +39,7 @@ Route::prefix('reports')->group(function () {
     Route::get('/', 'ReportController@index');
     Route::get('/create', 'ReportController@create')->name('report.create');
     Route::post('/', 'ReportController@store')->name('report.store');
+    Route::get('/{report_id}', 'ReportController@show')->name('report.show');
 });
 
 Route::get('/copyreport/{report_id}', 'ReportController@copyReport');
@@ -47,5 +48,3 @@ Route::get('/editreport/{report_id}', 'ReportController@editReport');
 Route::post('/editreport/{report_id}', 'ReportController@saveEditReport');
 
 Route::delete('/delete/report/{report_id}', 'ReportController@deleteReport');
-
-Route::get('/{report_id}', 'ReportController@show');
