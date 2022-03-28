@@ -10,8 +10,8 @@
             $url = url()->current();
             $action = '';
 
-            if (str_contains($url, 'newreport')) {
-                $action = '/newreport';
+            if (str_contains($url, 'create')) {
+                $action = route('report.store');
             } elseif (str_contains($url, 'copyreport')) {
                 $action = '/newreport';
             } elseif (str_contains($url, 'editreport')) {

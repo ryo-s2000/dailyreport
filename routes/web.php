@@ -35,10 +35,12 @@ Route::delete('/delete/construction/{constructionid}', 'ConstructionController@d
 
 // report
 Route::redirect('/', '/reports');
-Route::get('/reports', 'ReportController@index');
-Route::get('/reports/create', 'ReportController@create')->name('report.create');
+Route::prefix('reports')->group(function () {
+    Route::get('/', 'ReportController@index');
+    Route::get('/create', 'ReportController@create')->name('report.create');
+    Route::post('/', 'ReportController@store')->name('report.store');
+});
 
-Route::post('/newreport', 'ReportController@saveReport');
 Route::get('/copyreport/{report_id}', 'ReportController@copyReport');
 
 Route::get('/editreport/{report_id}', 'ReportController@editReport');

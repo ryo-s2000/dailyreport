@@ -64,7 +64,7 @@ class ReportController extends Controller
         $allDailyreports = Dailyreport::all();
         $constructions = Construction::all();
 
-        return view('top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
+        return view('report.top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
     }
 
     public function create()
@@ -82,7 +82,37 @@ class ReportController extends Controller
             ;
         }
 
-        return view('newreport', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+    }
+
+    public function store(DailyreportRequest $request)
+    {
+        $dailyreport = new Dailyreport();
+
+        $form = $request->dailyreportAttributes();
+        unset($form['_token']);
+
+        // nullを空文字に変更
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
+            }
+        }
+
+        // 遷移先を変更する。
+        $transitionPreview = $form['transition-preview'];
+        unset($form['transition-preview']);
+
+        // データを詰め込む
+        $dailyreport->fill($form)->save();
+        $dailyreportId = $dailyreport->id;
+
+        $redirectPath = '/';
+        if ('true' === $transitionPreview) {
+            $redirectPath = '/pdf/'.$dailyreportId;
+        }
+
+        return redirect($redirectPath);
     }
 
     public function show(Request $request)
@@ -118,36 +148,6 @@ class ReportController extends Controller
         if (null === $dailyreport) {
             return redirect('/');
         }
-
-        $form = $request->dailyreportAttributes();
-        unset($form['_token']);
-
-        // nullを空文字に変更
-        foreach ($form as $key => $item) {
-            if (null === $item) {
-                $form[$key] = '';
-            }
-        }
-
-        // 遷移先を変更する。
-        $transitionPreview = $form['transition-preview'];
-        unset($form['transition-preview']);
-
-        // データを詰め込む
-        $dailyreport->fill($form)->save();
-        $dailyreportId = $dailyreport->id;
-
-        $redirectPath = '/';
-        if ('true' === $transitionPreview) {
-            $redirectPath = '/pdf/'.$dailyreportId;
-        }
-
-        return redirect($redirectPath);
-    }
-
-    public function saveReport(DailyreportRequest $request)
-    {
-        $dailyreport = new Dailyreport();
 
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
