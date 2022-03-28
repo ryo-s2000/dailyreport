@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ConstructionRequest;
+use App\Http\Requests\Construction\StoreRequest;
 use App\Http\Requests\ConstructionUpdateRequest;
 use App\Models\Construction;
 use Illuminate\Http\Request;
@@ -97,7 +97,28 @@ class ConstructionController extends Controller
             return $element['number'];
         }, $constructions);
 
-        return view('construction.create', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
+        return view('construction.create_and_edit', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
+    }
+
+    public function store(StoreRequest $request)
+    {
+        $construction = new Construction();
+
+        $form = $request->constructionAttributes();
+        unset($form['_token']);
+
+        // nullを空文字に変更
+        foreach ($form as $key => $item) {
+            if (null === $item) {
+                $form[$key] = '';
+            }
+        }
+
+        // データを詰め込む
+        $construction->fill($form)->save();
+
+        // NOTE:パスワードを保存
+        return redirect('/construction/password');
     }
 
     public function root(Request $request)
@@ -180,27 +201,6 @@ class ConstructionController extends Controller
         }
 
         return view('construction.index', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
-    }
-
-    public function saveConstruction(ConstructionRequest $request)
-    {
-        $construction = new Construction();
-
-        $form = $request->constructionAttributes();
-        unset($form['_token']);
-
-        // nullを空文字に変更
-        foreach ($form as $key => $item) {
-            if (null === $item) {
-                $form[$key] = '';
-            }
-        }
-
-        // データを詰め込む
-        $construction->fill($form)->save();
-
-        // NOTE:パスワードを保存
-        return redirect('/construction/password');
     }
 
     public function editConstruction($constructionid)

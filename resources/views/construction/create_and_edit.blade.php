@@ -7,12 +7,16 @@
 
     <div class="container main-container">
         <?php
+            $method = '';
             $action = '';
 
-            if ('' !== $construction->name) {
-                $action = '/editconstruction/'.$construction->id;
+            $url = url()->current();
+            if (str_contains($url, 'edit')) {
+                $method = 'put';
+            // $action = route('constructions.update', ['report' => $construction->id]);
             } else {
-                $action = '/newconstruction';
+                $method = 'post';
+                $action = route('constructions.store');
             }
         ?>
 
@@ -31,7 +35,7 @@
             </div>
         @endif
 
-        <form method="post" action="{{$action}}" enctype="multipart/form-data">
+        <form method="{{$method}}" action="{{$action}}" enctype="multipart/form-data">
             @csrf
 
             {{-- 登録済工事番号取得 --}}

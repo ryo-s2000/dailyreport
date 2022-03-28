@@ -12,9 +12,7 @@ Route::resource('reports', 'ReportController');
 Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name('reports.create.copy');
 
 // Construction
-Route::resource('constructions', 'ConstructionController', ['only' => ['index', 'create']]);
-
-Route::post('/newconstruction', 'ConstructionController@saveConstruction');
+Route::resource('constructions', 'ConstructionController', ['only' => ['index', 'create', 'store']]);
 
 Route::get('/construction/{password}', 'ConstructionController@root');
 
