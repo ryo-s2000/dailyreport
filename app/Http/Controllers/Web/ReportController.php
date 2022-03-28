@@ -12,6 +12,71 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    public function index(Request $request)
+    {
+        function condition($value = null)
+        {
+            if ($value) {
+                return '=';
+            }
+
+            return 'LIKE';
+        }
+
+        function value($value = null)
+        {
+            if ($value) {
+                return $value;
+            }
+
+            return '%';
+        }
+
+        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+            ->where('department_id', condition($request->department_id), value($request->department_id))
+            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
+        ;
+
+        switch ($request->sort) {
+            case '日付が早い順':
+                $dailyreports = $dailyreports->orderBy('date')->paginate(100);
+
+                break;
+
+            case '日付が遅い順':
+                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
+
+                break;
+
+            default:
+                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
+        }
+
+        $dailyreportsPalams = [
+            'userName' => $request->userName,
+            'department_id' => $request->department_id,
+            'constructionNumber' => $request->constructionNumber,
+            'constructionName' => $request->constructionName,
+            'sort' => $request->sort,
+        ];
+
+        // TODO send userNames
+        $allDailyreports = Dailyreport::all();
+        $constructions = Construction::all();
+
+        return view('top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
+    }
+
+    public function show(Request $request)
+    {
+        $dailyreport = Dailyreport::find($request->report_id);
+        if (null === $dailyreport) {
+            return redirect('/');
+        }
+
+        return view('showreport', ['dailyreport' => $dailyreport]);
+    }
+
     public function newReport()
     {
         $dailyreport = new Dailyreport();
@@ -137,71 +202,6 @@ class ReportController extends Controller
         $report_id->delete();
 
         return redirect('/');
-    }
-
-    public function showReport(Request $request)
-    {
-        $dailyreport = Dailyreport::find($request->report_id);
-        if (null === $dailyreport) {
-            return redirect('/');
-        }
-
-        return view('showreport', ['dailyreport' => $dailyreport]);
-    }
-
-    public function index(Request $request)
-    {
-        function condition($value = null)
-        {
-            if ($value) {
-                return '=';
-            }
-
-            return 'LIKE';
-        }
-
-        function value($value = null)
-        {
-            if ($value) {
-                return $value;
-            }
-
-            return '%';
-        }
-
-        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
-            ->where('department_id', condition($request->department_id), value($request->department_id))
-            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
-        ;
-
-        switch ($request->sort) {
-            case '日付が早い順':
-                $dailyreports = $dailyreports->orderBy('date')->paginate(100);
-
-                break;
-
-            case '日付が遅い順':
-                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
-
-                break;
-
-            default:
-                $dailyreports = $dailyreports->orderByDesc('date')->paginate(100);
-        }
-
-        $dailyreportsPalams = [
-            'userName' => $request->userName,
-            'department_id' => $request->department_id,
-            'constructionNumber' => $request->constructionNumber,
-            'constructionName' => $request->constructionName,
-            'sort' => $request->sort,
-        ];
-
-        // TODO send userNames
-        $allDailyreports = Dailyreport::all();
-        $constructions = Construction::all();
-
-        return view('top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
     }
 
     private function fillTraders($dailyreport)

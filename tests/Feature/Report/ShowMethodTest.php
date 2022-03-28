@@ -8,11 +8,12 @@ use Tests\TestCase;
  * @internal
  * @coversNothing
  */
-final class IndexMethodTest extends TestCase
+final class ShowMethodTest extends TestCase
 {
     public function testConnectivity()
     {
-        $response = $this->get('/');
+        // TODO inner DB
+        $response = $this->get('/1');
 
         $response->assertStatus(200);
     }
