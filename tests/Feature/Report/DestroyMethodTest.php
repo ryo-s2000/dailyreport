@@ -15,6 +15,6 @@ final class DestroyMethodTest extends TestCase
         // TODO delete method
         $response = $this->get('/reports/1');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }
