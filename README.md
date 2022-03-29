@@ -1,4 +1,4 @@
-Using Laravel.
+Using Laravel
 
 ```
 composer install
