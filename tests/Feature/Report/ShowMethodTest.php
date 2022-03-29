@@ -15,6 +15,6 @@ final class ShowMethodTest extends TestCase
         // TODO inner DB
         $response = $this->get('/reports/1');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }

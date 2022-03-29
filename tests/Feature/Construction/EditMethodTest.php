@@ -15,6 +15,6 @@ final class EditMethodTest extends TestCase
         // TODO inner DB
         $response = $this->get('/constructions/1/edit');
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
     }
 }
