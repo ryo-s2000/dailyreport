@@ -28,4 +28,4 @@ jobs:
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
-      run: echo todo
+      run: php artisan migrate
