@@ -54,11 +54,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "format": [
-            "./vendor/bin/php-cs-fixer fix"
-        ],
         "analysis" : [
             "./vendor/bin/psalm"
+        ],
+        "analysis_alter_issues" : [
+            "./vendor/bin/psalm --alter --issues=MissingReturnType,UnusedVariable,MissingParamType"
+        ],
+        "format": [
+            "./vendor/bin/php-cs-fixer fix"
         ],
         "test" : [
             "./vendor/bin/phpunit"
