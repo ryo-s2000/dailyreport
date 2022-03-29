@@ -24,7 +24,8 @@
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^3.0",
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0",
+        "vimeo/psalm": "^4.22"
     },
     "config": {
         "optimize-autoloader": true,
@@ -58,6 +59,9 @@
         ],
         "test" : [
             "vendor/bin/phpunit"
+        ],
+        "analysis" : [
+            "./vendor/bin/psalm"
         ]
     }
 }
