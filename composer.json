@@ -55,7 +55,7 @@
     "prefer-stable": true,
     "scripts": {
         "analysis" : [
-            "./vendor/bin/psalm"
+            "vendor/bin/psalm"
         ],
         "format": [
             "vendor/bin/php-cs-fixer fix"
