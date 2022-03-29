@@ -42,7 +42,7 @@ class PdfController extends Controller
         // 読み込んだPDFの1ページ目のインデックスを取得
         $tplIdx = $pdf->importPage(1);
         // 読み込んだPDFの1ページ目をテンプレートとして使用
-        $pdf->useTemplate($tplIdx, null, null, null, null, true);
+        $pdf->useTemplate($tplIdx, null, 0, 0, 0, true);
         // 書き込む文字列のフォントを指定
         $pdf->SetFont('kozgopromedium', '', 10);
 
@@ -51,7 +51,8 @@ class PdfController extends Controller
 
         // 日付
         $weeknames = ['日', '月', '火', '水', '木', '金', '土'];
-        $weekname = $weeknames[date('w', strtotime($inputData['date']))];
+        $weekInt = (int) date('w', strtotime($inputData['date']));
+        $weekname = $weeknames[$weekInt];
         $items[] = ['x' => 26.0, 'y' => 16.0, 'content' => date('Y             m          d          ', strtotime($inputData['date'])).$weekname];
 
         // 天気

@@ -135,7 +135,7 @@ class ConstructionController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function edit($constructionid)
+    public function edit(int $constructionid)
     {
         $construction = Construction::find($constructionid);
         if (null === $construction) {
@@ -155,7 +155,7 @@ class ConstructionController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(UpdateRequest $request, $constructionid)
+    public function update(UpdateRequest $request, int $constructionid)
     {
         $construction = Construction::find($constructionid);
         if (null === $construction) {
@@ -180,9 +180,11 @@ class ConstructionController extends Controller
     }
 
     /**
+     * @param mixed $constructionId
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Construction $constructionId)
+    public function destroy(int $constructionId)
     {
         Construction::destroy($constructionId);
 
