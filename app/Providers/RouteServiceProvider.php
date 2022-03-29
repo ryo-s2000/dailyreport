@@ -10,15 +10,16 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * The path to the "home" route for your application.
      *
-     * @var string
+     * @var null|string
      */
     public const HOME = '/home';
+
     /**
      * This namespace is applied to your controller routes.
      *
      * In addition, it is set as the URL generator's root namespace.
      *
-     * @var string
+     * @var null|string
      */
     protected $namespace = 'App\Http\Controllers';
 

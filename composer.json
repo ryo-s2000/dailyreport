@@ -54,14 +54,14 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "analysis" : [
-            "vendor/bin/psalm"
-        ],
         "format": [
-            "vendor/bin/php-cs-fixer fix"
+            "./vendor/bin/php-cs-fixer fix"
+        ],
+        "analysis" : [
+            "./vendor/bin/psalm"
         ],
         "test" : [
-            "vendor/bin/phpunit"
+            "./vendor/bin/phpunit"
         ]
     }
 }
