@@ -36,7 +36,7 @@ class DataExportController extends Controller
                 'laborTraderName' => self::searchLaborTraderName($id),
             ];
 
-                $returnLaborTraderIds[] =
+            $returnLaborTraderIds[] =
                 $data
             ;
         }
@@ -47,7 +47,7 @@ class DataExportController extends Controller
                 'heavyMachineTraderName' => self::searchHeavyMachineTraderName($id),
             ];
 
-                $returnHeavyMachineryModels[] =
+            $returnHeavyMachineryModels[] =
                 $data
             ;
         }
@@ -137,6 +137,15 @@ class DataExportController extends Controller
         return response()->json($returnData);
     }
 
+    /**
+     * @psalm-return \Illuminate\Database\Eloquent\Collection|array<\Illuminate\Database\Eloquent\Builder>
+     *
+     * @param mixed $constructionNumber
+     * @param mixed $startDate
+     * @param mixed $endDate
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
     private function getReport($constructionNumber, $startDate, $endDate)
     {
         $query = Dailyreport::query();
@@ -167,7 +176,14 @@ class DataExportController extends Controller
         return self::searchLaborTraderName($asset->trader_id);
     }
 
-    private function getUniqueLaborAndHeavyMachineData($reports)
+    /**
+     * @psalm-return array{0: list<mixed>, 1: list<mixed>}
+     *
+     * @param mixed $reports
+     *
+     * @return array[]
+     */
+    private function getUniqueLaborAndHeavyMachineData($reports): array
     {
         $laborTraderIds = [];
         $heavyMachineryModels = [];
@@ -176,7 +192,7 @@ class DataExportController extends Controller
             foreach (range(1, 8) as $i) {
                 $laborTraderId = 'laborTraderId'.$i;
                 if ($report->{$laborTraderId}) {
-                        $laborTraderIds[] =
+                    $laborTraderIds[] =
                         $report->{$laborTraderId}
                     ;
                 }
@@ -184,7 +200,7 @@ class DataExportController extends Controller
             foreach (range(1, 6) as $i) {
                 $heavyMachineryModel = 'heavyMachineryModel'.$i;
                 if ($report->{$heavyMachineryModel}) {
-                        $heavyMachineryModels[] =
+                    $heavyMachineryModels[] =
                         $report->{$heavyMachineryModel}
                     ;
                 }
@@ -202,8 +218,22 @@ class DataExportController extends Controller
         return [$uniqueLaborTraderIds, $uniqueHeavyMachineryModels];
     }
 
-    private function getExportPeriod($startDate, $endDate)
+    /**
+     * @psalm-return non-empty-list<string>
+     *
+     * @param mixed $startDate
+     * @param mixed $endDate
+     *
+     * @return string[]
+     */
+    private function getExportPeriod($startDate, $endDate): array
     {
+        /**
+         * @param mixed $startDate
+         * @param mixed $endDate
+         *
+         * @return float|int
+         */
         function day_diff($startDate, $endDate)
         {
             // 日付をUNIXタイムスタンプに変換
@@ -223,7 +253,7 @@ class DataExportController extends Controller
         foreach (range(0, $dayDiff) as $i) {
             $addDate = '+'.$i.'day';
 
-                $exportPeriod[] =
+            $exportPeriod[] =
                 date('Y-m-d', strtotime($startDate.$addDate))
             ;
         }
@@ -231,12 +261,22 @@ class DataExportController extends Controller
         return $exportPeriod;
     }
 
-    private function fillCsvData($reports, $exportPeriod, $lowCount, $uniqueLaborTraderIds, $uniqueHeavyMachineryModels, $laborTraderColumnCount)
+    /**
+     * @psalm-return list<array<float|int>>
+     *
+     * @param mixed $reports
+     * @param mixed $exportPeriod
+     * @param mixed $uniqueLaborTraderIds
+     * @param mixed $uniqueHeavyMachineryModels
+     *
+     * @return (float|int)[][]
+     */
+    private function fillCsvData($reports, $exportPeriod, int $lowCount, $uniqueLaborTraderIds, $uniqueHeavyMachineryModels, int $laborTraderColumnCount): array
     {
         $csv = [];
 
         // 指定した日付の日報を取得する
-        function filterPeriodDateReport($reports, $date)
+        function filterPeriodDateReport($reports, $date): array
         {
             return array_filter($reports->toArray(), function ($report) use ($date) {
                 return $report['date'] === $date.' 00:00:00';
@@ -285,7 +325,14 @@ class DataExportController extends Controller
         return $csv;
     }
 
-    private function aggregateCumulative($csv)
+    /**
+     * @psalm-return list<0|mixed>
+     *
+     * @param mixed $csv
+     *
+     * @return (int|mixed)[]
+     */
+    private function aggregateCumulative($csv): array
     {
         $cumulative = array_fill(0, \count($csv[0]), 0);
         foreach ($csv as $row) {
@@ -297,7 +344,17 @@ class DataExportController extends Controller
         return $cumulative;
     }
 
-    private function aggregateUnitpriceRow($laborTraderUnitPrice, $uniqueLaborTraderIds, $heavyMachineUnitPrice, $uniqueHeavyMachineryModels, $laborTraderColumnCount, $lowCount)
+    /**
+     * @psalm-return array<int>
+     *
+     * @param mixed $laborTraderUnitPrice
+     * @param mixed $uniqueLaborTraderIds
+     * @param mixed $heavyMachineUnitPrice
+     * @param mixed $uniqueHeavyMachineryModels
+     *
+     * @return int[]
+     */
+    private function aggregateUnitpriceRow($laborTraderUnitPrice, $uniqueLaborTraderIds, $heavyMachineUnitPrice, $uniqueHeavyMachineryModels, int $laborTraderColumnCount, int $lowCount): array
     {
         $unitpriceRow = array_fill(0, $lowCount, 0);
         if (!empty($laborTraderUnitPrice)) {
@@ -322,7 +379,15 @@ class DataExportController extends Controller
         return $unitpriceRow;
     }
 
-    private function aggregateSubtotalRow($cumulative, $unitpriceRow, $lowCount)
+    /**
+     * @psalm-return list<0|mixed>
+     *
+     * @param mixed $cumulative
+     * @param mixed $unitpriceRow
+     *
+     * @return (int|mixed)[]
+     */
+    private function aggregateSubtotalRow($cumulative, $unitpriceRow, int $lowCount): array
     {
         $subtotalRow = array_fill(0, $lowCount, 0);
         foreach ($subtotalRow as $i => $v) {
@@ -332,7 +397,17 @@ class DataExportController extends Controller
         return $subtotalRow;
     }
 
-    private function conversionColumnTop($columnTop, $traderIds)
+    /**
+     * @param string[] $columnTop
+     * @param mixed    $traderIds
+     *
+     * @psalm-param list<''> $columnTop
+     *
+     * @return string[]
+     *
+     * @psalm-return array<int, ''|'労務'|'重機'>
+     */
+    private function conversionColumnTop(array $columnTop, $traderIds): array
     {
         $columnTop[0] = '労務';
         $columnTop[\count($traderIds)] = '重機';
@@ -340,18 +415,26 @@ class DataExportController extends Controller
         return $columnTop;
     }
 
-    private function conversionColumn($traderIds, $heavyMachineryModels)
+    /**
+     * @psalm-return list<string>
+     *
+     * @param mixed $traderIds
+     * @param mixed $heavyMachineryModels
+     *
+     * @return string[]
+     */
+    private function conversionColumn($traderIds, $heavyMachineryModels): array
     {
         $traderColumn = [];
         $heavyMachineColumn = [];
 
         foreach ($traderIds as $id) {
-                $traderColumn[] =
+            $traderColumn[] =
                 'オペ・作業員'.'【'.self::searchLaborTraderName($id).'】'
             ;
         }
         foreach ($heavyMachineryModels as $id) {
-                $heavyMachineColumn[] =
+            $heavyMachineColumn[] =
                 self::searchHeavyMachineName($id).'【'.self::searchHeavyMachineTraderName($id).'】'
             ;
         }

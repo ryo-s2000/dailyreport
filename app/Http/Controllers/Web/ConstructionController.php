@@ -10,9 +10,12 @@ use Illuminate\Http\Request;
 
 class ConstructionController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
-        function operator($value = null)
+        function operator($value = null): string
         {
             if ($value) {
                 return '=';
@@ -88,6 +91,9 @@ class ConstructionController extends Controller
         return view('construction.index', ['constructions' => $constructions, 'constructionsPalams' => $constructionsPalams, 'allConstructions' => $allConstructions]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $construction = new Construction();
@@ -100,6 +106,9 @@ class ConstructionController extends Controller
         return view('construction.create_and_edit', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(StoreRequest $request)
     {
         $construction = new Construction();
@@ -121,6 +130,11 @@ class ConstructionController extends Controller
         return redirect('/construction/password');
     }
 
+    /**
+     * @param mixed $constructionid
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function edit($constructionid)
     {
         $construction = Construction::find($constructionid);
@@ -136,6 +150,11 @@ class ConstructionController extends Controller
         return view('construction.create_and_edit', ['construction' => $construction, 'construction_numbers' => $construction_numbers]);
     }
 
+    /**
+     * @param mixed $constructionid
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(UpdateRequest $request, $constructionid)
     {
         $construction = Construction::find($constructionid);
@@ -160,6 +179,9 @@ class ConstructionController extends Controller
         return redirect('/construction/password');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy(Construction $constructionId)
     {
         Construction::destroy($constructionId);
@@ -168,11 +190,14 @@ class ConstructionController extends Controller
         return redirect('/construction/password');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function rootIndex(Request $request)
     {
         // TODO fix auth
 
-        function oper($value = null)
+        function oper($value = null): string
         {
             if ($value) {
                 return '=';

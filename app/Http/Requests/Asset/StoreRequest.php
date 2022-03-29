@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
         ];
     }
 
-    public function assetAttributes()
+    public function assetAttributes(): array
     {
         return $this->only([
             'name',

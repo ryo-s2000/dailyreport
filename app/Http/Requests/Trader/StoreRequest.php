@@ -29,7 +29,7 @@ class StoreRequest extends FormRequest
         ];
     }
 
-    public function traderAttributes()
+    public function traderAttributes(): array
     {
         return $this->only([
             'name',

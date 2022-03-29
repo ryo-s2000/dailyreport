@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class TraderController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Request $request)
     {
         $traders = self::sort_traders(Trader::all());
@@ -17,7 +20,16 @@ class TraderController extends Controller
         return view('trader.edit', ['traders' => $traders, 'assets' => $assets]);
     }
 
-    private function sort_traders($trader_all)
+    /**
+     * @param \Illuminate\Database\Eloquent\Collection|Trader[] $trader_all
+     *
+     * @psalm-param \Illuminate\Database\Eloquent\Collection|array<Trader> $trader_all
+     *
+     * @return array[]
+     *
+     * @psalm-return array<array{id: mixed, department_id: mixed, name: mixed}>
+     */
+    private function sort_traders($trader_all): array
     {
         $sort = [];
         $traders = [];

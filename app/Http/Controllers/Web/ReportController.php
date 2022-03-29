@@ -13,9 +13,12 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
-        function condition($value = null)
+        function condition($value = null): string
         {
             if ($value) {
                 return '=';
@@ -68,6 +71,9 @@ class ReportController extends Controller
         return view('report.top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $dailyreport = new Dailyreport();
@@ -86,6 +92,9 @@ class ReportController extends Controller
         return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function store(StoreRequest $request)
     {
         $dailyreport = new Dailyreport();
@@ -116,6 +125,11 @@ class ReportController extends Controller
         return redirect($redirectPath);
     }
 
+    /**
+     * @param mixed $reportId
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function show($reportId)
     {
         $dailyreport = Dailyreport::find($reportId);
@@ -126,6 +140,11 @@ class ReportController extends Controller
         return view('report.show', ['dailyreport' => $dailyreport]);
     }
 
+    /**
+     * @param mixed $reportId
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function edit($reportId)
     {
         $dailyreport = Dailyreport::find($reportId);
@@ -143,6 +162,11 @@ class ReportController extends Controller
         return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
+    /**
+     * @param mixed $reportId
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function update(UpdateRequest $request, $reportId)
     {
         $dailyreport = Dailyreport::find($reportId);
@@ -176,6 +200,11 @@ class ReportController extends Controller
         return redirect($redirectPath);
     }
 
+    /**
+     * @param mixed $dailyreportId
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function destroy($dailyreportId)
     {
         Dailyreport::destroy($dailyreportId);
@@ -183,6 +212,11 @@ class ReportController extends Controller
         return redirect('/');
     }
 
+    /**
+     * @param mixed $reportId
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
+     */
     public function createCopy($reportId)
     {
         $dailyreport = Dailyreport::find($reportId);
@@ -201,7 +235,14 @@ class ReportController extends Controller
         return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
     }
 
-    private function fillTraders($dailyreport)
+    /**
+     * @psalm-return array{0: array{id: ''|mixed, name: '業者名を選択してください'|mixed}}
+     *
+     * @param mixed $dailyreport
+     *
+     * @return (mixed|string)[][]
+     */
+    private function fillTraders($dailyreport): array
     {
         $return_traders = [
             ['id' => '', 'name' => '業者名を選択してください'],
@@ -217,7 +258,14 @@ class ReportController extends Controller
         return $return_traders;
     }
 
-    private function fillAssets($dailyreport)
+    /**
+     * @psalm-return non-empty-list<array{0: array{id: ''|mixed, name: '業者名を選択してください'|mixed}}>
+     *
+     * @param mixed $dailyreport
+     *
+     * @return (mixed|string)[][][]
+     */
+    private function fillAssets($dailyreport): array
     {
         $return_assets = [];
         for ($i = 1; $i <= 6; ++$i) {

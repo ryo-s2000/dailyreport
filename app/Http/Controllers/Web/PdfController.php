@@ -10,6 +10,11 @@ use FPDI;
 
 class PdfController extends Controller
 {
+    /**
+     * @param mixed $reportId
+     *
+     * @return null|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function generate($reportId)
     {
         /*

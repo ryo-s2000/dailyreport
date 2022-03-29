@@ -165,7 +165,7 @@ class StoreRequest extends FormRequest
         ];
     }
 
-    public function dailyreportAttributes()
+    public function dailyreportAttributes(): array
     {
         return $this->only([
             'userName',

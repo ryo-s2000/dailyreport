@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class DataExportController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create()
     {
         $constructions = Construction::all();
@@ -16,16 +19,22 @@ class DataExportController extends Controller
         return view('data_export.create', ['constructions' => $constructions]);
     }
 
-    public function generate(Request $request)
+    public function generate(Request $request): void
     {
         $startDate = $request->startDate;
         $endDate = $request->endDate;
         $constructionNumber = $request->constructionNumber;
         $constructionName = str_replace(["\r\n", "\r", "\n"], '', $request->constructionName);
 
-        $dailyreports = Dailyreport::all();
+        Dailyreport::all();
 
         // 二日間の差を計算
+        /**
+         * @param mixed $startDate
+         * @param mixed $endDate
+         *
+         * @return float|int
+         */
         function day_diff($startDate, $endDate)
         {
             // 日付をUNIXタイムスタンプに変換

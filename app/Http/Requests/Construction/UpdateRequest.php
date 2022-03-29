@@ -37,7 +37,7 @@ class UpdateRequest extends FormRequest
         ];
     }
 
-    public function constructionAttributes()
+    public function constructionAttributes(): array
     {
         return $this->only([
             'number',
