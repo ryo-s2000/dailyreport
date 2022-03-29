@@ -13,9 +13,17 @@ class DropColumnImagepathColumn extends Migration
     {
         Schema::table('dailyreports', function (Blueprint $table) {
             $table->dropColumn('imagepath1');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->dropColumn('imagepath2');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->dropColumn('imagepath3');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->dropColumn('imagepath4');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->dropColumn('imagepath5');
         });
     }

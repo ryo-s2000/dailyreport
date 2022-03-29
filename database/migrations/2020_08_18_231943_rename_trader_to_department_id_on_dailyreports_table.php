@@ -13,18 +13,44 @@ class RenameTraderToDepartmentIdOnDailyreportsTable extends Migration
     {
         Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName1', 'laborTraderId1');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName2', 'laborTraderId2');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName3', 'laborTraderId3');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName4', 'laborTraderId4');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName5', 'laborTraderId5');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName6', 'laborTraderId6');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName7', 'laborTraderId7');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('laborTraderName8', 'laborTraderId8');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('heavyMachineryTraderName1', 'heavyMachineryTraderId1');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('heavyMachineryTraderName2', 'heavyMachineryTraderId2');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('heavyMachineryTraderName3', 'heavyMachineryTraderId3');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('heavyMachineryTraderName4', 'heavyMachineryTraderId4');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('heavyMachineryTraderName5', 'heavyMachineryTraderId5');
+        });
+        Schema::table('dailyreports', function (Blueprint $table) {
             $table->renameColumn('heavyMachineryTraderName6', 'heavyMachineryTraderId6');
         });
     }
