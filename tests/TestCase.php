@@ -15,6 +15,8 @@ abstract class TestCase extends BaseTestCase
         $this->touchSqliteFile();
 
         parent::setUp();
+
+        $this->seed();
     }
 
     private function touchSqliteFile()
