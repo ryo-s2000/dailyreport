@@ -7,24 +7,22 @@
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-WL4RD9B');</script>
-    <!-- End Google Tag Manager -->
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- No Index Search Engine -->
+    <meta name="robots" content="noindex">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>日報作成ツール</title>
-
     <!-- Fonts -->
+    <meta charset="utf-8">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://kit.fontawesome.com/03da6a0c32.js" crossorigin="anonymous"></script>
 
     <!-- Styles -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
-    <meta name=”viewport” content=”width=device-width, initial-scale=1”>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Loading Bootstrap -->
     <link href="/dist/css/vendor/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +30,11 @@
     <!-- Loading Flat UI -->
     <link href="/dist/css/flat-ui.css" rel="stylesheet">
 
-    <!-- ファビコン -->
+    <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('/favicon.ico') }}">
+
+    <!-- Title -->
+    <title>日報作成ツール</title>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
