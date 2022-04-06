@@ -855,149 +855,269 @@
 
             //clear-button
             $('#laborButtonName1').on('click', function() {
-                $('#laborTraderId1').val('')
-                $('#laborPeopleNumber1').val('')
-                $('#laborWorkTime1').val('')
-                $('#laborWorkVolume1').val('')
+                document.getElementById("laborTraderId1").options[0].selected = true;
+                document.getElementById("select2-chosen-6").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber1").options[0].selected = true;
+                document.getElementById("select2-chosen-7").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime1").options[0].selected = true;
+                document.getElementById("select2-chosen-8").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume1').val('');
             });
             $('#laborButtonName2').on('click', function() {
-                $('#laborTraderId2').val('')
-                $('#laborPeopleNumber2').val('')
-                $('#laborWorkTime2').val('')
-                $('#laborWorkVolume2').val('')
+                document.getElementById("laborTraderId2").options[0].selected = true;
+                document.getElementById("select2-chosen-9").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber2").options[0].selected = true;
+                document.getElementById("select2-chosen-10").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime2").options[0].selected = true;
+                document.getElementById("select2-chosen-11").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume2').val('');
             });
             $('#laborButtonName3').on('click', function() {
-                $('#laborTraderId3').val('')
-                $('#laborPeopleNumber3').val('')
-                $('#laborWorkTime3').val('')
-                $('#laborWorkVolume3').val('')
+                document.getElementById("laborTraderId3").options[0].selected = true;
+                document.getElementById("select2-chosen-12").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber3").options[0].selected = true;
+                document.getElementById("select2-chosen-13").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime3").options[0].selected = true;
+                document.getElementById("select2-chosen-14").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume3').val('');
             });
             $('#laborButtonName4').on('click', function() {
-                $('#laborTraderId4').val('')
-                $('#laborPeopleNumber4').val('')
-                $('#laborWorkTime4').val('')
-                $('#laborWorkVolume4').val('')
+                document.getElementById("laborTraderId4").options[0].selected = true;
+                document.getElementById("select2-chosen-15").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber4").options[0].selected = true;
+                document.getElementById("select2-chosen-16").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime4").options[0].selected = true;
+                document.getElementById("select2-chosen-17").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume4').val('');
             });
             $('#laborButtonName5').on('click', function() {
-                $('#laborTraderId5').val('')
-                $('#laborPeopleNumber5').val('')
-                $('#laborWorkTime5').val('')
-                $('#laborWorkVolume5').val('')
+                document.getElementById("laborTraderId5").options[0].selected = true;
+                document.getElementById("select2-chosen-18").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber5").options[0].selected = true;
+                document.getElementById("select2-chosen-19").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime5").options[0].selected = true;
+                document.getElementById("select2-chosen-20").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume5').val('');
             });
             $('#laborButtonName6').on('click', function() {
-                $('#laborTraderId6').val('')
-                $('#laborPeopleNumber6').val('')
-                $('#laborWorkTime6').val('')
-                $('#laborWorkVolume6').val('')
+                document.getElementById("laborTraderId6").options[0].selected = true;
+                document.getElementById("select2-chosen-21").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber6").options[0].selected = true;
+                document.getElementById("select2-chosen-22").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime6").options[0].selected = true;
+                document.getElementById("select2-chosen-23").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume6').val('');
             });
             $('#laborButtonName7').on('click', function() {
-                $('#laborTraderId7').val('')
-                $('#laborPeopleNumber7').val('')
-                $('#laborWorkTime7').val('')
-                $('#laborWorkVolume7').val('')
+                document.getElementById("laborTraderId7").options[0].selected = true;
+                document.getElementById("select2-chosen-24").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber7").options[0].selected = true;
+                document.getElementById("select2-chosen-25").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime7").options[0].selected = true;
+                document.getElementById("select2-chosen-26").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume7').val('');
             });
             $('#laborButtonName8').on('click', function() {
-                $('#laborTraderId8').val('')
-                $('#laborPeopleNumber8').val('')
-                $('#laborWorkTime8').val('')
-                $('#laborWorkVolume8').val('')
+                document.getElementById("laborTraderId8").options[0].selected = true;
+                document.getElementById("select2-chosen-27").innerHTML = '業者名を選択してください';
+
+                document.getElementById("laborPeopleNumber8").options[0].selected = true;
+                document.getElementById("select2-chosen-28").innerHTML = '人数を選択';
+
+                document.getElementById("laborWorkTime8").options[0].selected = true;
+                document.getElementById("select2-chosen-29").innerHTML = '時間を選択';
+
+                $('#laborWorkVolume8').val('');
             });
             $('#laborButtonNameAll').on('click', function() {
-                $('#laborTraderId1').val('')
-                $('#laborPeopleNumber1').val('')
-                $('#laborWorkTime1').val('')
-                $('#laborWorkVolume1').val('')
-                $('#laborTraderId2').val('')
-                $('#laborPeopleNumber2').val('')
-                $('#laborWorkTime2').val('')
-                $('#laborWorkVolume2').val('')
-                $('#laborTraderId3').val('')
-                $('#laborPeopleNumber3').val('')
-                $('#laborWorkTime3').val('')
-                $('#laborWorkVolume3').val('')
-                $('#laborTraderId4').val('')
-                $('#laborPeopleNumber4').val('')
-                $('#laborWorkTime4').val('')
-                $('#laborWorkVolume4').val('')
-                $('#laborTraderId5').val('')
-                $('#laborPeopleNumber5').val('')
-                $('#laborWorkTime5').val('')
-                $('#laborWorkVolume5').val('')
-                $('#laborTraderId6').val('')
-                $('#laborPeopleNumber6').val('')
-                $('#laborWorkTime6').val('')
-                $('#laborWorkVolume6').val('')
-                $('#laborTraderId7').val('')
-                $('#laborPeopleNumber7').val('')
-                $('#laborWorkTime7').val('')
-                $('#laborWorkVolume7').val('')
-                $('#laborTraderId8').val('')
-                $('#laborPeopleNumber8').val('')
-                $('#laborWorkTime8').val('')
-                $('#laborWorkVolume8').val('')
+                document.getElementById("laborTraderId1").options[0].selected = true;
+                document.getElementById("select2-chosen-6").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber1").options[0].selected = true;
+                document.getElementById("select2-chosen-7").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime1").options[0].selected = true;
+                document.getElementById("select2-chosen-8").innerHTML = '時間を選択';
+                $('#laborWorkVolume1').val('');
+
+                document.getElementById("laborTraderId2").options[0].selected = true;
+                document.getElementById("select2-chosen-9").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber2").options[0].selected = true;
+                document.getElementById("select2-chosen-10").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime2").options[0].selected = true;
+                document.getElementById("select2-chosen-11").innerHTML = '時間を選択';
+                $('#laborWorkVolume2').val('');
+
+                document.getElementById("laborTraderId3").options[0].selected = true;
+                document.getElementById("select2-chosen-12").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber3").options[0].selected = true;
+                document.getElementById("select2-chosen-13").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime3").options[0].selected = true;
+                document.getElementById("select2-chosen-14").innerHTML = '時間を選択';
+                $('#laborWorkVolume3').val('');
+
+                document.getElementById("laborTraderId4").options[0].selected = true;
+                document.getElementById("select2-chosen-15").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber4").options[0].selected = true;
+                document.getElementById("select2-chosen-16").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime4").options[0].selected = true;
+                document.getElementById("select2-chosen-17").innerHTML = '時間を選択';
+                $('#laborWorkVolume4').val('');
+
+                document.getElementById("laborTraderId5").options[0].selected = true;
+                document.getElementById("select2-chosen-18").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber5").options[0].selected = true;
+                document.getElementById("select2-chosen-19").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime5").options[0].selected = true;
+                document.getElementById("select2-chosen-20").innerHTML = '時間を選択';
+                $('#laborWorkVolume5').val('');
+
+                document.getElementById("laborTraderId6").options[0].selected = true;
+                document.getElementById("select2-chosen-21").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber6").options[0].selected = true;
+                document.getElementById("select2-chosen-22").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime6").options[0].selected = true;
+                document.getElementById("select2-chosen-23").innerHTML = '時間を選択';
+                $('#laborWorkVolume6').val('');
+
+                document.getElementById("laborTraderId7").options[0].selected = true;
+                document.getElementById("select2-chosen-24").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber7").options[0].selected = true;
+                document.getElementById("select2-chosen-25").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime7").options[0].selected = true;
+                document.getElementById("select2-chosen-26").innerHTML = '時間を選択';
+                $('#laborWorkVolume7').val('');
+
+                document.getElementById("laborTraderId8").options[0].selected = true;
+                document.getElementById("select2-chosen-27").innerHTML = '業者名を選択してください';
+                document.getElementById("laborPeopleNumber8").options[0].selected = true;
+                document.getElementById("select2-chosen-28").innerHTML = '人数を選択';
+                document.getElementById("laborWorkTime8").options[0].selected = true;
+                document.getElementById("select2-chosen-29").innerHTML = '時間を選択';
+                $('#laborWorkVolume8').val('');
             });
 
             $('#heavyMachineryTraderButton1').on('click', function() {
-                $('#heavyMachineryTraderName1').val('')
-                $('#heavyMachineryModel1').val('')
-                $('#heavyMachineryTime1').val('')
-                $('#heavyMachineryRemarks1').val('')
+                document.getElementById("heavyMachineryTraderId1").options[0].selected = true;
+                document.getElementById("select2-chosen-31").innerHTML = '業者名を選択してください';
+
+                document.getElementById("heavyMachineryModel1").options[0].selected = true;
+                document.getElementById("select2-chosen-32").innerHTML = '業者名を選択してください';
+
+                $('#heavyMachineryTime1').val('');
+                $('#heavyMachineryRemarks1').val('');
             });
             $('#heavyMachineryTraderButton2').on('click', function() {
-                $('#heavyMachineryTraderName2').val('')
-                $('#heavyMachineryModel2').val('')
-                $('#heavyMachineryTime2').val('')
-                $('#heavyMachineryRemarks2').val('')
+                document.getElementById("heavyMachineryTraderId2").options[0].selected = true;
+                document.getElementById("select2-chosen-33").innerHTML = '業者名を選択してください';
+
+                document.getElementById("heavyMachineryModel2").options[0].selected = true;
+                document.getElementById("select2-chosen-34").innerHTML = '業者名を選択してください';
+
+                $('#heavyMachineryTime2').val('');
+                $('#heavyMachineryRemarks2').val('');
             });
             $('#heavyMachineryTraderButton3').on('click', function() {
-                $('#heavyMachineryTraderName3').val('')
-                $('#heavyMachineryModel3').val('')
-                $('#heavyMachineryTime3').val('')
-                $('#heavyMachineryRemarks3').val('')
+                document.getElementById("heavyMachineryTraderId3").options[0].selected = true;
+                document.getElementById("select2-chosen-35").innerHTML = '業者名を選択してください';
+
+                document.getElementById("heavyMachineryModel3").options[0].selected = true;
+                document.getElementById("select2-chosen-36").innerHTML = '業者名を選択してください';
+
+                $('#heavyMachineryTime3').val('');
+                $('#heavyMachineryRemarks3').val('');
             });
             $('#heavyMachineryTraderButton4').on('click', function() {
-                $('#heavyMachineryTraderName4').val('')
-                $('#heavyMachineryModel4').val('')
-                $('#heavyMachineryTime4').val('')
-                $('#heavyMachineryRemarks4').val('')
+                document.getElementById("heavyMachineryTraderId4").options[0].selected = true;
+                document.getElementById("select2-chosen-37").innerHTML = '業者名を選択してください';
+
+                document.getElementById("heavyMachineryModel4").options[0].selected = true;
+                document.getElementById("select2-chosen-38").innerHTML = '業者名を選択してください';
+
+                $('#heavyMachineryTime4').val('');
+                $('#heavyMachineryRemarks4').val('');
             });
             $('#heavyMachineryTraderButton5').on('click', function() {
-                $('#heavyMachineryTraderName5').val('')
-                $('#heavyMachineryModel5').val('')
-                $('#heavyMachineryTime5').val('')
-                $('#heavyMachineryRemarks5').val('')
+                document.getElementById("heavyMachineryTraderId5").options[0].selected = true;
+                document.getElementById("select2-chosen-39").innerHTML = '業者名を選択してください';
+
+                document.getElementById("heavyMachineryModel5").options[0].selected = true;
+                document.getElementById("select2-chosen-40").innerHTML = '業者名を選択してください';
+
+                $('#heavyMachineryTime5').val('');
+                $('#heavyMachineryRemarks5').val('');
             });
             $('#heavyMachineryTraderButton6').on('click', function() {
-                $('#heavyMachineryTraderName6').val('')
-                $('#heavyMachineryModel6').val('')
-                $('#heavyMachineryTime6').val('')
-                $('#heavyMachineryRemarks6').val('')
+                document.getElementById("heavyMachineryTraderId6").options[0].selected = true;
+                document.getElementById("select2-chosen-41").innerHTML = '業者名を選択してください';
+
+                document.getElementById("heavyMachineryModel6").options[0].selected = true;
+                document.getElementById("select2-chosen-42").innerHTML = '業者名を選択してください';
+
+                $('#heavyMachineryTime6').val('');
+                $('#heavyMachineryRemarks6').val('');
             });
             $('#heavyMachineryTraderButtonAll').on('click', function() {
-                $('#heavyMachineryTraderName1').val('')
-                $('#heavyMachineryModel1').val('')
-                $('#heavyMachineryTime1').val('')
-                $('#heavyMachineryRemarks1').val('')
-                $('#heavyMachineryTraderName2').val('')
-                $('#heavyMachineryModel2').val('')
-                $('#heavyMachineryTime2').val('')
-                $('#heavyMachineryRemarks2').val('')
-                $('#heavyMachineryTraderName3').val('')
-                $('#heavyMachineryModel3').val('')
-                $('#heavyMachineryTime3').val('')
-                $('#heavyMachineryRemarks3').val('')
-                $('#heavyMachineryTraderName4').val('')
-                $('#heavyMachineryModel4').val('')
-                $('#heavyMachineryTime4').val('')
-                $('#heavyMachineryRemarks4').val('')
-                $('#heavyMachineryTraderName5').val('')
-                $('#heavyMachineryModel5').val('')
-                $('#heavyMachineryTime5').val('')
-                $('#heavyMachineryRemarks5').val('')
-                $('#heavyMachineryTraderName6').val('')
-                $('#heavyMachineryModel6').val('')
-                $('#heavyMachineryTime6').val('')
-                $('#heavyMachineryRemarks6').val('')
+                document.getElementById("heavyMachineryTraderId1").options[0].selected = true;
+                document.getElementById("select2-chosen-31").innerHTML = '業者名を選択してください';
+                document.getElementById("heavyMachineryModel1").options[0].selected = true;
+                document.getElementById("select2-chosen-32").innerHTML = '業者名を選択してください';
+                $('#heavyMachineryTime1').val('');
+                $('#heavyMachineryRemarks1').val('');
+
+                document.getElementById("heavyMachineryTraderId2").options[0].selected = true;
+                document.getElementById("select2-chosen-33").innerHTML = '業者名を選択してください';
+                document.getElementById("heavyMachineryModel2").options[0].selected = true;
+                document.getElementById("select2-chosen-34").innerHTML = '業者名を選択してください';
+                $('#heavyMachineryTime2').val('');
+                $('#heavyMachineryRemarks2').val('');
+
+                document.getElementById("heavyMachineryTraderId3").options[0].selected = true;
+                document.getElementById("select2-chosen-35").innerHTML = '業者名を選択してください';
+                document.getElementById("heavyMachineryModel3").options[0].selected = true;
+                document.getElementById("select2-chosen-36").innerHTML = '業者名を選択してください';
+                $('#heavyMachineryTime3').val('');
+                $('#heavyMachineryRemarks3').val('');
+
+                document.getElementById("heavyMachineryTraderId4").options[0].selected = true;
+                document.getElementById("select2-chosen-37").innerHTML = '業者名を選択してください';
+                document.getElementById("heavyMachineryModel4").options[0].selected = true;
+                document.getElementById("select2-chosen-38").innerHTML = '業者名を選択してください';
+                $('#heavyMachineryTime4').val('');
+                $('#heavyMachineryRemarks4').val('');
+
+                document.getElementById("heavyMachineryTraderId5").options[0].selected = true;
+                document.getElementById("select2-chosen-39").innerHTML = '業者名を選択してください';
+                document.getElementById("heavyMachineryModel5").options[0].selected = true;
+                document.getElementById("select2-chosen-40").innerHTML = '業者名を選択してください';
+                $('#heavyMachineryTime5').val('');
+                $('#heavyMachineryRemarks5').val('');
+
+                document.getElementById("heavyMachineryTraderId6").options[0].selected = true;
+                document.getElementById("select2-chosen-41").innerHTML = '業者名を選択してください';
+                document.getElementById("heavyMachineryModel6").options[0].selected = true;
+                document.getElementById("select2-chosen-42").innerHTML = '業者名を選択してください';
+                $('#heavyMachineryTime6').val('');
+                $('#heavyMachineryRemarks6').val('');
             });
 
             $('#materialTraderButton1').on('click', function() {
