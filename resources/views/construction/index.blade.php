@@ -12,7 +12,7 @@
             <div class="btn-container col-md-12">
                 <button class="btn btn-primary btn-new-pdf display-none display-pc display-root" onClick="location.href='{{ route('constructions.create') }}'">工事番号登録</button>
             </div>
-            <?php $action = '/construction/password'; ?>
+            <?php $action = '/constructions/password'; ?>
         @else
             <div class="btn-container col-md-12">
                 <button class="edit-construction-btn btn btn-primary btn-new-pdf display-none display-pc" onClick="root()">管理アカウントに変更</button>

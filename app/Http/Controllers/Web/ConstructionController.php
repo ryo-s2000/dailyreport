@@ -127,7 +127,7 @@ class ConstructionController extends Controller
         $construction->fill($form)->save();
 
         // NOTE:パスワードを保存
-        return redirect('/construction/password');
+        return redirect('/constructions/password');
     }
 
     /**
@@ -176,7 +176,7 @@ class ConstructionController extends Controller
         $construction->fill($form)->save();
 
         // NOTE:パスワードを保存
-        return redirect('/construction/password');
+        return redirect('/constructions/password');
     }
 
     /**
@@ -189,7 +189,7 @@ class ConstructionController extends Controller
         Construction::destroy($constructionId);
 
         // NOTE:パスワードを保存
-        return redirect('/construction/password');
+        return redirect('/constructions/password');
     }
 
     /**
