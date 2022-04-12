@@ -54,8 +54,8 @@
                         @endswitch
                     </tr>
                     <tr><th>日付</th><td>{{$dailyreport->date->format('Y年m月d日')}}</td></tr>
-                    <tr><th>工事番号</th><td>{{$dailyreport->constructionNumber}}</td></tr>
-                    <tr><th>工事名</th><td>{{$dailyreport->constructionName}}</td></tr>
+                    <tr><th>工事番号</th><td>{{$dailyreport->construction->number}}</td></tr>
+                    <tr><th>工事名</th><td>{{$dailyreport->construction->name}}</td></tr>
             </table>
         </main>
     </div>

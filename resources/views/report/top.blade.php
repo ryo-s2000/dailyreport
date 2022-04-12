@@ -121,8 +121,8 @@
                                         <td></td>
                                 @endswitch
                                 <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
-                                <td>{{$dailyreport->constructionNumber}}</td>
-                                <td><div class="construction-name-form">{{$dailyreport->constructionName}}</div></td>
+                                <td>{{$dailyreport->construction->number}}</td>
+                                <td><div class="construction-name-form">{{$dailyreport->construction->name}}</div></td>
                                 <td>
                                     <form method="get" action="{{ route('reports.create.copy', ['report' => $dailyreport->id]) }}">
                                         <input type="submit" class="btn btn-primary btn-create-pdf" value="コピーして作成" />

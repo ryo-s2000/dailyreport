@@ -14,4 +14,9 @@ class Dailyreport extends Model
         'id',
         'created_at',
     ];
+
+    public function construction()
+    {
+        return $this->belongsTo(Construction::class);
+    }
 }

@@ -36,7 +36,7 @@ class ReportController extends Controller
             return '%';
         }
 
-        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+        $dailyreports = Dailyreport::with(['construction'])->where('userName', condition($request->userName), value($request->userName))
             ->where('department_id', condition($request->department_id), value($request->department_id))
             ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
         ;
@@ -134,7 +134,7 @@ class ReportController extends Controller
      */
     public function show($reportId)
     {
-        $dailyreport = Dailyreport::find($reportId);
+        $dailyreport = Dailyreport::with(['construction'])->find($reportId);
         if (null === $dailyreport) {
             return redirect('/');
         }
@@ -149,7 +149,7 @@ class ReportController extends Controller
      */
     public function edit($reportId)
     {
-        $dailyreport = Dailyreport::find($reportId);
+        $dailyreport = Dailyreport::with(['construction'])->find($reportId);
 
         if (null === $dailyreport) {
             return redirect('/');
@@ -221,7 +221,7 @@ class ReportController extends Controller
      */
     public function createCopy($reportId)
     {
-        $dailyreport = Dailyreport::find($reportId);
+        $dailyreport = Dailyreport::with(['construction'])->find($reportId);
         $dailyreport->date = date('Y-m-d');
 
         if (null === $dailyreport) {

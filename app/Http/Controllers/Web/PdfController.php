@@ -24,7 +24,7 @@ class PdfController extends Controller
         error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
         // データを取得できる
-        $inputData = Dailyreport::find($reportId);
+        $inputData = Dailyreport::with(['construction'])->find($reportId);
         if (null === $inputData) {
             return redirect('/');
         }
@@ -111,10 +111,10 @@ class PdfController extends Controller
         }
 
         // 工事番号
-        $items[] = ['x' => 30.0, 'y' => 25.0, 'content' => $inputData['constructionNumber']];
+        $items[] = ['x' => 30.0, 'y' => 25.0, 'content' => $inputData['construction']['number']];
 
         // 工事名
-        $construction = explode("\n", $inputData['constructionName']);
+        $construction = explode("\n", $inputData['construction']['name']);
         if (1 === \count($construction)) {
             $items[] = ['x' => 75.0, 'y' => 25.0, 'content' => $construction[0]];
         } elseif (2 === \count($construction)) {
