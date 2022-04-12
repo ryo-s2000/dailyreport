@@ -9,6 +9,8 @@
     <projectFiles>
         <directory name="app" />
         <ignoreFiles>
+            <file name="app/Http/Controllers/Web/PdfController.php" />
+            <file name="app/Http/Controllers/Web/ReportController.php" />
             <directory name="vendor" />
         </ignoreFiles>
     </projectFiles>

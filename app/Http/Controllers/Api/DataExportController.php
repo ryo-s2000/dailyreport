@@ -20,7 +20,6 @@ class DataExportController extends Controller
         // postされたデータを取得
         $startDate = $request->startDate;
         $endDate = $request->endDate;
-        $constructionNumber = $request->constructionNumber;
         $constructionId = $request->constructionId;
 
         // 工事番号と日付を指定して、日報データを取得

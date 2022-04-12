@@ -1,7 +1,7 @@
 <?php
 
 if (!function_exists('lineNotify')) {
-    function lineNotify($departmentId, $message)
+    function lineNotify($departmentId, $message): void
     {
         $lineUrl = 'https://notify-api.line.me/api/notify';
 
