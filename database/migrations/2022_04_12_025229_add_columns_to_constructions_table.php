@@ -12,7 +12,7 @@ class AddColumnsToConstructionsTable extends Migration
     public function up()
     {
         Schema::table('constructions', function (Blueprint $table) {
-            $table->string('year')->index()->after('id');
+            $table->string('year')->index()->after('id')->default('');
             $table->string('scale')->after('number');
             $table->integer('progress')->after('scale');
             $table->datetime('billing_date')->nullable()->after('progress');
