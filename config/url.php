@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'pdf' => env('URL_PDF')
+    'pdf' => env('URL_PDF'),
 ];
