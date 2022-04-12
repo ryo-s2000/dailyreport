@@ -12,13 +12,13 @@ class AddColumnsToConstructionsTable extends Migration
     public function up()
     {
         Schema::table('constructions', function (Blueprint $table) {
-            $table->string('year')->index()->after('id')->default('');
-            $table->string('scale')->after('number');
-            $table->integer('progress')->after('scale');
+            $table->string('year')->index()->default('')->after('id');
+            $table->string('scale')->nullable()->after('number');
+            $table->integer('progress')->default(0)->after('scale');
             $table->datetime('billing_date')->nullable()->after('progress');
             $table->datetime('payment_date')->nullable()->after('billing_date');
             $table->datetime('contract_date')->nullable()->after('orderer');
-            $table->integer('score')->after('contract_date');
+            $table->integer('score')->nullable()->after('contract_date');
             $table->integer('price_spare1')->nullable()->after('price');
             $table->integer('price_spare2')->nullable()->after('price_spare1');
             $table->integer('price_spare3')->nullable()->after('price_spare2');
@@ -27,8 +27,8 @@ class AddColumnsToConstructionsTable extends Migration
             $table->datetime('period_spare2')->nullable()->after('period_spare1');
             $table->datetime('period_spare3')->nullable()->after('period_spare2');
             $table->datetime('period_spare4')->nullable()->after('period_spare3');
-            $table->string('agent')->after('supervisor');
-            $table->string('developer')->after('agent');
+            $table->string('agent')->default('')->after('supervisor');
+            $table->string('developer')->default('')->after('agent');
         });
     }
 
