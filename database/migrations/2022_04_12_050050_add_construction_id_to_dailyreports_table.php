@@ -12,7 +12,7 @@ class AddConstructionIdToDailyreportsTable extends Migration
     public function up()
     {
         Schema::table('dailyreports', function (Blueprint $table) {
-            $table->bigInteger('construction_id')->after('department_id');
+            $table->bigInteger('construction_id')->default(0)->after('department_id');
         });
     }
 
