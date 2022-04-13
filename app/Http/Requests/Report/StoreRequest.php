@@ -26,7 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'userName' => ['required', 'string', 'max:30'],
             'department_id' => ['required', 'integer', 'max:20'],
-            'construction_id' => ['required', 'integer', 'max:20'],
+            'construction_id' => ['required'],
             'date' => ['required', 'date'],
             'amWeather' => ['string', 'max:20'],
             'pmWeather' => ['string', 'max:20'],
