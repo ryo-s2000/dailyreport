@@ -36,24 +36,25 @@ class ReportController extends Controller
             return '%';
         }
 
-        $dailyreports = Dailyreport::with(['construction'])->where('userName', condition($request->userName), value($request->userName))
+        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+            ->join('constructions', 'dailyreports.construction_id', '=', 'constructions.id')
             ->where('department_id', condition($request->department_id), value($request->department_id))
-            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
+            ->where('constructions.number', condition($request->constructionNumber), value($request->constructionNumber))
         ;
 
         switch ($request->sort) {
             case '日付が早い順':
-                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('dailyreports.created_at')->paginate(100);
 
                 break;
 
             case '日付が遅い順':
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate(100);
 
                 break;
 
             default:
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate(100);
         }
 
         $dailyreportsPalams = [
