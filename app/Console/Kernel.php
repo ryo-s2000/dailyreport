@@ -7,6 +7,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     protected $commands = [
-        \App\Console\Commands\Maintenances\ConstructionNumberToConstructionIdOnConstructionsTable::class,
+        Commands\Maintenances\ConstructionNumberToConstructionIdOnConstructionsTable::class,
     ];
 }
