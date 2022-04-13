@@ -28,7 +28,7 @@
 
     <div class="container main-container">
 
-        <form method="post" action="{{ route('data_export.generate') }}" enctype="multipart/form-data">
+        <form method="post" action="" enctype="multipart/form-data">
             @csrf
 
             <div class="item-conteiner-top">
@@ -58,6 +58,12 @@
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
                             <option value="{{$construction->name}}">{{$construction->name}}</option>
+                        @endforeach
+                    </select>
+                    <select name="constructionId" data-toggle="select" style="visibility:hidden">
+                        <option value="" label="default">工事idを選択</option>
+                        @foreach ($constructions as $construction)
+                            <option value="{{$construction->id}}">{{$construction->id}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -102,7 +108,8 @@
                 data: {
                     startDate: $('input[name="startDate"]').val(),
                     endDate: $('input[name="endDate"]').val(),
-                    constructionNumber: $('select[name="constructionNumber"]').val()
+                    constructionNumber: $('select[name="constructionNumber"]').val(),
+                    constructionId: $('select[name="constructionId"]').val()
                 },
             })
             .done(function (response) {
@@ -147,7 +154,8 @@
                 { 'startDate' : $('input[name="startDate"]').val() },
                 { 'endDate' : $('input[name="endDate"]').val() },
                 { 'constructionNumber' : $('select[name="constructionNumber"]').val() },
-                { 'constructionName' : $('select[name="constructionName"]').val() }
+                { 'constructionName' : $('select[name="constructionName"]').val() },
+                { 'constructionId' : $('select[name="constructionId"]').val() },
             );
             $.ajax({
                 url: '/api/data_exports',
@@ -206,11 +214,13 @@
             $('select[name="constructionNumber"]').change(function(e, data) {
                 if(data !="exit"){
                     $('select[name="constructionName"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                    $('select[name="constructionId"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
             $('select[name="constructionName"]').change(function(e, data) {
                 if(data !="exit"){
                     $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                    $('select[name="constructionId"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
 

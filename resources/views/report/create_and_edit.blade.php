@@ -96,7 +96,7 @@
                             @if($construction->number == old('constructionNumber'))
                                 <?php $selectedNumber = true; ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
-                            @elseif(old('constructionNumber') == "" and $construction->number == $dailyreport->constructionNumber)
+                            @elseif(old('constructionNumber') == "" and $construction->number == $dailyreport->construction->number)
                                 <?php $selectedNumber = true; ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @else
@@ -110,11 +110,23 @@
                             @if($construction->name == old('constructionName'))
                                 <?php $selectedName = true; ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
-                            @elseif(old('constructionName') == "" and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->constructionName))
+                            @elseif(old('constructionName') == "" and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->construction->name))
                                 <?php $selectedName = true; ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
                                 <option value="{{$construction->name}}">{{$construction->name}}</option>
+                            @endif
+                        @endforeach
+                    </select>
+                    <select name="construction_id" data-toggle="select" style="visibility:hidden">
+                        <option value="" label="default">工事idを選択</option>
+                        @foreach ($constructions as $construction)
+                            @if($construction->id == old('construction_id'))
+                                <option value="{{$construction->id}}" selected="selected">{{$construction->id}}</option>
+                            @elseif(old('construction_id') == "" and $construction->id == $dailyreport->construction_id)
+                                <option value="{{$construction->id}}" selected="selected">{{$construction->id}}</option>
+                            @else
+                                <option value="{{$construction->id}}">{{$construction->id}}</option>
                             @endif
                         @endforeach
                     </select>
@@ -789,11 +801,13 @@
             $('select[name="constructionNumber"]').change(function(e, data) {
                 if(data !="exit"){
                     $('select[name="constructionName"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                    $('select[name="construction_id"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
             $('select[name="constructionName"]').change(function(e, data) {
                 if(data !="exit"){
                     $('select[name="constructionNumber"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
+                    $('select[name="construction_id"]').prop("selectedIndex", $(this).prop("selectedIndex")).trigger('change', ['exit']);
                 }
             });
 

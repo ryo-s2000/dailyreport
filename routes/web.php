@@ -28,4 +28,3 @@ Route::get('/traders/edit', 'TraderController@edit')->name('traders.edit.all');
 
 // Data Export
 Route::get('/data_export/create', 'DataExportController@create')->name('data_export.create');
-Route::post('/data_export', 'DataExportController@generate')->name('data_export.generate');

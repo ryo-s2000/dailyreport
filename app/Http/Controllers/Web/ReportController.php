@@ -37,23 +37,24 @@ class ReportController extends Controller
         }
 
         $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+            ->join('constructions', 'dailyreports.construction_id', '=', 'constructions.id')
             ->where('department_id', condition($request->department_id), value($request->department_id))
-            ->where('constructionNumber', condition($request->constructionNumber), value($request->constructionNumber))
+            ->where('constructions.number', condition($request->constructionNumber), value($request->constructionNumber))
         ;
 
         switch ($request->sort) {
             case '日付が早い順':
-                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('dailyreports.created_at')->paginate(100);
 
                 break;
 
             case '日付が遅い順':
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate(100);
 
                 break;
 
             default:
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate(100);
         }
 
         $dailyreportsPalams = [
@@ -117,7 +118,7 @@ class ReportController extends Controller
         $dailyreport->fill($form)->save();
         $dailyreportId = $dailyreport->id;
 
-        lineNotify($form['department_id'], $form['userName'] . 'さんから' . $form['constructionName'] . '[' . $form['constructionNumber'] . ']' . 'の日報が届きました。' . config('url.pdf') . $dailyreportId);
+        lineNotify($form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
 
         $redirectPath = '/';
         if ('true' === $transitionPreview) {
@@ -134,7 +135,7 @@ class ReportController extends Controller
      */
     public function show($reportId)
     {
-        $dailyreport = Dailyreport::find($reportId);
+        $dailyreport = Dailyreport::with(['construction'])->find($reportId);
         if (null === $dailyreport) {
             return redirect('/');
         }
@@ -149,7 +150,7 @@ class ReportController extends Controller
      */
     public function edit($reportId)
     {
-        $dailyreport = Dailyreport::find($reportId);
+        $dailyreport = Dailyreport::with(['construction'])->find($reportId);
 
         if (null === $dailyreport) {
             return redirect('/');
@@ -221,7 +222,7 @@ class ReportController extends Controller
      */
     public function createCopy($reportId)
     {
-        $dailyreport = Dailyreport::find($reportId);
+        $dailyreport = Dailyreport::with(['construction'])->find($reportId);
         $dailyreport->date = date('Y-m-d');
 
         if (null === $dailyreport) {

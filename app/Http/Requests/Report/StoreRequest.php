@@ -26,6 +26,7 @@ class StoreRequest extends FormRequest
         return [
             'userName' => ['required', 'string', 'max:30'],
             'department_id' => ['required', 'integer', 'max:20'],
+            'construction_id' => ['required', 'integer', 'max:20'],
             'date' => ['required', 'date'],
             'amWeather' => ['string', 'max:20'],
             'pmWeather' => ['string', 'max:20'],
@@ -170,6 +171,7 @@ class StoreRequest extends FormRequest
         return $this->only([
             'userName',
             'department_id',
+            'construction_id',
             'date',
             'amWeather',
             'pmWeather',

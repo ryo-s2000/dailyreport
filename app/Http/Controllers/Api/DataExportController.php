@@ -20,10 +20,10 @@ class DataExportController extends Controller
         // postされたデータを取得
         $startDate = $request->startDate;
         $endDate = $request->endDate;
-        $constructionNumber = $request->constructionNumber;
+        $constructionId = $request->constructionId;
 
         // 工事番号と日付を指定して、日報データを取得
-        $reports = self::getReport($constructionNumber, $startDate, $endDate);
+        $reports = self::getReport($constructionId, $startDate, $endDate);
 
         // 従業員・重機のデータを取得、整形、ユニーク
         [$uniqueLaborTraderIds, $uniqueHeavyMachineryModels] = self::getUniqueLaborAndHeavyMachineData($reports);
@@ -69,9 +69,10 @@ class DataExportController extends Controller
         $heavyMachineUnitPrice = $request->heavyMachineUnitPrice;
         $constructionNumber = $request->constructionNumber;
         $constructionName = str_replace(["\r\n", "\r", "\n"], '', $request->constructionName);
+        $constructionId = $request->constructionId;
 
         // 工事番号と日付を指定して、日報データを取得
-        $reports = self::getReport($constructionNumber, $startDate, $endDate);
+        $reports = self::getReport($constructionId, $startDate, $endDate);
 
         /////////////// CSVのCOLUMN情報を取得する ///////////////
         // 従業員・重機のデータを取得、整形、ユニーク
@@ -140,16 +141,16 @@ class DataExportController extends Controller
     /**
      * @psalm-return \Illuminate\Database\Eloquent\Collection|array<\Illuminate\Database\Eloquent\Builder>
      *
-     * @param mixed $constructionNumber
+     * @param mixed $constructionId
      * @param mixed $startDate
      * @param mixed $endDate
      *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    private function getReport($constructionNumber, $startDate, $endDate)
+    private function getReport($constructionId, $startDate, $endDate)
     {
         $query = Dailyreport::query();
-        $query->where('constructionNumber', $constructionNumber);
+        $query->where('construction_id', $constructionId);
         $query->whereBetween('date', [$startDate, $endDate]);
 
         return $query->get();
