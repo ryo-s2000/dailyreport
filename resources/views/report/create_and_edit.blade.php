@@ -118,7 +118,7 @@
                             @endif
                         @endforeach
                     </select>
-                    <select name="construction_id" data-toggle="select" style="visibility:hidden">
+                    <select name="construction_id" style="visibility:hidden">
                         <option value="" label="default">工事idを選択</option>
                         @foreach ($constructions as $construction)
                             @if($construction->id == old('construction_id'))
