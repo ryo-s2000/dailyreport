@@ -36,7 +36,7 @@ class ReportController extends Controller
             return '%';
         }
 
-        $dailyreports = Dailyreport::where('userName', condition($request->userName), value($request->userName))
+        $dailyreports = Dailyreport::select('dailyreports.*')->where('userName', condition($request->userName), value($request->userName))
             ->join('constructions', 'dailyreports.construction_id', '=', 'constructions.id')
             ->where('department_id', condition($request->department_id), value($request->department_id))
             ->where('constructions.number', condition($request->constructionNumber), value($request->constructionNumber))
