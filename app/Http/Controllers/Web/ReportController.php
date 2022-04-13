@@ -118,7 +118,7 @@ class ReportController extends Controller
         $dailyreport->fill($form)->save();
         $dailyreportId = $dailyreport->id;
 
-        lineNotify($form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
+        lineNotify((int) $form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
 
         $redirectPath = '/';
         if ('true' === $transitionPreview) {
