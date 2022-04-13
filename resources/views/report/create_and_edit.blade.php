@@ -96,7 +96,7 @@
                             @if($construction->number == old('constructionNumber'))
                                 <?php $selectedNumber = true; ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
-                            @elseif(old('constructionNumber') == "" and $construction->number == $dailyreport->construction->number)
+                            @elseif(old('constructionNumber') == "" and isset($dailyreport->construction) and $construction->number == $dailyreport->construction->number)
                                 <?php $selectedNumber = true; ?>
                                 <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
                             @else
@@ -110,7 +110,7 @@
                             @if($construction->name == old('constructionName'))
                                 <?php $selectedName = true; ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
-                            @elseif(old('constructionName') == "" and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->construction->name))
+                            @elseif(old('constructionName') == "" and isset($dailyreport->construction) and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->construction->name))
                                 <?php $selectedName = true; ?>
                                 <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
                             @else
