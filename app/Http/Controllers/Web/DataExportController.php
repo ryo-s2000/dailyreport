@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 use App\Models\Construction;
-use App\Models\Trader;
 
 class DataExportController extends Controller
 {
@@ -23,8 +22,6 @@ class DataExportController extends Controller
      */
     public function vender_create()
     {
-        $traders = Trader::select('id', 'name')->get();
-
-        return view('data_export.vender_create', ['traders' => $traders]);
+        return view('data_export.vender_create');
     }
 }

@@ -24,13 +24,23 @@
             </div>
 
             <div class="item-conteiner-top select-checker-container">
+                <h5>部署  <span class="required">[必須]</h5>
+                <div class="col-md-12">
+                    <select name="department_id" id="department_id" data-toggle="select" class="form-control select select-default mrs mbm">
+                        <option value="" label="default">部署を選択してください</option>
+
+                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
+                            <option value="{{$loop->index+1}}">{{$value}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="item-conteiner-top select-checker-container">
                 <h5>業者名  <span class="required">[必須]</h5>
                 <div class="col-md-12">
-                    <select name="traderId" data-toggle="select" class="form-control select select-default mrs mbm">
-                        <option value="" label="default">業者名を選択</option>
-                        @foreach ($traders as $trader)
-                            <option value="{{$trader->id}}">{{$trader->name}}</option>
-                        @endforeach
+                    <select name="traderId" id="traderId" data-toggle="select" class="form-control select select-default mrs mbm">
+                        <option value="" label="default">部署を選択してください</option>
                     </select>
                 </div>
             </div>
@@ -107,6 +117,54 @@
             document.body.appendChild(element);
             element.click();
             document.body.removeChild(element);
+        }
+
+        // 部署を選択したら、業者データを更新
+        $('#department_id').change(function() {
+            const department_id = $('#department_id option:selected').val();
+            if(!department_id) {
+                return
+            }
+
+            // 業者データを取得
+            $.ajax({
+                url: '/api/traders/' + department_id,
+                type: 'get',
+                dataType: 'json'
+            })
+            .done(function (response) {
+                traders = response;
+                traders.unshift({'id':'', 'name':'業者名を選択してください'});
+                update_trader(traders, true);
+            })
+            .fail(function () {
+                alert('業者データ取得中にエラーが発生しました、しばらくたってやり直しても治らない場合は管理者までお問い合わせください。');
+            });
+        });
+
+        // 業者データを書き換え
+        const update_trader = (traders, select_default) => {
+            // 業者データを上書き
+            const over_write = (traders, select_id, selected_value, select_default) => {
+                // 全て取り除く
+                $(select_id  + '> option').remove();
+
+                // 追加
+                traders.forEach(trader => {
+                    $(select_id).append($('<option>').html(trader['name']).val(trader['id']));
+                });
+
+                // デフォルト選択表示にする
+                if(select_default) {
+                    $(select_id).prop("selectedIndex", 0).trigger('change', ['exit']);
+                } else {
+                    // 前回選択されていた項目を選択をする
+                    let select_index = traders.map(x => x['id']).indexOf(Number(selected_value));
+                    $(select_id).prop("selectedIndex", select_index).trigger('change', ['exit']);
+                }
+            }
+
+            over_write(traders, '#traderId', '', true);
         }
     </script>
 

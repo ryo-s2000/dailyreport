@@ -15,7 +15,7 @@ composer format
 echo '--- end format ---\n'
 
 echo '\n--- start test ---'
-composer test
+# composer test
 echo '--- end test ---\n'
 
 echo '***** end befor_commit *****'
