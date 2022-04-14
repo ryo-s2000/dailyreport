@@ -46,7 +46,7 @@
         const dataexport = async () => {
             if(validate()) {
                 const csvData = await generateCsvData();
-                downloadCsv(csvData['content'], csvData['fileName']);
+                downloadCsv(csvData['fileName'], csvData['content']);
             }
         };
 
@@ -90,7 +90,7 @@
             });
         }
 
-        const downloadCsv = (array, fileName) => {
+        const downloadCsv = (fileName, array) => {
             var UTF_8_BOM = '%EF%BB%BF';
 
             var csv = [];

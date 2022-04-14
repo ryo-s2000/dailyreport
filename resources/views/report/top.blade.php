@@ -14,7 +14,7 @@
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('traders.edit.all') }}'">業者・重機</button>
             <div>
                 <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.construction_number.create') }}'">工事番号別CSV出力</button>
-                <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.vender.create') }}'">業者名称別CSV出力</button>
+                <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.vender.create') }}'">業者名別CSV出力</button>
             </div>
         </div>
 
