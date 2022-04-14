@@ -27,4 +27,5 @@ Route::get('/pdf/{report_id}', 'PdfController@generate');
 Route::get('/traders/edit', 'TraderController@edit')->name('traders.edit.all');
 
 // Data Export
-Route::get('/data_export/create', 'DataExportController@create')->name('data_export.create');
+Route::get('/data_export/construction_number/create', 'DataExportController@construction_number_create')->name('data_export.construction_number.create');
+Route::get('/data_export/vender/create', 'DataExportController@vender_create')->name('data_export.vender.create');

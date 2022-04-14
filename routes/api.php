@@ -13,5 +13,6 @@ Route::resource('traders', 'TraderController', ['only' => ['show', 'store', 'edi
 Route::resource('assets', 'AssetController', ['only' => ['show', 'store', 'edit']]);
 
 // Dataexport
-Route::post('/data_exports/unit_price', 'DataExportController@show');
-Route::post('/data_exports', 'DataExportController@export');
+Route::post('/data_exports/construction_number/unit_price', 'ConstructionNumberDataExportController@show');
+Route::post('/data_exports/construction_number', 'ConstructionNumberDataExportController@export');
+Route::post('/data_exports/vender', 'VenderDataExportController@generate');

@@ -8,7 +8,7 @@ use App\Models\Dailyreport;
 use App\Models\Trader;
 use Illuminate\Http\Request;
 
-class DataExportController extends Controller
+class ConstructionNumberDataExportController extends Controller
 {
     /**
      * Display a listing of the resource.
