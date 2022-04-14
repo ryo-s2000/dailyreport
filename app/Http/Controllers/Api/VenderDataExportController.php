@@ -10,57 +10,7 @@ use Illuminate\Http\Request;
 
 class VenderDataExportController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Request $request)
-    {
-        // postされたデータを取得
-        $startDate = $request->startDate;
-        $endDate = $request->endDate;
-        $constructionId = $request->constructionId;
-
-        // 工事番号と日付を指定して、日報データを取得
-        $reports = self::getReport($constructionId, $startDate, $endDate);
-
-        // 従業員・重機のデータを取得、整形、ユニーク
-        [$uniqueLaborTraderIds, $uniqueHeavyMachineryModels] = self::getUniqueLaborAndHeavyMachineData($reports);
-
-        $returnLaborTraderIds = [];
-        $returnHeavyMachineryModels = [];
-        foreach ($uniqueLaborTraderIds as $id) {
-            $data = [
-                'laborTraderId' => $id,
-                'laborTraderName' => self::searchLaborTraderName($id),
-            ];
-
-            $returnLaborTraderIds[] =
-                $data
-            ;
-        }
-        foreach ($uniqueHeavyMachineryModels as $id) {
-            $data = [
-                'heavyMachineryModel' => $id,
-                'heavyMachineName' => self::searchHeavyMachineName($id),
-                'heavyMachineTraderName' => self::searchHeavyMachineTraderName($id),
-            ];
-
-            $returnHeavyMachineryModels[] =
-                $data
-            ;
-        }
-
-        $return_data = [
-            'laborTraderIds' => $returnLaborTraderIds,
-            'heavyMachineryModels' => $returnHeavyMachineryModels,
-        ];
-
-        return response()->json($return_data);
-    }
-
-    public function export(Request $request)
+    public function generate(Request $request)
     {
         // postされたデータを取得
         $startDate = $request->startDate;
@@ -132,7 +82,7 @@ class VenderDataExportController extends Controller
 
         $returnData = [
             'fileName' => $fileName,
-            'csv' => $csv,
+            'content' => $csv,
         ];
 
         return response()->json($returnData);
