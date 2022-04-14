@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Asset;
 use App\Models\Dailyreport;
 use App\Models\Trader;
 use Carbon\Carbon;
@@ -29,9 +28,8 @@ class VenderDataExportController extends Controller
     private function generateFileName(string $startDate, string $endDate, int $traderId): string
     {
         $traderName = Trader::find($traderId)->name;
-        $fileName = join( '_', ['業者名別レポート', $startDate, $endDate, $traderName] ).'.csv';
 
-        return $fileName;
+        return implode('_', ['業者名別レポート', $startDate, $endDate, $traderName]).'.csv';
     }
 
     private function generateCsv(string $startDate, string $endDate, int $traderId): array
@@ -55,7 +53,7 @@ class VenderDataExportController extends Controller
             // WARNING
             // Low performance
             $reports = collect();
-            for($i=1; $i<=8; ++$i) {
+            for ($i = 1; $i <= 8; ++$i) {
                 $reports = $reports->merge(
                     Dailyreport::select('constructions.number as constructionNumber', 'constructions.name as constructionName', 'laborPeopleNumber'.$i.' as count', 'laborWorkTime'.$i.' as time', 'date')
                         ->join('constructions', 'dailyreports.construction_id', '=', 'constructions.id')
@@ -67,11 +65,13 @@ class VenderDataExportController extends Controller
             }
 
             $constructions = $reports->unique('constructionNumber')->pluck('constructionName', 'constructionNumber')->all();
-            foreach ( $constructions as $constructionNumber => $constructionName ) {
+            foreach ($constructions as $constructionNumber => $constructionName) {
                 $row = [$constructionNumber, $constructionName];
 
-                foreach ( $columns as $date ) {
-                    if(empty($date)) continue;
+                foreach ($columns as $date) {
+                    if (empty($date)) {
+                        continue;
+                    }
 
                     $value = 0;
 
@@ -80,8 +80,8 @@ class VenderDataExportController extends Controller
                     $filteredReports = $reports->filter(function ($report) use ($constructionNumber, $date) {
                         return $report->constructionNumber === $constructionNumber && (new Carbon($report->date))->format('m/d') === $date;
                     });
-                    foreach ( $filteredReports as $report ) {
-                        $value += ($report->time * $report->count)/8.0;
+                    foreach ($filteredReports as $report) {
+                        $value += ($report->time * $report->count) / 8.0;
                     }
 
                     $row[] = $value;
@@ -97,12 +97,12 @@ class VenderDataExportController extends Controller
         {
             $totals = ['', '小計'];
 
-            $rowCount = count($rows);
+            $rowCount = \count($rows);
 
-            for($l=2; $l<$columnCount; ++$l) {
+            for ($l = 2; $l < $columnCount; ++$l) {
                 $total = 0;
 
-                for ($r=0; $r<$rowCount; ++$r) {
+                for ($r = 0; $r < $rowCount; ++$r) {
                     $total += $rows[$r][$l];
                 }
 
@@ -113,7 +113,7 @@ class VenderDataExportController extends Controller
         }
 
         $columns = generateColumns($startDate, $endDate);
-        $columnCount = count($columns);
+        $columnCount = \count($columns);
         $rows = gemerateRows($startDate, $endDate, $traderId, $columns);
         $total = gemerateTotal($rows, $columnCount);
         $margin = array_fill(0, $columnCount, '');
