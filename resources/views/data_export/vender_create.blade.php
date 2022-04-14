@@ -102,7 +102,7 @@
             }
 
             $.ajax({
-                url: '/api/data_exports/unit_price',
+                url: '/api/data_exports/vender/unit_price',
                 type: 'post',
                 dataType: 'json',
                 data: {
@@ -158,7 +158,7 @@
                 { 'constructionId' : $('select[name="constructionId"]').val() },
             );
             $.ajax({
-                url: '/api/data_exports',
+                url: '/api/data_exports/vender',
                 type: 'post',
                 dataType: 'json',
                 data: unit_prices

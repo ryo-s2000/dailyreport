@@ -12,7 +12,10 @@
             <button class="btn btn-primary btn-new-pdf" onClick="location.href='{{ route('reports.create') }}'">日報作成</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('constructions.index') }}'">工事番号</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('traders.edit.all') }}'">業者・重機</button>
-            <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.create') }}'">CSV出力</button>
+            <div>
+                <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.construction_number.create') }}'">工事番号別CSV出力</button>
+                <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.vender.create') }}'">業者名称別CSV出力</button>
+            </div>
         </div>
 
         <?php

@@ -10,10 +10,20 @@ class DataExportController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function create()
+    public function construction_number_create()
     {
         $constructions = Construction::all();
 
-        return view('data_export.create', ['constructions' => $constructions]);
+        return view('data_export.construction_number_create', ['constructions' => $constructions]);
+    }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function vender_create()
+    {
+        $constructions = Construction::all();
+
+        return view('data_export.vender_create', ['constructions' => $constructions]);
     }
 }

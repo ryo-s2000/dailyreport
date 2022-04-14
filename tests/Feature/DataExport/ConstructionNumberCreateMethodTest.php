@@ -8,12 +8,11 @@ use Tests\TestCase;
  * @internal
  * @coversNothing
  */
-final class GenerateMethodTest extends TestCase
+final class ConstructionNumberCreateMethodTest extends TestCase
 {
     public function testConnectivity()
     {
-        // TODO csv generate test
-        $response = $this->get('/data_export/create');
+        $response = $this->get('/data_export/construction_number/create');
 
         $response->assertStatus(200);
     }
