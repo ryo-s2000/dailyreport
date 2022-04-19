@@ -217,10 +217,10 @@ class PdfController extends Controller
         $items[] = ['x' => 14.0, 'y' => 91.5, 'content' => self::trader_name($inputData['laborTraderId8'])];
         $items[] = ['x' => 62.0, 'y' => 91.5, 'content' => $inputData['laborPeopleNumber8']];
         $items[] = ['x' => 77.0, 'y' => 91.5, 'content' => $inputData['laborWorkTime8']];
-        if (mb_strlen($inputData['laborWorkVolume7'], 'UTF-8') < 25) {
-            $items[] = ['x' => 86.0, 'y' => 91.5, 'content' => $inputData['laborWorkVolume7']];
+        if (mb_strlen($inputData['laborWorkVolume8'], 'UTF-8') < 25) {
+            $items[] = ['x' => 86.0, 'y' => 91.5, 'content' => $inputData['laborWorkVolume8']];
         } else {
-            $text = $inputData['laborWorkVolume7'];
+            $text = $inputData['laborWorkVolume8'];
             $line1 = mb_substr($text, 0, 25, 'UTF-8');
             $line2 = mb_substr($text, 25, 80, 'UTF-8');
             $items[] = ['x' => 86.0, 'y' => 90.5, 'content' => $line1];
