@@ -12,14 +12,15 @@ class AddColumnsToConstructionsTable extends Migration
     public function up()
     {
         Schema::table('constructions', function (Blueprint $table) {
-            $table->string('year')->index()->default('')->after('id');
+            $table->string('year')->default('')->after('id');
             $table->string('scale')->nullable()->after('number');
             $table->integer('progress')->default(0)->after('scale');
-            $table->datetime('billing_date')->nullable()->after('progress');
+            $table->datetime('contract_date')->nullable()->after('progress');
+            $table->datetime('billing_date')->nullable()->after('contract_date');
             $table->datetime('payment_date')->nullable()->after('billing_date');
-            $table->datetime('contract_date')->nullable()->after('orderer');
-            $table->integer('score')->nullable()->after('contract_date');
-            $table->integer('price_spare1')->nullable()->after('price');
+            $table->integer('score')->nullable()->after('payment_date');
+            $table->integer('tax')->default(0)->after('price');
+            $table->integer('price_spare1')->nullable()->after('tax');
             $table->integer('price_spare2')->nullable()->after('price_spare1');
             $table->integer('price_spare3')->nullable()->after('price_spare2');
             $table->integer('price_spare4')->nullable()->after('price_spare3');
@@ -27,8 +28,10 @@ class AddColumnsToConstructionsTable extends Migration
             $table->datetime('period_spare2')->nullable()->after('period_spare1');
             $table->datetime('period_spare3')->nullable()->after('period_spare2');
             $table->datetime('period_spare4')->nullable()->after('period_spare3');
-            $table->string('agent')->default('')->after('supervisor');
-            $table->string('developer')->default('')->after('agent');
+            $table->string('agent')->nullable()->after('supervisor');
+            $table->string('developer')->nullable()->after('agent');
+
+            $table->unique(['year', 'number'], 'year_and_number');
         });
     }
 
@@ -41,10 +44,11 @@ class AddColumnsToConstructionsTable extends Migration
             $table->dropColumn('year');
             $table->dropColumn('scale');
             $table->dropColumn('progress');
+            $table->dropColumn('contract_date');
             $table->dropColumn('billing_date');
             $table->dropColumn('payment_date');
-            $table->dropColumn('contract_date');
             $table->dropColumn('score');
+            $table->dropColumn('tax');
             $table->dropColumn('price_spare1');
             $table->dropColumn('price_spare2');
             $table->dropColumn('price_spare3');
@@ -55,6 +59,8 @@ class AddColumnsToConstructionsTable extends Migration
             $table->dropColumn('period_spare4');
             $table->dropColumn('agent');
             $table->dropColumn('developer');
+
+            $table->dropIndex('year_and_number');
         });
     }
 }
