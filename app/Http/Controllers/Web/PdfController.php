@@ -116,9 +116,9 @@ class PdfController extends Controller
         // 工事名
         $construction = explode("\n", $inputData['construction']['name']);
         if (1 === \count($construction)) {
-            $items[] = ['x' => 75.0, 'y' => 25.0, 'content' => $construction[0]];
+            $items[] = ['x' => 75.0, 'y' => 25.0, 'content' => $inputData['construction']['orderer'] + '/' + $construction[0]];
         } elseif (2 === \count($construction)) {
-            $items[] = ['x' => 75.0, 'y' => 22.5, 'content' => $construction[0]];
+            $items[] = ['x' => 75.0, 'y' => 22.5, 'content' => $inputData['construction']['orderer'] + '/' + $construction[0]];
             $items[] = ['x' => 75.0, 'y' => 27.0, 'content' => $construction[1]];
         }
 
