@@ -14,7 +14,7 @@ class AddColumnsToConstructionsTable extends Migration
         Schema::table('constructions', function (Blueprint $table) {
             $table->string('year')->default('')->after('id');
             $table->string('scale')->nullable()->after('number');
-            $table->integer('progress')->default(0)->after('scale');
+            $table->json('progress')->after('scale');
             $table->datetime('contract_date')->nullable()->after('progress');
             $table->datetime('billing_date')->nullable()->after('contract_date');
             $table->datetime('payment_date')->nullable()->after('billing_date');
