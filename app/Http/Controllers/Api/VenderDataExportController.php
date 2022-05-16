@@ -81,7 +81,9 @@ class VenderDataExportController extends Controller
                         return $report->constructionNumber === $constructionNumber && (new Carbon($report->date))->format('m/d') === $date;
                     });
                     foreach ($filteredReports as $report) {
-                        $value += ($report->time * $report->count) / 8.0;
+                        if(is_numeric($report->time) && is_numeric($report->count)) {
+                            $value += ($report->time * $report->count) / 8.0;
+                        }
                     }
 
                     $row[] = $value;
