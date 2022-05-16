@@ -42,7 +42,7 @@
             <div class="item-conteiner">
                 <h5>お名前  <span class="required">[必須]</span></h5>
                 <div class="col-md-12">
-                    <input name="userName" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設　太郎" value="{{old('userName') ?? $dailyreport->userName}}" required />
+                    <input name="userName" class="tagsinput tagsinput-typeahead input-lg"  placeholder="建設太郎" value="{{old('userName') ?? $dailyreport->userName}}" required />
                 </div>
             </div>
 

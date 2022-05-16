@@ -103,8 +103,12 @@ class ReportController extends Controller
         $form = $request->dailyreportAttributes();
         unset($form['_token']);
 
-        // nullを空文字に変更
+        // nullを空文字に変更, 名前の空白を削除
         foreach ($form as $key => $item) {
+            if ('userName' === $key) {
+                $form['userName'] = str_replace([' ', '　'], '', $item);
+            }
+
             if (null === $item) {
                 $form[$key] = '';
             }
