@@ -47,6 +47,20 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+
+$config = new Jaeger\Config(
+    [
+        'sampler' => [
+            'type' => Jaeger\SAMPLER_TYPE_CONST,
+            'param' => true,
+        ],
+        'logging' => true,
+    ],
+    'dailyreport'
+);
+$config->initializeTracer();
+
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(

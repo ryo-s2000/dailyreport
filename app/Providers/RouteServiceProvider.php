@@ -48,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes(): void
     {
         Route::middleware('web')
+            ->middleware('jaeger')
             ->namespace($this->namespace.'\Web')
             ->group(base_path('routes/web.php'))
         ;
@@ -61,6 +62,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes(): void
     {
         Route::prefix('api')
+            ->middleware('jaeger')
             ->middleware('api')
             ->namespace($this->namespace.'\Api')
             ->group(base_path('routes/api.php'))
