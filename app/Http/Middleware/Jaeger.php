@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use OpenTracing\GlobalTracer;
 use Illuminate\Support\Facades\Route;
+use DB;
 
 class Jaeger
 {
@@ -21,11 +22,21 @@ class Jaeger
     public function handle($request, Closure $next, $guard = null)
     {
         $tracer = GlobalTracer::get();
-        $scope = $tracer->startActiveSpan(Route::currentRouteAction(), []);
+        $scope = $tracer->startSpan(Route::currentRouteAction(), []);
 
+        // main
+        DB::enableQueryLog();
         $response = $next($request);
+        // main
 
-        $scope->close();
+        // query log
+        $rowQueryLog = collect(DB::getQueryLog());
+        $queryLog = $rowQueryLog->pluck('time', 'query')->sortBy('time');
+        // ->pluck('time', 'query');
+        $scope->log(['query_log' => $queryLog]);
+        // query log
+
+        $scope->finish();
         $tracer->flush();
 
         return $response;
