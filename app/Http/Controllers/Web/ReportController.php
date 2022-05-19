@@ -123,6 +123,7 @@ class ReportController extends Controller
         $dailyreportId = $dailyreport->id;
 
         lineNotify((int) $form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
+        GoogleChatNotify((int) $form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
 
         $redirectPath = '/';
         if ('true' === $transitionPreview) {
