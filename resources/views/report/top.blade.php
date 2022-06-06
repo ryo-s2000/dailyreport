@@ -90,6 +90,11 @@
                             @endforeach
                         </select>
                     </div>
+
+                    <div>
+                        最大件数 <input name="limit" value="{{$dailyreportsPalams['limit']}}">
+                    </div>
+
                     <button type="button" class="btn btn-primary btn-create-pdf" onClick="window.reset();">条件をリセット</button>
                     <button class="btn btn-primary btn-refine">決定</button>
                 </form>

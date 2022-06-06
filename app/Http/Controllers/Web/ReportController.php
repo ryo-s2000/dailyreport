@@ -42,19 +42,22 @@ class ReportController extends Controller
             ->where('constructions.number', condition($request->constructionNumber), value($request->constructionNumber))
         ;
 
+        $limit = 100;
+        if ($request->limit) $limit = $request->limit;
+
         switch ($request->sort) {
             case '日付が早い順':
-                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('dailyreports.created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('dailyreports.created_at')->paginate($limit);
 
                 break;
 
             case '日付が遅い順':
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate($limit);
 
                 break;
 
             default:
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate(100);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate($limit);
         }
 
         $dailyreportsPalams = [
@@ -63,6 +66,7 @@ class ReportController extends Controller
             'constructionNumber' => $request->constructionNumber,
             'constructionName' => $request->constructionName,
             'sort' => $request->sort,
+            'limit' => $limit,
         ];
 
         // TODO send userNames
