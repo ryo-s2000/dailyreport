@@ -11,10 +11,6 @@ Route::redirect('/', '/reports');
 Route::resource('reports', 'ReportController');
 Route::get('/reports/create/copy/{report}', 'ReportController@createCopy')->name('reports.create.copy');
 
-// Construction
-Route::resource('constructions', 'ConstructionController', ['except' => ['show']]);
-Route::get('/constructions/{password}', 'ConstructionController@rootIndex');
-
 // PDF
 Route::get('/pdf/{report_id}', 'PdfController@generate');
 

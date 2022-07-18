@@ -10,7 +10,7 @@
 
         <div class="btn-container col-md-12">
             <button class="btn btn-primary btn-new-pdf" onClick="location.href='{{ route('reports.create') }}'">日報作成</button>
-            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('constructions.index') }}'">工事番号</button>
+            <button class="edit-construction-btn btn btn-primary btn-new-pdf" onclick="window.open('http://c-ledger.suzukikennsetu.jp/','_blank')">工事番号</button>
             <button class="edit-construction-btn btn btn-primary btn-new-pdf" onClick="location.href='{{ route('traders.edit.all') }}'">業者・重機</button>
             <div>
                 <button class="btn-dataexport btn btn-primary btn-new-pdf" onClick="location.href='{{ route('data_export.construction_number.create') }}'">工事番号別CSV出力</button>
