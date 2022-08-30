@@ -49,6 +49,9 @@
                             @case(4)
                                 <td>農業施設部</td>
                                 @break
+                            @case(5)
+                                <td>東京支店</td>
+                                @break
                             @default
                                 <td></td>
                         @endswitch

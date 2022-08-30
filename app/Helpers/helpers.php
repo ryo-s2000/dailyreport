@@ -35,6 +35,10 @@ if (!function_exists('GoogleChatNotify')) {
             $url = config('google_chat_notify.webhook_url.architecture');
         }
 
+        if (5 === $departmentId) {
+            $url = config('google_chat_notify.webhook_url.tokyo');
+        }
+
         exec("curl -X POST --data "."'".'{"text": "'.$message.'"}'."'"." -H 'Content-Type: application/json' "."'".$url."'");
     }
 }

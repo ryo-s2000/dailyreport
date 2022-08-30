@@ -29,7 +29,7 @@
                     <select name="department_id" id="department_id" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択してください</option>
 
-                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部") as $value)
+                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部", "東京支店") as $value)
                             <option value="{{$loop->index+1}}">{{$value}}</option>
                         @endforeach
                     </select>

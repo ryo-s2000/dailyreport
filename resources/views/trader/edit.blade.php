@@ -27,6 +27,9 @@
                             @case(4)
                                 農業施設部
                                 @break
+                            @case(5)
+                                <td>東京支店</td>
+                                @break
                             @default
                                 <td></td>
                         @endswitch
@@ -51,7 +54,7 @@
     <script>
         //////////// 業者追加 ////////////
         const showTraderForm = (button_this) => {
-            $(button_this).parent().append(`<select class="department"><option value="">部署を選択してください</option><option value="1">住宅部</option><option value="2">土木部</option><option value="3">特殊建築部</option><option value="4">農業施設部</option></select>`);
+            $(button_this).parent().append(`<select class="department"><option value="">部署を選択してください</option><option value="1">住宅部</option><option value="2">土木部</option><option value="3">特殊建築部</option><option value="4">農業施設部</option><option value="5">東京支店</option></select>`);
             $(button_this).parent().append(`<input class="work-volume tagsinput tagsinput-typeahead input-lg" placeholder="追加したい業者名" />`);
             $(button_this).parent().append(`<button type="button" class="btn btn-info" style="margin:0 5px;" onclick="(checkTraderForm(this))">業者を追加</button>`);
             $(button_this).remove();
