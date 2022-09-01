@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Scopes\HiddenScope;
 
 class Construction extends Model
 {
@@ -15,4 +16,11 @@ class Construction extends Model
         'id',
         'created_at',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::addGlobalScope(new HiddenScope);
+    }
 }
