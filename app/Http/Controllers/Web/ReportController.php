@@ -18,50 +18,35 @@ class ReportController extends Controller
      */
     public function index(Request $request)
     {
-        function condition($value = null): string
-        {
-            if ($value) {
-                return '=';
-            }
+        $dailyreports = Dailyreport::select('dailyreports.*', 'constructions.year as construction_year', 'constructions.number as construction_number', 'constructions.name as construction_name')
+            ->join('constructions', 'dailyreports.construction_id', '=', 'constructions.id');
 
-            return 'LIKE';
-        }
+        // filter
+        if ($request->year) $dailyreports = $dailyreports->where('constructions.year', $request->year);
+        if ($request->userName) $dailyreports = $dailyreports->where('userName', $request->userName);
+        if ($request->department_id) $dailyreports = $dailyreports->where('department_id', $request->department_id);
+        if ($request->constructionNumber) $dailyreports = $dailyreports->where('year', $request->constructionNumber);
 
-        function value($value = null)
-        {
-            if ($value) {
-                return $value;
-            }
-
-            return '%';
-        }
-
-        $dailyreports = Dailyreport::select('dailyreports.*', 'constructions.number as construction_number', 'constructions.name as construction_name')
-            ->join('constructions', 'dailyreports.construction_id', '=', 'constructions.id')
-            ->where('userName', condition($request->userName), value($request->userName))
-            ->where('department_id', condition($request->department_id), value($request->department_id))
-            ->where('constructions.number', condition($request->constructionNumber), value($request->constructionNumber))
-        ;
-
-        $limit = 100;
-        if ($request->limit) $limit = $request->limit;
-
+        // sort
         switch ($request->sort) {
             case '日付が早い順':
-                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('dailyreports.created_at')->paginate($limit);
-
+                $dailyreports = $dailyreports->orderBy('date')->orderByDesc('dailyreports.created_at');
                 break;
 
             case '日付が遅い順':
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate($limit);
-
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at');
                 break;
 
             default:
-                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at')->paginate($limit);
+                $dailyreports = $dailyreports->orderByDesc('date')->orderByDesc('dailyreports.created_at');
         }
 
+        // limit
+        $limit = 100;
+        if ($request->limit) $limit = $request->limit;
+
         $dailyreportsPalams = [
+            'year' => $request->year,
             'userName' => $request->userName,
             'department_id' => $request->department_id,
             'constructionNumber' => $request->constructionNumber,
@@ -74,7 +59,7 @@ class ReportController extends Controller
         $allDailyreports = Dailyreport::all();
         $constructions = Construction::all();
 
-        return view('report.top', ['dailyreports' => $dailyreports, 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions]);
+        return view('report.top', ['dailyreports' => $dailyreports->paginate($limit), 'dailyreportsPalams' => $dailyreportsPalams, 'allDailyreports' => $allDailyreports, 'constructions' => $constructions, 'years' => config('common.years')]);
     }
 
     /**
@@ -95,7 +80,7 @@ class ReportController extends Controller
             ;
         }
 
-        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets, 'years' => config('common.years')]);
     }
 
     /**
@@ -172,7 +157,7 @@ class ReportController extends Controller
 
         $assets = self::fillAssets($dailyreport);
 
-        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets, 'years' => config('common.years')]);
     }
 
     /**
@@ -245,7 +230,7 @@ class ReportController extends Controller
 
         $assets = self::fillAssets($dailyreport);
 
-        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets]);
+        return view('report.create_and_edit', ['dailyreport' => $dailyreport, 'constructions' => $constructions, 'traders' => $traders, 'assets' => $assets, 'years' => config('common.years')]);
     }
 
     /**

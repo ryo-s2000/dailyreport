@@ -23,4 +23,9 @@ class Construction extends Model
 
         static::addGlobalScope(new HiddenScope);
     }
+
+    public function dailyreports(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Dailyreport::class);
+    }
 }

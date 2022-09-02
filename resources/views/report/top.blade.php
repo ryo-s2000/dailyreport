@@ -69,6 +69,16 @@
                     </div>
 
                     <div>
+                        <select name="year" data-toggle="select" class="form-control select select-default mrs mbm">
+                            <option value="" label="default">年度を選択</option>
+                            @foreach ($years as $year)
+                                @if($dailyreportsPalams['year'] == $year)
+                                    <option value="{{$year}}" selected>{{$year}}</option>
+                                @else
+                                    <option value="{{$year}}">{{$year}}</option>
+                                @endif
+                            @endforeach
+                        </select>
                         <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                             <option value="" label="default">工事番号を選択</option>
                             @foreach ($constructions as $construction)
@@ -106,7 +116,7 @@
             <main class="dailyreport-wrapper">
                 <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">
                     <thead class="header">
-                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>詳細</th></tr>
+                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>年度</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>詳細</th></tr>
                     </thead>
                     <tbody>
                         @foreach ($dailyreports as $dailyreport)
@@ -132,6 +142,7 @@
                                         <td></td>
                                 @endswitch
                                 <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
+                                <td>{{$dailyreport->construction_year}}</td>
                                 <td>{{$dailyreport->construction_number}}</td>
                                 <td><div class="construction-name-form">{{$dailyreport->construction_name}}</div></td>
                                 <td>
@@ -159,16 +170,19 @@
     <script>
         // リセット処理
         function reset(){
-            ['sort', 'userName', 'department_id', 'constructionNumber', 'constructionName'].forEach(name => {
+            ['sort', 'year', 'userName', 'department_id', 'constructionNumber', 'constructionName'].forEach(name => {
                 selectName = 'select[name="' + name + '"]';
                 $(selectName).prop("selectedIndex", 0).trigger('change', ['exit']);
             });
         }
 
-        // 選択時カラー機能
+        // 初期選択時カラー機能
         $(document).ready(function(){
             if($('select[name="sort"]').val() != ""){
                 $('select[name="sort"]').addClass("select-choiced");
+            }
+            if($('select[name="year"]').val() != ""){
+                $('select[name="year"]').addClass("select-choiced");
             }
             if($('select[name="userName"]').val() != ""){
                 $('select[name="userName"]').addClass("select-choiced");
@@ -203,6 +217,13 @@
                     $('select[name="sort"]').removeClass("select-choiced");
                 } else {
                     $('select[name="sort"]').addClass("select-choiced");
+                }
+            });
+            $('select[name="year"]').change(function(e, data) {
+                if($(this).prop("selectedIndex") == 0){
+                    $('select[name="year"]').removeClass("select-choiced");
+                } else {
+                    $('select[name="year"]').addClass("select-choiced");
                 }
             });
             $('select[name="userName"]').change(function(e, data) {

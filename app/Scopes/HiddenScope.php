@@ -10,6 +10,6 @@ class HiddenScope implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        return $builder->whereNotNull('hidden_at');
+        return $builder->whereNull('hidden_at');
     }
 }
