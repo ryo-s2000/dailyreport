@@ -93,28 +93,28 @@
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">工事番号を選択</option>
                         @foreach ($constructions as $construction)
-                            @if($construction->number == old('constructionNumber'))
+                            @if($construction->id == old('constructionNumber'))
                                 <?php $selectedNumber = true; ?>
-                                <option value="{{$construction->number}}" selected="selected">{{$construction->number_with_year}}</option>
-                            @elseif(old('constructionNumber') == "" and isset($dailyreport->construction) and $construction->number == $dailyreport->construction->number)
+                                <option value="{{$construction->id}}" selected="selected">{{$construction->number_with_year}}</option>
+                            @elseif(old('constructionNumber') == "" and isset($dailyreport->construction) and $construction->id == $dailyreport->construction->id)
                                 <?php $selectedNumber = true; ?>
-                                <option value="{{$construction->number}}" selected="selected">{{$construction->number_with_year}}</option>
+                                <option value="{{$construction->id}}" selected="selected">{{$construction->number_with_year}}</option>
                             @else
-                                <option value="{{$construction->number}}">{{$construction->number_with_year}}</option>
+                                <option value="{{$construction->id}}">{{$construction->number_with_year}}</option>
                             @endif
                         @endforeach
                     </select>
                     <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
                         <option value="" label="default">工事名を選択</option>
                         @foreach ($constructions as $construction)
-                            @if($construction->name == old('constructionName'))
+                            @if($construction->id == old('constructionName'))
                                 <?php $selectedName = true; ?>
-                                <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
-                            @elseif(old('constructionName') == "" and isset($dailyreport->construction) and str_replace(array("\r","\n"), "", $construction->name) == str_replace(array("\r","\n"), "", $dailyreport->construction->name))
+                                <option value="{{$construction->id}}" selected="selected">{{$construction->name}}</option>
+                            @elseif(old('constructionName') == "" and isset($dailyreport->construction) and $construction->id == $dailyreport->construction->id)
                                 <?php $selectedName = true; ?>
-                                <option value="{{$construction->name}}" selected="selected">{{$construction->name}}</option>
+                                <option value="{{$construction->id}}" selected="selected">{{$construction->name}}</option>
                             @else
-                                <option value="{{$construction->name}}">{{$construction->name}}</option>
+                                <option value="{{$construction->id}}">{{$construction->name}}</option>
                             @endif
                         @endforeach
                     </select>

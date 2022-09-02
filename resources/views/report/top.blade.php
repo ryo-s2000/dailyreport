@@ -93,9 +93,9 @@
                             <option value="" label="default">工事名を選択</option>
                             @foreach ($constructions as $construction)
                                 @if($dailyreportsPalams['constructionName'] == $construction->id)
-                                    <option value="{{$construction->id}}" selected>{{$construction->name}}</option>
+                                    <option selected>{{$construction->name}}</option>
                                 @else
-                                    <option value="{{$construction->id}}">{{$construction->name}}</option>
+                                    <option>{{$construction->name}}</option>
                                 @endif
                             @endforeach
                         </select>
