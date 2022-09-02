@@ -24,6 +24,13 @@ class Construction extends Model
         static::addGlobalScope(new HiddenScope);
     }
 
+    protected $appends = ['number_with_year'];
+
+    public function getNumberWithYearAttribute()
+    {
+        return '('. $this->year . ')' . $this->number;
+    }
+
     public function dailyreports(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Dailyreport::class);

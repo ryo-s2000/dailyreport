@@ -82,20 +82,20 @@
                         <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                             <option value="" label="default">工事番号を選択</option>
                             @foreach ($constructions as $construction)
-                                @if($dailyreportsPalams['constructionNumber'] == $construction->number)
-                                    <option value="{{$construction->number}}" selected>{{$construction->number}}</option>
+                                @if($dailyreportsPalams['constructionNumber'] == $construction->id)
+                                    <option value="{{$construction->id}}" selected>{{$construction->number_with_year}}</option>
                                 @else
-                                    <option value="{{$construction->number}}">{{$construction->number}}</option>
+                                    <option value="{{$construction->id}}">{{$construction->number_with_year}}</option>
                                 @endif
                             @endforeach
                         </select>
                         <select name="constructionName" data-toggle="select" class="construction-name form-control select select-default mrs mbm">
                             <option value="" label="default">工事名を選択</option>
                             @foreach ($constructions as $construction)
-                                @if($dailyreportsPalams['constructionName'] == $construction->name)
-                                    <option value="{{$construction->name}}" selected>{{$construction->name}}</option>
+                                @if($dailyreportsPalams['constructionName'] == $construction->id)
+                                    <option value="{{$construction->id}}" selected>{{$construction->name}}</option>
                                 @else
-                                    <option value="{{$construction->name}}">{{$construction->name}}</option>
+                                    <option value="{{$construction->id}}">{{$construction->name}}</option>
                                 @endif
                             @endforeach
                         </select>
@@ -116,7 +116,7 @@
             <main class="dailyreport-wrapper">
                 <table class="table table-striped table-condensed table-bordered table-nonfluid" border="1">
                     <thead class="header">
-                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>年度</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>詳細</th></tr>
+                        <tr><th>日報作者名</th><th>部署名</th><th>日付</th><th>工事番号</th><th>工事名</th><th>コピー</th><th>詳細</th></tr>
                     </thead>
                     <tbody>
                         @foreach ($dailyreports as $dailyreport)
@@ -142,8 +142,7 @@
                                         <td></td>
                                 @endswitch
                                 <td>{{$dailyreport->date->format('Y年m月d日')}}</td>
-                                <td>{{$dailyreport->construction_year}}</td>
-                                <td>{{$dailyreport->construction_number}}</td>
+                                <td>( {{$dailyreport->construction_year}} ) {{$dailyreport->construction_number}}</td>
                                 <td><div class="construction-name-form">{{$dailyreport->construction_name}}</div></td>
                                 <td>
                                     <form method="get" action="{{ route('reports.create.copy', ['report' => $dailyreport->id]) }}">

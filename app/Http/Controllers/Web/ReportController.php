@@ -25,7 +25,7 @@ class ReportController extends Controller
         if ($request->year) $dailyreports = $dailyreports->where('constructions.year', $request->year);
         if ($request->userName) $dailyreports = $dailyreports->where('userName', $request->userName);
         if ($request->department_id) $dailyreports = $dailyreports->where('department_id', $request->department_id);
-        if ($request->constructionNumber) $dailyreports = $dailyreports->where('year', $request->constructionNumber);
+        if ($request->constructionNumber) $dailyreports = $dailyreports->where('constructions.id', $request->constructionNumber);
 
         // sort
         switch ($request->sort) {

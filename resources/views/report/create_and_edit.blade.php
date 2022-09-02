@@ -84,29 +84,23 @@
             </div>
 
             <div class="item-conteiner-top select-checker-container">
-                <h5>年度(TODO)・工事番号・工事名  <span class="required">[必須]</h5>
+                <h5>工事番号・工事名  <span class="required">[必須]</h5>
                 <div class="col-md-12">
                     <?php
                         $selectedNumber = false;
                         $selectedName = false;
                     ?>
-                    <select name="year" data-toggle="select" class="form-control select select-default mrs mbm">
-                        <option value="" label="default">年度を選択</option>
-                        @foreach ($years as $year)
-                            <option value="{{$year}}">{{$year}}</option>
-                        @endforeach
-                    </select>
                     <select name="constructionNumber" data-toggle="select" class="form-control select select-default mrs mbm">
                         <option value="" label="default">工事番号を選択</option>
                         @foreach ($constructions as $construction)
                             @if($construction->number == old('constructionNumber'))
                                 <?php $selectedNumber = true; ?>
-                                <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
+                                <option value="{{$construction->number}}" selected="selected">{{$construction->number_with_year}}</option>
                             @elseif(old('constructionNumber') == "" and isset($dailyreport->construction) and $construction->number == $dailyreport->construction->number)
                                 <?php $selectedNumber = true; ?>
-                                <option value="{{$construction->number}}" selected="selected">{{$construction->number}}</option>
+                                <option value="{{$construction->number}}" selected="selected">{{$construction->number_with_year}}</option>
                             @else
-                                <option value="{{$construction->number}}">{{$construction->number}}</option>
+                                <option value="{{$construction->number}}">{{$construction->number_with_year}}</option>
                             @endif
                         @endforeach
                     </select>
