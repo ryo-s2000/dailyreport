@@ -69,7 +69,7 @@ class ReportController extends Controller
     {
         $dailyreport = new Dailyreport();
         $dailyreport->date = date('Y-m-d');
-        $constructions = Construction::all();
+        $constructions = Construction::orderBy('year')->get();
         $traders = [
             ['id' => '', 'name' => '部署を選択してください'],
         ];
