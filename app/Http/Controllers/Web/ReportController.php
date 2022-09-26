@@ -112,8 +112,9 @@ class ReportController extends Controller
         $dailyreport->fill($form)->save();
         $dailyreportId = $dailyreport->id;
 
-        // lineNotify((int) $form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
-        GoogleChatNotify((int) $form['department_id'], $form['userName'].'さんから'.$form['constructionName'].'['.$form['constructionNumber'].']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
+        $construction = Construction::find($dailyreport->construction_id);
+
+        GoogleChatNotify((int) $form['department_id'], $form['userName'].'さんから'.$construction->name.'['.$construction->number.']'.'の日報が届きました。'.config('url.pdf').$dailyreportId);
 
         $redirectPath = '/';
         if ('true' === $transitionPreview) {
