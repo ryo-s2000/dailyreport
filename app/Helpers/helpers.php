@@ -31,7 +31,7 @@ if (!function_exists('GoogleChatNotify')) {
             $url = config('google_chat_notify.webhook_url.civil');
         }
 
-        if (3 === $departmentId || 4 === $departmentId) {
+        if (3 === $departmentId || 4 === $departmentId || 6 === $departmentId) {
             $url = config('google_chat_notify.webhook_url.architecture');
         }
 

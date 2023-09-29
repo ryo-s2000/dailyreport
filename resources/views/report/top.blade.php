@@ -58,7 +58,7 @@
                         <select name="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                             <option value="" label="default">部署を選択</option>
 
-                            @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部", "東京支店") as $value)
+                            @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部", "東京支店", "第二建築部") as $value)
                                 @if($dailyreportsPalams['department_id'] == $loop->index+1)
                                     <option value="{{$loop->index+1}}" selected>{{$value}}</option>
                                 @else
@@ -137,6 +137,9 @@
                                         @break
                                     @case(5)
                                         <td>東京支店</td>
+                                        @break
+                                    @case(6)
+                                        <td>第二建築部</td>
                                         @break
                                     @default
                                         <td></td>

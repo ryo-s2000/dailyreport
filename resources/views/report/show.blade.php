@@ -52,6 +52,9 @@
                             @case(5)
                                 <td>東京支店</td>
                                 @break
+                            @case(6)
+                                <td>第二建築部</td>
+                                @break
                             @default
                                 <td></td>
                         @endswitch

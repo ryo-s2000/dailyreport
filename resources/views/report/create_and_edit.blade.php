@@ -53,7 +53,7 @@
                     <select name="department_id" id="department_id" data-toggle="select" class="select2 form-control select select-default mrs mbm">
                         <option value="" label="default">部署を選択</option>
 
-                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部", "東京支店") as $value)
+                        @foreach(array("住宅部", "土木部", "特殊建築部", "農業施設部", "東京支店", "第二建築部") as $value)
                             @if(
                                 ( $loop->index+1 == old('department_id') )
                                 ||
@@ -813,9 +813,15 @@
 
             // 部署を選択したら、業者データを更新
             $('#department_id').change(function() {
-                const department_id = $('#department_id option:selected').val();
+                let department_id = $('#department_id option:selected').val();
                 if(!department_id) {
                     return
+                }
+
+                // 第二建築部が選択された場合は特殊建築部の業者を出す
+                // 第二建築部で業者登録しても追加されないので注意
+                if(department_id == 6) {
+                    department_id = 3
                 }
 
                 // 業者データを取得
